@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
     
         <activity
             android:name=".MainActivity"
@@ -29,7 +30,7 @@
 
                 <category android:name="android.intent.category.VIEW" />
             </intent-filter>
-        </activity>
+=======
         <activity
             android:name=".GuideActivity"
             android:label="@string/title_activity_guide" >
@@ -43,6 +44,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
+>>>>>>> 8236f844501a7ea2a48daeef5e1837fe205aa167
         </activity>
     </application>
 
