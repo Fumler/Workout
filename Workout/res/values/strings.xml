@@ -9,5 +9,7 @@
     <string name="title_section1">Section 1</string>
     <string name="title_activity_stats">Strongbird - Stats</string>
     <string name="title_activity_guide">Strongbird - Guide</string>
+    <string name="title_activity_log">Strongbird - Log</string>
+    <string name="title_activity_settings">Strongbird - Settings</string>
 
 </resources>
