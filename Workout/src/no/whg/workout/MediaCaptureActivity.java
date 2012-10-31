@@ -24,14 +24,14 @@ public class MediaCaptureActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         int i = intent.getIntExtra("MEDIA_TYPE", 0);
-        captureMedia(i);
+        captureMedia(intent, i);
 	}
 	
-	private void captureMedia(int i) {
+	private void captureMedia(Intent intent, int i) {
 		if (i == MEDIA_TYPE_IMAGE){
 			captureImage();
 		} else if (i == MEDIA_TYPE_VIDEO) {
-			captureVideo();
+			captureVideo(intent);
 		} else {
 			
 		}
@@ -46,24 +46,21 @@ public class MediaCaptureActivity extends Activity {
 		startActivityForResult(intent, IMAGE_REQUEST_CODE);
 	}
 	
-	private void captureVideo() {
+	private void captureVideo(Intent i) {
 		String lift = "SL_VID_";
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-		Exercise[] exercises = MainActivity.SLCalc.getABworkouts();
-
-		ImageButton ib = (ImageButton) view;
-		if (ib.equals(findViewById(R.id.btn_video0))) {
-			lift += exercises[0].getName();
-		} else if (ib.equals(findViewById(R.id.btn_video1))) {
-			lift += exercises[1].getName();
-		} else if (ib.equals(findViewById(R.id.btn_video2))) {
-			lift += exercises[2].getName();
+		//Exercise[] exercises = MainActivity.SLCalc.getABworkouts();
+		int etype = i.getIntExtra("VIDEO_TYPE", 3);
+		if (etype <= 3) {
+			//lift += exercises[etype].getName();
+			fileUri = getMediaFileUri(MEDIA_TYPE_VIDEO, lift);
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+	
+			startActivityForResult(intent, IMAGE_REQUEST_CODE);
+		} else {
+			// error
+			finish();
 		}
-
-		fileUri = getMediaFileUri(MEDIA_TYPE_VIDEO, lift);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-		startActivityForResult(intent, IMAGE_REQUEST_CODE);
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
