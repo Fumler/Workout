@@ -19,3 +19,5 @@ local.properties
 .classpath
 .project
 
+# original merged files
+.orig
