@@ -23,7 +23,8 @@
     
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:icon="@drawable/topbaricon" >
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
 
