@@ -20,14 +20,21 @@ public class MediaCaptureActivity extends Activity {
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	private Uri fileUri;
 	
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState, Intent intent) {
         super.onCreate(savedInstanceState);
         
-        captureMedia();
+        int i = intent.getIntExtra("MEDIA_TYPE", 0);
+        captureMedia(i);
 	}
 	
-	private void captureMedia() {
-		
+	private void captureMedia(int i) {
+		if (i == MEDIA_TYPE_IMAGE){
+			captureImage();
+		} else if (i == MEDIA_TYPE_VIDEO) {
+			captureVideo();
+		} else {
+			
+		}
 	}
 	
 	private void captureImage() {
@@ -39,7 +46,7 @@ public class MediaCaptureActivity extends Activity {
 		startActivityForResult(intent, IMAGE_REQUEST_CODE);
 	}
 	
-	private void captureVideo(View view) {
+	private void captureVideo() {
 		String lift = "SL_VID_";
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 		Exercise[] exercises = MainActivity.SLCalc.getABworkouts();
