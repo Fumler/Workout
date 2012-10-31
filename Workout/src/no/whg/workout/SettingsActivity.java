@@ -17,7 +17,7 @@ public class SettingsActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_log, menu);
+        getMenuInflater().inflate(R.menu.activity_settings, menu);
         return true;
     }
 
