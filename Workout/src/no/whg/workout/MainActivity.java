@@ -6,12 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 
@@ -64,9 +62,9 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int i) {
-            Fragment fragment = new DummySectionFragment();
+            Fragment fragment = new MainFragment();
             Bundle args = new Bundle();
-            args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
+            args.putInt(MainFragment.ARG_SECTION_NUMBER, i);
             fragment.setArguments(args);
             return fragment;
         }
@@ -87,23 +85,35 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * A dummy fragment representing a section of the app, but that simply displays dummy text.
-     */
-    public static class DummySectionFragment extends Fragment {
-        public DummySectionFragment() {
-        }
+
+    public static class MainFragment extends Fragment {
 
         public static final String ARG_SECTION_NUMBER = "section_number";
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            TextView textView = new TextView(getActivity());
-            textView.setGravity(Gravity.CENTER);
-            Bundle args = getArguments();
-            textView.setText(Integer.toString(args.getInt(ARG_SECTION_NUMBER)));
-            return textView;
+        	
+        	Bundle args = getArguments();
+        	int position = args.getInt(ARG_SECTION_NUMBER);
+        	
+        	int tabLayout = 0;
+        	switch(position) {
+        	case 0:
+        		tabLayout = R.layout.tab1;
+        		break;
+        	case 1:
+        		tabLayout = R.layout.tab2;
+        		break;
+        	case 2:
+        		tabLayout = R.layout.tab3;
+        		break;
+        		
+        	}
+        	
+            
+            return inflater.inflate(tabLayout, container, false);
+            //return textView;
         }
     }
 }
