@@ -10,5 +10,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_guide">GuideActivity</string>
     <string name="title_activity_log">LogActivity</string>
+    
+    <!-- MAIN ACTIVITY -->
+    <string name="tv_welcomeMessage">Welcome to Strongbird! This app will help you keep track of your stronglifts workout.</string>
 
 </resources>
