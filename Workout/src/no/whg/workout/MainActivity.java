@@ -52,28 +52,19 @@ public class MainActivity extends FragmentActivity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	int itemid = item.getItemId();
     	
-    	switch(itemid) {
-    	case R.id.menu_music: {
+    	if(item.getItemId() == R.id.menu_settings) {
+    		startActivity(new Intent(this, SettingsActivity.class));
+    	}
+    	
+    	if(item.getItemId() == R.id.menu_guide) {
+    		startActivity(new Intent(this, GuideActivity.class));
+    	}
+    	
+    	if(item.getItemId() == R.id.menu_music) {
     		// start the music player
     	}
-    	case R.id.menu_settings: {
-    		// start the settings activity!
-			startActivity(new Intent(this, SettingsActivity.class));
-			}
-    	//THIS CASE IS SUPPOSED TO BE BE IN THE OTHER ACTIVITIES
-    	// BUT I JUST DID IT HERE BECAUSE IM LEANING REALLY FAR BACK
-    	// IN MY CHAIR
-//    	case android.R.id.home: {
-//    		if (item.getItemId() == android.R.id.home) {
-//    			Intent intent = new Intent(this, MainActivity.class);
-//    			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//    			startActivity(intent);
-//    		}
-//    		return true;
-//    	}
-    	}
+    	
         return true;
     }
 

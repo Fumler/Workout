@@ -3,4 +3,12 @@
         android:title="@string/str_menu_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/menu_music"
+        android:title="@string/str_menu_music"
+        android:icon="@drawable/ic_action_play"
+        android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_guide"
+        android:title="@string/str_menu_guide"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 </menu>
