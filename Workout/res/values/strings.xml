@@ -1,18 +1,32 @@
 <resources>
-
-    <string name="splash">Splash</string>
-    <string name="app_name">Workout</string>
+	<!-- HELLO WORLD (it has to be here, come on guys) -->
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- APPLICATION -->
+    <string name="app_name">Strongbirds</string>
+    
+    <!-- SECTIONS / TABS -->
     <string name="title_section3">Stats</string>
     <string name="title_section2">Home</string>
     <string name="title_section1">Log workout</string>
-    <string name="hello_world">Hello world!</string>
+
+    <!--  WINDOW TITLES -->
+    <string name="title_activity_main">Strongbirds</string>
+    <string name="title_activity_guide">Guide</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_splash">Strongbirds</string>
+    
+    <!-- ACTION BAR / MENU -->
     <string name="str_menu_settings">Settings</string>
     <string name="str_menu_music">Music</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_guide">GuideActivity</string>
-    <string name="title_activity_log">LogActivity</string>
     
     <!-- MAIN ACTIVITY -->
     <string name="tv_welcomeMessage">Welcome to Strongbird! This app will help you keep track of your stronglifts workout.</string>
 
+    <!-- LOG WORKOUT ACTIVITY -->
+    
+    <!-- SETTINGS ACTIVITY -->
+    
+    <!-- GUIDE ACTIVITY -->
+    
 </resources>

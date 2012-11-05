@@ -2,7 +2,6 @@ package no.whg.workout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -57,14 +56,23 @@ public class MainActivity extends FragmentActivity {
     	
     	switch(itemid) {
     	case R.id.menu_music: {
-    		// do stuff
+    		// start the music player
     	}
     	case R.id.menu_settings: {
-    		// this should at some point be moved to another activity
-    		Intent intent = new Intent(this, MainActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+    		// start the settings activity!
+			startActivity(new Intent(this, SettingsActivity.class));
 			}
+    	//THIS CASE IS SUPPOSED TO BE BE IN THE OTHER ACTIVITIES
+    	// BUT I JUST DID IT HERE BECAUSE IM LEANING REALLY FAR BACK
+    	// IN MY CHAIR
+//    	case android.R.id.home: {
+//    		if (item.getItemId() == android.R.id.home) {
+//    			Intent intent = new Intent(this, MainActivity.class);
+//    			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//    			startActivity(intent);
+//    		}
+//    		return true;
+//    	}
     	}
         return true;
     }
