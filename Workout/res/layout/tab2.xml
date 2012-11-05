@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tab2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical">
  
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+	<TextView
+        android:id="@+id/tv_main1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Tab 2" />
+        android:text="@string/tv_welcomeMessage"
+        android:background="#fff"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp" />
+    
+    <TextView
+        android:id="@+id/tv_main2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_welcomeMessage"
+        android:background="#fff"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_main1" />
+    
+    <TextView
+        android:id="@+id/tv_main3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_welcomeMessage"
+        android:background="#fff"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_main2" />
+    <TextView
+        android:id="@+id/tv_main4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_welcomeMessage"
+        android:background="#fff"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:layout_below="@id/tv_main3" />
  
-</LinearLayout>
+</RelativeLayout>

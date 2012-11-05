@@ -3,8 +3,8 @@
     <string name="splash">Splash</string>
     <string name="app_name">Workout</string>
     <string name="title_section3">Stats</string>
-    <string name="title_section2">Log workout</string>
-    <string name="title_section1">Home</string>
+    <string name="title_section2">Home</string>
+    <string name="title_section1">Log workout</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>

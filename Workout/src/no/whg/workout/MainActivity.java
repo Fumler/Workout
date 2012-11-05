@@ -97,7 +97,7 @@ public class MainActivity extends FragmentActivity {
         	Bundle args = getArguments();
         	int position = args.getInt(ARG_SECTION_NUMBER);
         	
-        	int tabLayout = 0;
+        	int tabLayout = 1;
         	switch(position) {
         	case 0:
         		tabLayout = R.layout.tab1;
