@@ -1,5 +1,6 @@
 package no.whg.workout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
@@ -41,6 +48,23 @@ public class MainActivity extends FragmentActivity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(1);
+        
+        // THIS DOES NOT WORK
+        if(mViewPager.getCurrentItem() == 3) {
+        	 // set up gridview
+            GridView gridview = (GridView) findViewById(R.id.tab4);
+            gridview.setAdapter(new ImageAdapter(this));
+            
+            
+            gridview.setOnItemClickListener(new OnItemClickListener() {
+            	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            		Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+            		
+            	}
+            });
+        	
+        }
+       
 
     }
 
@@ -92,7 +116,7 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -101,6 +125,7 @@ public class MainActivity extends FragmentActivity {
                 case 0: return getString(R.string.title_section1).toUpperCase();
                 case 1: return getString(R.string.title_section2).toUpperCase();
                 case 2: return getString(R.string.title_section3).toUpperCase();
+                case 3: return getString(R.string.title_section4).toUpperCase();
             }
             return null;
         }
@@ -129,6 +154,9 @@ public class MainActivity extends FragmentActivity {
         	case 2:
         		tabLayout = R.layout.tab3;
         		break;
+        	case 3:
+        		tabLayout = R.layout.tab4;
+        		break;
         		
         	}
         	
@@ -136,5 +164,47 @@ public class MainActivity extends FragmentActivity {
             return inflater.inflate(tabLayout, container, false);
             //return textView;
         }
+    }
+    
+    public class ImageAdapter extends BaseAdapter {
+    	private Context mContext;
+    	
+		Integer[] mThumbIds = {
+				R.drawable.ic_action_play, R.drawable.ic_action_search,
+				R.drawable.ic_launcher, R.drawable.topbaricon
+				
+		};
+    	
+    	public ImageAdapter(Context c) {
+    		mContext = c;
+    	}
+    	
+    	public int getCount() {
+    		return mThumbIds.length;
+    	}
+    	
+    	public Object getItem(int position) {
+    		return null;
+    	}
+    	
+    	public long getItemId(int position) {
+    		return 0;
+    	}
+    	
+    	public View getView(int position, View convertView, ViewGroup parent) {
+    		ImageView imageView;
+    		if(convertView == null) {
+    			imageView = new ImageView(mContext);
+    			imageView.setLayoutParams(new GridView.LayoutParams(85,85));
+    			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    			imageView.setPadding(8, 8, 8, 8);
+    			
+    		} else {
+    			imageView = (ImageView) convertView;
+    		}
+    		imageView.setImageResource(mThumbIds[position]);
+			return imageView;
+
+    	}
     }
 }

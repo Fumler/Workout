@@ -6,9 +6,11 @@
     <string name="app_name">Strongbirds</string>
     
     <!-- SECTIONS / TABS -->
+    <string name="title_section4">Gallery</string>
     <string name="title_section3">Stats</string>
     <string name="title_section2">Home</string>
     <string name="title_section1">Log workout</string>
+    
 
     <!--  WINDOW TITLES -->
     <string name="title_activity_main">Strongbirds</string>
