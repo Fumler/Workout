@@ -1,9 +1,11 @@
 package no.whg.workout;
 
+import android.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -86,7 +88,15 @@ public class MainActivity extends FragmentActivity {
     	}
     	
     	if(item.getItemId() == R.id.menu_music) {
-    		// start the music player
+    		Intent i = new Intent(Intent.ACTION_MAIN);
+    		i.addCategory(Intent.CATEGORY_APP_MUSIC);
+    		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    		startActivity(i);
+    	}
+    	
+    	if(item.getItemId() == R.id.menu_help) {
+    		DialogFragment dialog = new HelpDialog();
+    		dialog.show(getFragmentManager(), "Æ");
     	}
     	
         return true;

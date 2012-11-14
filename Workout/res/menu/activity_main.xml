@@ -11,4 +11,9 @@
         android:title="@string/str_menu_guide"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/menu_help"
+        android:title="@string/str_menu_help"
+        android:icon="@drawable/ic_menu_help"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText" />
 </menu>
