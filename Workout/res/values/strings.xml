@@ -3,7 +3,7 @@
     <string name="hello_world">Hello world!</string>
     
     <!-- APPLICATION -->
-    <string name="app_name">Strongbirds</string>
+    <string name="app_name">Strongbird</string>
     
     <!-- SECTIONS / TABS -->
     <string name="title_section4">Gallery</string>
@@ -13,10 +13,10 @@
     
 
     <!--  WINDOW TITLES -->
-    <string name="title_activity_main">Strongbirds</string>
+    <string name="title_activity_main">Strongbird</string>
     <string name="title_activity_guide">Guide</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="title_splash">Strongbirds</string>
+    <string name="title_splash">Strongbird</string>
     
     <!-- ACTION BAR / MENU -->
     <string name="str_menu_settings">Settings</string>
@@ -30,6 +30,13 @@
     <!-- LOG WORKOUT ACTIVITY -->
     
     <!-- SETTINGS ACTIVITY -->
+    <string name="set_main">Settings</string>
+    <string name="set_weight">Weight should be displayed in:</string>
+    <string name="set_reset">Reset data</string>
+
+    <!-- SETTINGS RADIO BUTTONS -->
+    <string name="set_kg_rb">KG</string>
+    <string name="set_lbs_rb">Lbs</string>
     
     <!-- GUIDE ACTIVITY -->
     
