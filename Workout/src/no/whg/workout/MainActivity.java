@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -51,21 +50,7 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(1);
         
-        // THIS DOES NOT WORK
-        if(mViewPager.getCurrentItem() == 3) {
-        	 // set up gridview
-            GridView gridview = (GridView) findViewById(R.id.tab4);
-            gridview.setAdapter(new ImageAdapter(this));
-            
-            
-            gridview.setOnItemClickListener(new OnItemClickListener() {
-            	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            		Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-            		
-            	}
-            });
-        	
-        }
+     
        
 
     }
@@ -101,8 +86,25 @@ public class MainActivity extends FragmentActivity {
     	
         return true;
     }
-
     
+    public void makeGrid (Context c){
+	    // THIS DOES NOT WORK
+	    //if(mViewPager.getCurrentItem() == 3) {
+	    	 // set up gridview
+	        GridView gridview = (GridView) findViewById(R.id.tab4);
+	        gridview.setAdapter(new ImageAdapter(c));
+	        
+	        
+	        gridview.setOnItemClickListener(new OnItemClickListener() {
+	        	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        		Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+	        		
+	        	}
+	        });
+	    	
+	    //}
+	    //    return gridview;
+    }
 
 
     /**
@@ -145,11 +147,10 @@ public class MainActivity extends FragmentActivity {
     public static class MainFragment extends Fragment {
 
         public static final String ARG_SECTION_NUMBER = "section_number";
-
+        
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-        	
         	Bundle args = getArguments();
         	int position = args.getInt(ARG_SECTION_NUMBER);
         	
@@ -174,12 +175,13 @@ public class MainActivity extends FragmentActivity {
             return inflater.inflate(tabLayout, container, false);
             //return textView;
         }
+    	
     }
     
-    public class ImageAdapter extends BaseAdapter {
+    public static class ImageAdapter extends BaseAdapter {
     	private Context mContext;
     	
-		Integer[] mThumbIds = {
+		private Integer[] mThumbIds = {
 				R.drawable.ic_action_play, R.drawable.ic_action_search,
 				R.drawable.ic_launcher, R.drawable.topbaricon
 				
