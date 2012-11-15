@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_gradient" >
 
-    <!-- This is temporary. Holy shit -->
+    <!-- The following is temporary. Holy shit -->
     
     <TextView
         android:id="@+id/set_headline"
@@ -31,14 +31,17 @@
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:orientation="horizontal"
+	    android:checkedButton="@+id/set_kg_rb"
 	    android:layout_below="@id/set_weight">
 	    
 	    <RadioButton 
+	        android:id="@id/set_kg_rb"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="@string/set_kg_rb" />
 	    
 	    <RadioButton 
+    	    android:id="@+id/set_lbs_rb"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="@string/set_lbs_rb"/>
