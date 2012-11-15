@@ -3,7 +3,7 @@
     <string name="hello_world">Hello world!</string>
     
     <!-- APPLICATION -->
-    <string name="app_name">Strongbirds</string>
+    <string name="app_name">Strongbird</string>
     
     <!-- SECTIONS / TABS -->
     <string name="title_section4">Gallery</string>
@@ -13,10 +13,10 @@
     
 
     <!--  WINDOW TITLES -->
-    <string name="title_activity_main">Strongbirds</string>
+    <string name="title_activity_main">Strongbird</string>
     <string name="title_activity_guide">Guide</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="title_splash">Strongbirds</string>
+    <string name="title_splash">Strongbird</string>
     
     <!-- ACTION BAR / MENU -->
     <string name="str_menu_settings">Settings</string>
@@ -30,11 +30,20 @@
     <!-- LOG WORKOUT ACTIVITY -->
     
     <!-- SETTINGS ACTIVITY -->
+    <string name="set_main">Settings</string>
+    <string name="set_weight">Weight should be displayed in:</string>
+    <string name="set_reset">Reset data</string>
+
+    <!-- SETTINGS RADIO BUTTONS -->
+    <string name="set_kg_rb">KG</string>
+    <string name="set_lbs_rb">Lbs</string>
     
     <!-- GUIDE ACTIVITY -->
     
     <!-- HELP DIALOG -->
     <string name="dialog_close">Close</string>
-    <string name="dialog_help">Generic help message</string>
-    
+    <string name="dialog_help0">This is where you log your workout. This message needs to be changed</string>
+    <string name="dialog_help1">This is the homepage. This message needs to be changed</string>
+    <string name="dialog_help2">This is where you view statistics. This message needs to be changed</string>
+    <string name="dialog_help3">This is the gallery. This message needs to be changed</string>
 </resources>

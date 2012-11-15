@@ -14,13 +14,6 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_settings, menu);
-        return true;
-    }
-
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -44,5 +37,4 @@ public class SettingsActivity extends Activity {
     	}
         return true;
     }
-
 }
