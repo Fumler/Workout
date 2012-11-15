@@ -95,7 +95,7 @@ public class MainActivity extends FragmentActivity {
     	}
     	
     	if(item.getItemId() == R.id.menu_help) {
-    		DialogFragment dialog = new HelpDialog();
+    		DialogFragment dialog = new HelpDialog(mViewPager.getCurrentItem());
     		dialog.show(getFragmentManager(), "Æ");
     	}
     	
