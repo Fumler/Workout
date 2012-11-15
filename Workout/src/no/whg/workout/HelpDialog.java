@@ -10,6 +10,7 @@ public class HelpDialog extends DialogFragment {
 	public int fragment;
 	private String string;
 	
+	// Constructor takes an int that tells the dialog which string to use
 	public HelpDialog(int fragment){
 		this.fragment = fragment;
 	}
@@ -19,15 +20,20 @@ public class HelpDialog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         
+        // Determines which string to display in the dialog.
         switch(fragment){
-	        case 0: string = getString(R.string.dialog_help0);
-	        		break;
-	        case 1: string = getString(R.string.dialog_help1);
-	        		break;
-	        case 2: string = getString(R.string.dialog_help2);
-	        		break;
-	        case 3: string = getString(R.string.dialog_help3);
-	        		break;
+	        case 0: 
+	        	string = getString(R.string.dialog_help0);
+	        	break;
+	        case 1:
+	        	string = getString(R.string.dialog_help1);
+	        	break;
+	        case 2: 
+	        	string = getString(R.string.dialog_help2);
+	        	break;
+	        case 3: 
+	        	string = getString(R.string.dialog_help3);
+	        	break;
         }
         
         builder.setMessage(string)
