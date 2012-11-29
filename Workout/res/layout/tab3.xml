@@ -1,16 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tab3"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
- 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Number 3" />
- 
-</LinearLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/tab3"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	 	
+	    <TextView
+	    	android:id="@+id/stats_main"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/tv_welcomeMessage"
+	        style="@style/style_whiteBox" />	
+	    <LinearLayout 
+	        android:id="@+id/stats_linearOne"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/stats_main"> 
+	        
+    	    <TextView
+		        android:id="@+id/stats_squats"
+		        style="@style/style_whiteBox"
+		        android:layout_width="0dp"
+		        android:layout_height="120dp"
+		        android:layout_weight="0.5"
+		        android:text="@string/ex_squats"
+		        android:layout_marginRight="10dp" />
+		    
+		    <TextView 
+		        android:id="@+id/stats_benchPress"
+		        android:layout_width="0dp"
+		        android:layout_height="120dp"
+		        android:layout_weight="0.5"
+		        android:text="@string/ex_benchPress"
+		        style="@style/style_whiteBox"
+		        android:layout_marginLeft="10dp" />
+	    </LinearLayout>
+	    
+   	    <LinearLayout 
+	        android:id="@+id/stats_linearTwo"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/stats_linearOne">
+		    
+		    <TextView 
+		        android:id="@+id/stats_rowing"
+		        android:layout_width="0dp"
+		        android:layout_height="120dp"
+		        android:layout_weight="0.5"
+		        android:text="@string/ex_rowing"
+		        style="@style/style_whiteBox"
+		        android:layout_marginRight="10dp" />
+		    
+		    <TextView 
+		        android:id="@+id/stats_deadlift"
+		        android:layout_width="0dp"
+		        android:layout_height="120dp"
+		        android:layout_weight="0.5"
+		        android:text="@string/ex_deadlift"
+		        style="@style/style_whiteBox"
+		        android:layout_marginLeft="10dp" />
+		</LinearLayout>
+	    
+   	    <LinearLayout 
+	        android:id="@+id/stats_linearThree"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/stats_linearTwo">
+   	    
+		    <TextView 
+		        android:id="@+id/stats_ohp"
+		        android:layout_width="0dp"
+		        android:layout_height="120dp"
+		        android:layout_weight="0.5"
+		        android:text="@string/ex_ohp"
+		        style="@style/style_whiteBox"
+		        android:layout_marginRight="10dp" />
+		    
+		    <!-- This textview is here to keep the width of the textview over correct -->
+		    <TextView 
+		        android:layout_width="0dp"
+		        android:layout_height="120dp"
+		        android:layout_weight="0.5"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="20dp" />
+	  	</LinearLayout>
+	 </RelativeLayout>
+</ScrollView>

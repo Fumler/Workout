@@ -40,6 +40,13 @@
     
     <!-- GUIDE ACTIVITY -->
     
+    <!-- EXERCISE NAMES -->
+    <string name="ex_squats">Squats</string>
+    <string name="ex_benchPress">Bench Press</string>
+    <string name="ex_rowing">Rowing</string>
+    <string name="ex_deadlift">Deadlift</string>
+    <string name="ex_ohp">OHP</string>
+    
     <!-- HELP DIALOG -->
     <string name="dialog_close">Close</string>
     <string name="dialog_help0">This is where you log your workout. This message needs to be changed</string>
