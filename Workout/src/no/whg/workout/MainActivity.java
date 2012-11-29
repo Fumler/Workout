@@ -1,10 +1,13 @@
 package no.whg.workout;
 
+import java.util.List;
+
 import android.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
+	//public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -61,7 +65,8 @@ public class MainActivity extends FragmentActivity {
         return true;
     }
     
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	
     	if(item.getItemId() == R.id.menu_settings) {
@@ -72,11 +77,22 @@ public class MainActivity extends FragmentActivity {
     		startActivity(new Intent(this, GuideActivity.class));
     	}
     	
-    	if(item.getItemId() == R.id.menu_music) {
-    		Intent i = new Intent(Intent.ACTION_MAIN);
-    		i.addCategory(Intent.CATEGORY_APP_MUSIC);
-    		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    		startActivity(i);
+    	if(item.getItemId() == R.id.menu_music) {	//THIS DOES NOT WANT TO WORK ON 4.0
+    		try {
+    			Intent i = new Intent(Intent.ACTION_MAIN);
+        		i.addCategory(Intent.CATEGORY_APP_MUSIC);
+        		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        		startActivity(i);
+    		} catch (Exception e){
+    			try {
+	        		Intent i = new Intent(Intent.ACTION_VIEW);
+	        		i.setAction(MediaStore.INTENT_ACTION_MUSIC_PLAYER);
+	        		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        		startActivity(i);
+    			} catch (Exception x) {
+    				
+    			}
+    		}
     	}
     	
     	if(item.getItemId() == R.id.menu_help) {

@@ -3,6 +3,7 @@ package no.whg.workout;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -49,7 +50,7 @@ public class MediaCaptureActivity extends Activity {
 	private void captureVideo(Intent i) {
 		String lift = "SL_VID_";
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-		//Exercise[] exercises = MainActivity.SLCalc.getABworkouts();
+		//List<Exercise> exercises = MainActivity.SLCalc.getCurrentSession();
 		int etype = i.getIntExtra("VIDEO_TYPE", 3);
 		if (etype <= 3) {
 			//lift += exercises[etype].getName();
