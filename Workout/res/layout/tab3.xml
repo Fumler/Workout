@@ -89,5 +89,20 @@
 		        android:layout_marginLeft="10dp"
 		        android:layout_marginRight="20dp" />
 	  	</LinearLayout>
-	 </RelativeLayout>
+	  	
+   	    <LinearLayout 
+   	        android:id="@+id/stats_linearFour"
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="wrap_content"
+   	        android:layout_below="@id/stats_linearThree">
+   	        
+   	        <TextView 
+   	        	android:id="@+id/stats_graphView"
+   	        	android:layout_width="fill_parent"
+   	        	android:layout_height="150dp"
+   	        	style="@style/style_whiteBox"
+   	        	android:layout_marginBottom="20dp" />
+   	        
+   	    </LinearLayout>
+	</RelativeLayout>
 </ScrollView>
