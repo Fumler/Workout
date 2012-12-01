@@ -29,7 +29,7 @@ import java.util.List;
  *  					Takes a list of exercises that has been marked as success or !success
  *  					using the boolean in each exercise, and does appropriate updates.
  *  
- *  createNewWorkout(String name, String sessionName)
+ *  createNewExercise(String name, String sessionName)
  *  					Creates a new exercise with default values with "name". Added to session
  *  					name "A", "B" or "BOTH".  
  *  					
@@ -251,7 +251,7 @@ public class StrongLiftsCalculator {
 		return numberOfSessionsLogged;
 	}
 	
-	public void createNewWorkout(String name, String sessionName)
+	public void createNewExercise(String name, String sessionName)
 	{
 		if(sessionName == "A")
 		{
