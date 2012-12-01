@@ -32,6 +32,9 @@ import java.util.List;
  *  createNewExercise(String name, String sessionName)
  *  					Creates a new exercise with default values with "name". Added to session
  *  					name "A", "B" or "BOTH".  
+ *  
+ *  deleteExercise(Exercise exerciseToDelete)
+ *  					Deletes all references to 'exerciseToDelete'.
  *  					
  *  Also contains information on
  *  			- boolean sessionTypeA 
@@ -271,6 +274,18 @@ public class StrongLiftsCalculator {
 			System.out.println("ERROR! There is no session named: " + name + "!");
 			System.out.println("\n\nNO EXERCISE ADDED!!");
 			
+		}
+	}
+	
+	/*
+	 * 
+	 */
+	public void deleteExercise(Exercise exerciseToDelete)
+	{
+		if((!a_session.remove(exerciseToDelete) && (!b_session.remove(exerciseToDelete))))
+		{
+			System.out.println("ERROR! You are trying to delete a modified or non-existant exercise.");
+			System.out.println("\n\nNo exercises deleted!!");
 		}
 	}
 	
