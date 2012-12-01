@@ -266,6 +266,12 @@ public class StrongLiftsCalculator {
 			a_session.add(new Exercise(name));
 			b_session.add(a_session.get(a_session.size() - 1));
 		}
+		else
+		{
+			System.out.println("ERROR! There is no session named: " + name + "!");
+			System.out.println("\n\nNO EXERCISE ADDED!!");
+			
+		}
 	}
 	
 	
