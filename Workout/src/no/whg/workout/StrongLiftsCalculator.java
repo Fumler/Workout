@@ -27,7 +27,11 @@ import java.util.List;
  *  
  *  updateSessionWeights(List<Exercise> exercise)
  *  					Takes a list of exercises that has been marked as success or !success
- *  					using the boolean in each exercise, and does appropriate updates. 
+ *  					using the boolean in each exercise, and does appropriate updates.
+ *  
+ *  createNewWorkout(String name, String sessionName)
+ *  					Creates a new exercise with default values with "name". Added to session
+ *  					name "A", "B" or "BOTH".  
  *  					
  *  Also contains information on
  *  			- boolean sessionTypeA 
@@ -246,5 +250,23 @@ public class StrongLiftsCalculator {
 	{
 		return numberOfSessionsLogged;
 	}
+	
+	public void createNewWorkout(String name, String sessionName)
+	{
+		if(sessionName == "A")
+		{
+			a_session.add(new Exercise(name));
+		}
+		else if(sessionName == "B")
+		{
+			b_session.add(new Exercise(name));
+		}
+		else if(sessionName == "BOTH")
+		{
+			a_session.add(new Exercise(name));
+			b_session.add(a_session.get(a_session.size() - 1));
+		}
+	}
+	
 	
 }
