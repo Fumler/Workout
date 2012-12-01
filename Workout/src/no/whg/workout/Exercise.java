@@ -39,6 +39,22 @@ public class Exercise {
 		success					= false;
 	}
 	
+	public Exercise (String name)
+	{
+		currentWeight 			= 20;
+		this.name 				= name;
+		numberOfSets			= 5;
+		weightIncrement 		= 2.5;
+		
+		numberOfFails 			= 0;
+		numberOfDeloads 		= 0;
+		numberOfWorkouts 		= 0;
+		
+		progressList 			= new ArrayList<Double>();
+
+		success					= false;
+	}
+	
 	//Progress
 	public void updateProgress(){
 		numberOfWorkouts++;
@@ -107,14 +123,17 @@ public class Exercise {
 		this.weightIncrement = weightIncrement;
 	}
 	
-	public boolean getSuccess()
-	{
+	// Success
+	public boolean getSuccess(){
 		return success;
 	}
 	
+	public void setSuccess(boolean success){
+		this.success = success;
+	}
+	
 	//Name of exercise
-	public String getName()
-	{
+	public String getName(){
 		return name;
 	}
 	
