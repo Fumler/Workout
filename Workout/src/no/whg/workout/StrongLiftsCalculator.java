@@ -254,6 +254,12 @@ public class StrongLiftsCalculator {
 		return numberOfSessionsLogged;
 	}
 	
+	/*Adds a new exercise to session A, B or BOTH. The exercise is given default values
+	 * except for it's name. 
+	 * 
+	 * @param String name
+	 * @param String sessionName
+	 */
 	public void createNewExercise(String name, String sessionName)
 	{
 		if(sessionName == "A")
@@ -273,12 +279,12 @@ public class StrongLiftsCalculator {
 		{
 			System.out.println("ERROR! There is no session named: " + name + "!");
 			System.out.println("\n\nNO EXERCISE ADDED!!");
-			
 		}
 	}
 	
-	/*
+	/*Deletes all references to the parameter object. 
 	 * 
+	 * @param Exercise exerciseToDelete
 	 */
 	public void deleteExercise(Exercise exerciseToDelete)
 	{
