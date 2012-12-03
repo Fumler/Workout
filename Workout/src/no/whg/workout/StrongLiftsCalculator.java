@@ -260,39 +260,46 @@ public class StrongLiftsCalculator {
 	 * @param String name
 	 * @param String sessionName
 	 */
-	public void createNewExercise(String name, String sessionName)
+	public boolean createNewExercise(String name, String sessionName)
 	{
 		if(sessionName == "A")
 		{
 			a_session.add(new Exercise(name));
+			return true;
 		}
 		else if(sessionName == "B")
 		{
 			b_session.add(new Exercise(name));
+			return true;
 		}
 		else if(sessionName == "BOTH")
 		{
 			a_session.add(new Exercise(name));
 			b_session.add(a_session.get(a_session.size() - 1));
+			return true;
 		}
 		else
 		{
 			System.out.println("ERROR! There is no session named: " + name + "!");
 			System.out.println("\n\nNO EXERCISE ADDED!!");
+			return false;
 		}
 	}
 	
 	/*Deletes all references to the parameter object. 
 	 * 
 	 * @param Exercise exerciseToDelete
+	 * @return boolean
 	 */
-	public void deleteExercise(Exercise exerciseToDelete)
+	public boolean deleteExercise(Exercise exerciseToDelete)
 	{
 		if((!a_session.remove(exerciseToDelete) && (!b_session.remove(exerciseToDelete))))
 		{
 			System.out.println("ERROR! You are trying to delete a modified or non-existant exercise.");
 			System.out.println("\n\nNo exercises deleted!!");
+			return false;
 		}
+		else return true;
 	}
 	
 	
