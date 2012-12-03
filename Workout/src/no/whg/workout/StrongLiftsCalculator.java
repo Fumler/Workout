@@ -31,10 +31,10 @@ import java.util.List;
  *  
  *  createNewExercise(String name, String sessionName)
  *  					Creates a new exercise with default values with "name". Added to session
- *  					name "A", "B" or "BOTH".  
+ *  					name "A", "B" or "BOTH". Returns true if success. 
  *  
  *  deleteExercise(Exercise exerciseToDelete)
- *  					Deletes all references to 'exerciseToDelete'.
+ *  					Deletes all references to 'exerciseToDelete'. Returns true if success.
  *  					
  *  Also contains information on
  *  			- boolean sessionTypeA 
@@ -255,10 +255,11 @@ public class StrongLiftsCalculator {
 	}
 	
 	/*Adds a new exercise to session A, B or BOTH. The exercise is given default values
-	 * except for it's name. 
+	 * except for it's name. Returns true if successfull. 
 	 * 
 	 * @param String name
 	 * @param String sessionName
+	 * @return boolean
 	 */
 	public boolean createNewExercise(String name, String sessionName)
 	{
@@ -286,7 +287,7 @@ public class StrongLiftsCalculator {
 		}
 	}
 	
-	/*Deletes all references to the parameter object. 
+	/*Deletes all references to the parameter object. Returns true if successfull. 
 	 * 
 	 * @param Exercise exerciseToDelete
 	 * @return boolean
