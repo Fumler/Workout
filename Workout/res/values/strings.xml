@@ -28,6 +28,7 @@
     <string name="tv_welcomeMessage">Welcome to Strongbird! This app will help you keep track of your stronglifts workout.</string>
 
     <!-- LOG WORKOUT ACTIVITY -->
+    <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
     
     <!-- SETTINGS ACTIVITY -->
     <string name="set_main">Settings</string>

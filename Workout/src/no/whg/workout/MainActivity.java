@@ -1,7 +1,6 @@
 package no.whg.workout;
 
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,14 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
@@ -54,7 +46,7 @@ public class MainActivity extends FragmentActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(2);
+        mViewPager.setCurrentItem(1);
     }
 
     @Override
@@ -200,8 +192,29 @@ public class MainActivity extends FragmentActivity {
 			// TODO Auto-generated method stub
 			super.onActivityCreated(savedInstanceState);
 			
-        	TextView tv = (TextView) getActivity().findViewById(R.id.stats_squats);
-        	tv.setText("DEPRSTgjhndkpgfhn");
+        	Bundle args = getArguments();
+        	int position = args.getInt(ARG_SECTION_NUMBER);
+
+        	switch(position) {
+        	case 0:
+        		// Tab 1 - Log Workout
+    			TextView logStart = (TextView) getActivity().findViewById(R.id.tv_log1);
+    			logStart.setText("Herp a derp a derp");
+        		break;
+        	case 1:
+        		// Tab 2 - Home
+        		break;
+        	case 2:
+        		// Tab 3 - Stats
+        		TextView tv = (TextView) getActivity().findViewById(R.id.stats_squats);
+        		tv.setText("DEPRSTgjhndkpgfhn");
+        		break;
+        	case 3:
+        		// Tab 4 - Gallery
+        		
+        		break;
+        		
+        	}
 		}
     }
 }
