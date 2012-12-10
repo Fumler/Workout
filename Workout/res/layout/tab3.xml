@@ -27,8 +27,8 @@
 		        android:layout_width="0dp"
 		        android:layout_height="120dp"
 		        android:layout_weight="0.5"
-		        android:text="@string/ex_squats"
 		        android:layout_marginRight="10dp" />
+    	    <!-- android:text="@string/ex_squats" -->
 		    
 		    <TextView 
 		        android:id="@+id/stats_benchPress"
@@ -80,7 +80,7 @@
 		        style="@style/style_whiteBox"
 		        android:layout_marginRight="10dp" />
 		    
-		    <!-- This textview is here to keep the width of the textview over correct -->
+		    <!-- This textview is here to keep the width of the textview above correct -->
 		    <TextView 
 		        android:layout_width="0dp"
 		        android:layout_height="120dp"
@@ -89,20 +89,14 @@
 		        android:layout_marginLeft="10dp"
 		        android:layout_marginRight="20dp" />
 	  	</LinearLayout>
-	  	
-   	    <LinearLayout 
-   	        android:id="@+id/stats_linearFour"
-   	        android:layout_width="fill_parent"
-   	        android:layout_height="wrap_content"
-   	        android:layout_below="@id/stats_linearThree">
    	        
-   	        <TextView 
-   	        	android:id="@+id/stats_graphView"
-   	        	android:layout_width="fill_parent"
-   	        	android:layout_height="150dp"
-   	        	style="@style/style_whiteBox"
-   	        	android:layout_marginBottom="20dp" />
-   	        
-   	    </LinearLayout>
+        <TextView 
+        	android:id="@+id/stats_graphView"
+        	android:layout_width="fill_parent"
+        	android:layout_height="150dp"
+        	android:layout_below="@id/stats_linearThree"
+        	style="@style/style_whiteBox"
+        	android:layout_marginBottom="20dp" />
+
 	</RelativeLayout>
 </ScrollView>

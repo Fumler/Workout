@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
@@ -39,6 +40,8 @@ public class MainActivity extends FragmentActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    
+    TextView testText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,15 +51,10 @@ public class MainActivity extends FragmentActivity {
         // of the app.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(1);
-        
-     
-       
-
     }
 
     @Override
@@ -101,6 +99,7 @@ public class MainActivity extends FragmentActivity {
     	}
     	
         return true;
+        
     }
     
     public void makeGrid (Context c){
@@ -184,10 +183,8 @@ public class MainActivity extends FragmentActivity {
         	case 3:
         		tabLayout = R.layout.tab4;
         		break;
-        		
         	}
         	
-            
             return inflater.inflate(tabLayout, container, false);
             //return textView;
         }
@@ -234,5 +231,5 @@ public class MainActivity extends FragmentActivity {
 			return imageView;
 
     	}
-    }
+    }   
 }
