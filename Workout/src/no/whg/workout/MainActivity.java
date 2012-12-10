@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -120,6 +121,27 @@ public class MainActivity extends FragmentActivity {
 	    	
 	    //}
 	    //    return gridview;
+    }
+    
+    public void videoCapture(View view){
+//    	String lift = "SL_VID_";
+//    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+//    	intent.putExtra("MEDIA_TYPE", 2);
+//		ImageButton ib = (ImageButton) view;
+//		if (ib.equals(findViewById(R.id.btn_video0))) {
+//			//lift += exercises[0].getName();
+//		} else if (ib.equals(findViewById(R.id.btn_video1))) {
+//			//lift += exercises[1].getName();
+//		} else if (ib.equals(findViewById(R.id.btn_video2))) {
+//			//lift += exercises[2].getName();
+//		} else {
+//			// oops!
+//			
+//		}
+//		
+//    	intent.putExtra("lift", lift);
+//
+//		this.startActivity(intent);
     }
 
 

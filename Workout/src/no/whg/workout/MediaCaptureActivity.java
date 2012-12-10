@@ -48,21 +48,14 @@ public class MediaCaptureActivity extends Activity {
 	}
 	
 	private void captureVideo(Intent i) {
-		String lift = "SL_VID_";
+		String lift = i.getStringExtra("lift");
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-		List<Exercise> exercises = MainActivity.SLCalc.getCurrentSession();
-		int etype = i.getIntExtra("VIDEO_TYPE", 3);
-		// perhaps this should be handled differently
-		if (etype <= 3) {
-			//lift += exercises[etype].getName();
-			fileUri = getMediaFileUri(MEDIA_TYPE_VIDEO, lift);
-			intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-	
-			startActivityForResult(intent, IMAGE_REQUEST_CODE);
-		} else {
-			// error
-			finish();
-		}
+		
+		
+		fileUri = getMediaFileUri(MEDIA_TYPE_VIDEO, lift);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+		startActivityForResult(intent, IMAGE_REQUEST_CODE);
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
