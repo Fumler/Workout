@@ -50,8 +50,9 @@ public class MediaCaptureActivity extends Activity {
 	private void captureVideo(Intent i) {
 		String lift = "SL_VID_";
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-		//List<Exercise> exercises = MainActivity.SLCalc.getCurrentSession();
+		List<Exercise> exercises = MainActivity.SLCalc.getCurrentSession();
 		int etype = i.getIntExtra("VIDEO_TYPE", 3);
+		// perhaps this should be handled differently
 		if (etype <= 3) {
 			//lift += exercises[etype].getName();
 			fileUri = getMediaFileUri(MEDIA_TYPE_VIDEO, lift);

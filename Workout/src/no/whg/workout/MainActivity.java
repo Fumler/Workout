@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
-	//public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
+	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -90,7 +90,7 @@ public class MainActivity extends FragmentActivity {
 	        		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	        		startActivity(i);
     			} catch (Exception x) {
-    				
+    				//TOAST
     			}
     		}
     	}
