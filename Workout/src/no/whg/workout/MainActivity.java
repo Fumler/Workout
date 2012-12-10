@@ -1,13 +1,11 @@
 package no.whg.workout;
 
-import java.util.List;
-
 import android.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,12 +19,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
-	//public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
+	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -51,10 +50,11 @@ public class MainActivity extends FragmentActivity {
         // of the app.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(2);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class MainActivity extends FragmentActivity {
 	        		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	        		startActivity(i);
     			} catch (Exception x) {
-    				
+    				//TOAST
     			}
     		}
     	}
@@ -119,6 +119,27 @@ public class MainActivity extends FragmentActivity {
 	    	
 	    //}
 	    //    return gridview;
+    }
+    
+    public void videoCapture(View view){
+//    	String lift = "SL_VID_";
+//    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+//    	intent.putExtra("MEDIA_TYPE", 2);
+//		ImageButton ib = (ImageButton) view;
+//		if (ib.equals(findViewById(R.id.btn_video0))) {
+//			//lift += exercises[0].getName();
+//		} else if (ib.equals(findViewById(R.id.btn_video1))) {
+//			//lift += exercises[1].getName();
+//		} else if (ib.equals(findViewById(R.id.btn_video2))) {
+//			//lift += exercises[2].getName();
+//		} else {
+//			// oops!
+//			
+//		}
+//		
+//    	intent.putExtra("lift", lift);
+//
+//		this.startActivity(intent);
     }
 
 
@@ -166,10 +187,11 @@ public class MainActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+        	super.onCreate(savedInstanceState);
         	Bundle args = getArguments();
         	int position = args.getInt(ARG_SECTION_NUMBER);
-        	
         	int tabLayout = 1;
+
         	switch(position) {
         	case 0:
         		tabLayout = R.layout.tab1;
@@ -183,11 +205,30 @@ public class MainActivity extends FragmentActivity {
         	case 3:
         		tabLayout = R.layout.tab4;
         		break;
+        		
         	}
         	
-            return inflater.inflate(tabLayout, container, false);
+        	View view = inflater.inflate(tabLayout, container, false);
+        	
+
+        	
+
+        	
+            
+            return view;
             //return textView;
         }
+
+		@Override
+		public void onActivityCreated(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			super.onActivityCreated(savedInstanceState);
+			
+        	TextView tv = (TextView) getActivity().findViewById(R.id.stats_squats);
+        	tv.setText("DEPRSTgjhndkpgfhn");
+		}
+        
+        
     	
     }
     

@@ -27,7 +27,14 @@ import java.util.List;
  *  
  *  updateSessionWeights(List<Exercise> exercise)
  *  					Takes a list of exercises that has been marked as success or !success
- *  					using the boolean in each exercise, and does appropriate updates. 
+ *  					using the boolean in each exercise, and does appropriate updates.
+ *  
+ *  createNewExercise(String name, String sessionName)
+ *  					Creates a new exercise with default values with "name". Added to session
+ *  					name "A", "B" or "BOTH". Returns true if success. 
+ *  
+ *  deleteExercise(Exercise exerciseToDelete)
+ *  					Deletes all references to 'exerciseToDelete'. Returns true if success.
  *  					
  *  Also contains information on
  *  			- boolean sessionTypeA 
@@ -246,5 +253,55 @@ public class StrongLiftsCalculator {
 	{
 		return numberOfSessionsLogged;
 	}
+	
+	/*Adds a new exercise to session A, B or BOTH. The exercise is given default values
+	 * except for it's name. Returns true if successfull. 
+	 * 
+	 * @param String name
+	 * @param String sessionName
+	 * @return boolean
+	 */
+	public boolean createNewExercise(String name, String sessionName)
+	{
+		if(sessionName == "A")
+		{
+			a_session.add(new Exercise(name));
+			return true;
+		}
+		else if(sessionName == "B")
+		{
+			b_session.add(new Exercise(name));
+			return true;
+		}
+		else if(sessionName == "BOTH")
+		{
+			a_session.add(new Exercise(name));
+			b_session.add(a_session.get(a_session.size() - 1));
+			return true;
+		}
+		else
+		{
+			System.out.println("ERROR! There is no session named: " + name + "!");
+			System.out.println("\n\nNO EXERCISE ADDED!!");
+			return false;
+		}
+	}
+	
+	/*Deletes all references to the parameter object. Returns true if successfull. 
+	 * 
+	 * @param Exercise exerciseToDelete
+	 * @return boolean
+	 */
+	public boolean deleteExercise(Exercise exerciseToDelete)
+	{
+		if((!a_session.remove(exerciseToDelete) && (!b_session.remove(exerciseToDelete))))
+		{
+			System.out.println("ERROR! You are trying to delete a modified or non-existant exercise.");
+			System.out.println("\n\nNo exercises deleted!!");
+			return false;
+		}
+		else return true;
+	}
+	
 	
 }
