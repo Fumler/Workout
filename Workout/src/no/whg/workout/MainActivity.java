@@ -1,13 +1,11 @@
 package no.whg.workout;
 
-import java.util.List;
-
 import android.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
@@ -52,11 +51,7 @@ public class MainActivity extends FragmentActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(1);
-        
-     
-       
-
+        mViewPager.setCurrentItem(2);
     }
 
     @Override
@@ -167,10 +162,11 @@ public class MainActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+        	super.onCreate(savedInstanceState);
         	Bundle args = getArguments();
         	int position = args.getInt(ARG_SECTION_NUMBER);
-        	
         	int tabLayout = 1;
+
         	switch(position) {
         	case 0:
         		tabLayout = R.layout.tab1;
@@ -187,10 +183,27 @@ public class MainActivity extends FragmentActivity {
         		
         	}
         	
+        	View view = inflater.inflate(tabLayout, container, false);
+        	
+
+        	
+
+        	
             
-            return inflater.inflate(tabLayout, container, false);
+            return view;
             //return textView;
         }
+
+		@Override
+		public void onActivityCreated(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			super.onActivityCreated(savedInstanceState);
+			
+        	TextView tv = (TextView) getActivity().findViewById(R.id.stats_squats);
+        	tv.setText("DEPRSTgjhndkpgfhn");
+		}
+        
+        
     	
     }
     

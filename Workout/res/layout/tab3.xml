@@ -27,7 +27,6 @@
 		        android:layout_width="0dp"
 		        android:layout_height="120dp"
 		        android:layout_weight="0.5"
-		        android:text="@string/ex_squats"
 		        android:layout_marginRight="10dp" />
 		    
 		    <TextView 
