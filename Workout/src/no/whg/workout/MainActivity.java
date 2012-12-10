@@ -101,26 +101,7 @@ public class MainActivity extends FragmentActivity {
         return true;
         
     }
-    
-    public void makeGrid (Context c){
-	    // THIS DOES NOT WORK
-	    //if(mViewPager.getCurrentItem() == 3) {
-	    	 // set up gridview
-	        GridView gridview = (GridView) findViewById(R.id.tab4);
-	        gridview.setAdapter(new ImageAdapter(c));
-	        
-	        
-	        gridview.setOnItemClickListener(new OnItemClickListener() {
-	        	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	        		Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-	        		
-	        	}
-	        });
-	    	
-	    //}
-	    //    return gridview;
-    }
-    
+        
     public void videoCapture(View view){
 //    	String lift = "SL_VID_";
 //    	Intent intent = new Intent(this, MediaCaptureActivity.class);
@@ -209,12 +190,7 @@ public class MainActivity extends FragmentActivity {
         	}
         	
         	View view = inflater.inflate(tabLayout, container, false);
-        	
 
-        	
-
-        	
-            
             return view;
             //return textView;
         }
@@ -227,50 +203,5 @@ public class MainActivity extends FragmentActivity {
         	TextView tv = (TextView) getActivity().findViewById(R.id.stats_squats);
         	tv.setText("DEPRSTgjhndkpgfhn");
 		}
-        
-        
-    	
     }
-    
-    public static class ImageAdapter extends BaseAdapter {
-    	private Context mContext;
-    	
-		private Integer[] mThumbIds = {
-				R.drawable.ic_action_play, R.drawable.ic_action_search,
-				R.drawable.ic_launcher, R.drawable.topbaricon
-				
-		};
-    	
-    	public ImageAdapter(Context c) {
-    		mContext = c;
-    	}
-    	
-    	public int getCount() {
-    		return mThumbIds.length;
-    	}
-    	
-    	public Object getItem(int position) {
-    		return null;
-    	}
-    	
-    	public long getItemId(int position) {
-    		return 0;
-    	}
-    	
-    	public View getView(int position, View convertView, ViewGroup parent) {
-    		ImageView imageView;
-    		if(convertView == null) {
-    			imageView = new ImageView(mContext);
-    			imageView.setLayoutParams(new GridView.LayoutParams(85,85));
-    			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-    			imageView.setPadding(8, 8, 8, 8);
-    			
-    		} else {
-    			imageView = (ImageView) convertView;
-    		}
-    		imageView.setImageResource(mThumbIds[position]);
-			return imageView;
-
-    	}
-    }   
 }
