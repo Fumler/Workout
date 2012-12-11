@@ -238,6 +238,14 @@ public class MainActivity extends FragmentActivity {
 			List<Exercise> 	exercises;
 			exercises = SLCalc.getBothSessions();
 			
+			// Number in list -> exercise:
+			// 0 - Squats
+			// 1 - Benchpress
+			// 2 - Rowing
+			// 3 - Squats (not used)
+			// 4 - OHP
+			// 5 - Deadlift
+			
 			tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
 			tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
 			tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
