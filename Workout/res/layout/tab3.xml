@@ -27,7 +27,7 @@
 		        android:layout_width="0dp"
 		        android:layout_height="120dp"
 		        android:layout_weight="0.5"
-		        android:layout_marginRight="10dp" />
+		        android:layout_marginRight="3dp" />
     	    <!-- android:text="@string/ex_squats" -->
 		    
 		    <TextView 
@@ -37,7 +37,7 @@
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_benchPress"
 		        style="@style/style_whiteBox"
-		        android:layout_marginLeft="10dp" />
+		        android:layout_marginLeft="3dp" />
 	    </LinearLayout>
 	    
    	    <LinearLayout 
@@ -53,7 +53,7 @@
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_rowing"
 		        style="@style/style_whiteBox"
-		        android:layout_marginRight="10dp" />
+		        android:layout_marginRight="3dp" />
 		    
 		    <TextView 
 		        android:id="@+id/stats_deadlift"
@@ -62,7 +62,7 @@
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_deadlift"
 		        style="@style/style_whiteBox"
-		        android:layout_marginLeft="10dp" />
+		        android:layout_marginLeft="3dp" />
 		</LinearLayout>
 	    
    	    <LinearLayout 
@@ -77,17 +77,14 @@
 		        android:layout_height="120dp"
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_ohp"
-		        style="@style/style_whiteBox"
-		        android:layout_marginRight="10dp" />
+		        style="@style/style_whiteBox" />
 		    
 		    <!-- This textview is here to keep the width of the textview above correct -->
 		    <TextView 
 		        android:layout_width="0dp"
 		        android:layout_height="120dp"
 		        android:layout_weight="0.5"
-		        android:layout_marginTop="20dp"
-		        android:layout_marginLeft="10dp"
-		        android:layout_marginRight="20dp" />
+		        style="@style/style_whiteBox" />
 	  	</LinearLayout>
    	        
         <TextView 
