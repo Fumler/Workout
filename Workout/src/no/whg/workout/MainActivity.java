@@ -167,6 +167,12 @@ public class MainActivity extends FragmentActivity {
         public TextView tv_deadlift;
         public TextView tv_OHP;
         
+        public TextView tab1_tv_squats;
+        public TextView tab1_tv_benchPress;
+        public TextView tab1_tv_rowing;
+        public TextView tab1_tv_deadlift;
+        public TextView tab1_tv_OHP;
+        
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -276,6 +282,14 @@ public class MainActivity extends FragmentActivity {
 			tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
 			tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
 			tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+		}
+		
+		public void initTab1() {
+			
+		}
+		
+		public void refreshTab1() {
+			
 		}
     }
 }
