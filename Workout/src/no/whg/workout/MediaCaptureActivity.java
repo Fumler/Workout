@@ -55,7 +55,7 @@ public class MediaCaptureActivity extends Activity {
 		fileUri = getMediaFileUri(MEDIA_TYPE_VIDEO, lift);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
-		startActivityForResult(intent, IMAGE_REQUEST_CODE);
+		startActivityForResult(intent, VIDEO_REQUEST_CODE);
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
