@@ -35,9 +35,9 @@
     <string name="set_weight">Weight should be displayed in:</string>
     <string name="set_reset">Reset data</string>
 
-    <!-- SETTINGS RADIO BUTTONS -->
-    <string name="set_kg_rb">KG</string>
-    <string name="set_lbs_rb">Lbs</string>
+    <!-- SETTINGS WEIGHT BUTTONS -->
+    <string name="set_kg_btn">KG</string>
+    <string name="set_lbs_btn">Lbs</string>
     
     <!-- GUIDE ACTIVITY -->
     

@@ -1,6 +1,7 @@
 package no.whg.workout;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -174,6 +175,19 @@ public class MainActivity extends FragmentActivity {
 
         public static final String ARG_SECTION_NUMBER = "section_number";
         
+        // STATS RELATED TEXTVIEWS
+        public TextView tab3_tv_squats;
+        public TextView tab3_tv_benchPress;
+        public TextView tab3_tv_rowing;
+        public TextView tab3_tv_deadlift;
+        public TextView tab3_tv_OHP;
+        
+        public TextView tab1_tv_squats;
+        public TextView tab1_tv_benchPress;
+        public TextView tab1_tv_rowing;
+        public TextView tab1_tv_deadlift;
+        public TextView tab1_tv_OHP;
+        
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -223,8 +237,9 @@ public class MainActivity extends FragmentActivity {
         		break;
         	case 2:
         		// Tab 3 - Stats
-        		TextView tv = (TextView) getActivity().findViewById(R.id.stats_squats);
-        		tv.setText("DEPRSTgjhndkpgfhn");
+        		// Initializing the TextViews.
+        		initTab3();
+        		refreshTab3();
         		break;
         	case 3:
     		
@@ -263,10 +278,68 @@ public class MainActivity extends FragmentActivity {
           			}
           		});
     	        initGallery();
-        		
-        		break;
-        		
-        	}
+    	        break;
+			        	}
+		}
+		@Override
+		public void onResume() {
+			// TODO Auto-generated method stub
+			super.onResume();
+			
+			Bundle args = getArguments();
+			int position = args.getInt(ARG_SECTION_NUMBER);
+
+    
+			switch(position) {
+			case 0:
+				// Tab 1 - Log Workout
+				break;
+			case 1:
+				// Tab 2 - Home
+				break;
+			case 2:
+				// Tab 3 - Stats
+				refreshTab3();
+				break;
+			case 3:
+				// Tab 4 - Gallery
+				break;
+			}
+		}
+
+		public void initTab3(){
+			tab3_tv_squats 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
+			tab3_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
+			tab3_tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
+			tab3_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
+			tab3_tv_OHP 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
+		}
+		
+		public void refreshTab3(){
+			List<Exercise> 	exercises;
+			exercises = SLCalc.getBothSessions();
+			
+			// Number in list -> exercise:
+			// 0 - Squats
+			// 1 - Benchpress
+			// 2 - Rowing
+			// 3 - Squats (not used)
+			// 4 - OHP
+			// 5 - Deadlift
+			
+			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
+			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
+			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
+			tab3_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
+			tab3_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+		}
+		
+		public void initTab1() {
+			
+		}
+		
+		public void refreshTab1() {
+			
 		}
     }
     
