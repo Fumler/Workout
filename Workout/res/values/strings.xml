@@ -41,6 +41,11 @@
     
     <!-- GUIDE ACTIVITY -->
     
+    <!-- GALLERY ACTIVITY -->
+	<string name="gallery_picture">Picture</string>
+    <string name="gallery_select_intro">Long-press a thumbnail to add an image</string>
+	<string name="gallery_show_intro">Press a thumbnail to display at larger size</string>
+    
     <!-- EXERCISE NAMES -->
     <string name="ex_squats">Squats</string>
     <string name="ex_benchPress">Bench Press</string>
