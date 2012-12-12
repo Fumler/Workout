@@ -12,7 +12,7 @@
 	    android:layout_marginTop="10dp"
 	    android:text="@string/set_weight"
 	    android:gravity="center_horizontal" />
-		
+
 	<LinearLayout
         android:id="@+id/settings_weightBtns"
         android:layout_width="fill_parent"
@@ -28,7 +28,7 @@
 	        android:background="@drawable/button_custom_focus"
 	        android:text="@string/set_kg_btn"
 	        android:layout_marginLeft="20dp" />
-	    
+
    	    <Button 
 	        android:id="@+id/settings_lbsBtn"
 	        android:layout_width="0dp"
@@ -37,11 +37,11 @@
 	        android:background="@drawable/button_custom_focus"
 	        android:text="@string/set_lbs_btn"
 	        android:layout_marginRight="20dp" />
-	    
+
     </LinearLayout>
     
 	<Button 
-	    android:id="@+id/settings_donBtn"
+	    android:id="@+id/settings_doneBtn"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
@@ -51,5 +51,5 @@
 	    android:layout_marginBottom="10dp"
 	    android:layout_marginLeft="10dp"
 	    android:layout_marginRight="10dp" />
-	
+
 </RelativeLayout>

@@ -28,7 +28,7 @@ public class SettingsActivity extends Activity {
          */
         Button settings_kgBtn 	= (Button) findViewById(R.id.settings_kgBtn);
         Button settings_lbsBtn 	= (Button) findViewById(R.id.settings_lbsBtn);
-        Button settings_doneBtn = (Button) findViewById(R.id.settings_donBtn);
+        Button settings_doneBtn = (Button) findViewById(R.id.settings_doneBtn);
         
         /*
          *  Sets up the buttons so that they can be focused.
