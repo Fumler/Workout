@@ -3,58 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_gradient" >
-
-    <!-- The following is temporary. Holy shit -->
     
-    <TextView
-        android:id="@+id/set_headline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:padding="8dp"
-        android:text="@string/set_main"
-        tools:context=".LogActivity" />
-    
-    <TextView
-        android:id="@+id/set_weight"
-        android:layout_below="@id/set_headline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:padding="8dp"
-        android:text="@string/set_weight"
-        tools:context=".LogActivity" />
-    
-    <RadioGroup
-        android:id="@+id/set_weight_rg"
-	    android:layout_width="wrap_content"
+	<TextView 
+	    android:id="@+id/settings_main"
 	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:orientation="horizontal"
-	    android:checkedButton="@+id/set_kg_rb"
-	    android:layout_below="@id/set_weight">
-	    
-	    <RadioButton 
-	        android:id="@id/set_kg_rb"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/set_kg_rb" />
-	    
-	    <RadioButton 
-    	    android:id="@+id/set_lbs_rb"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/set_lbs_rb"/>
-    </RadioGroup>
-    
-    <TextView
-        android:id="@+id/set_reset"
-        android:layout_below="@id/set_weight_rg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:padding="8dp"
-        android:text="@string/set_reset"
-        tools:context=".LogActivity" />
-
+	    android:layout_width="fill_parent"
+	    style="@style/style_whiteBoxRegular"
+	    android:text="DERP" />
+	
 </RelativeLayout>

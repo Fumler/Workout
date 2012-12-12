@@ -22,6 +22,16 @@
         <item name="android:padding">5dp</item>
     </style>
     
+    <style name="style_whiteBoxCapsRegular">
+        <item name="android:background">#fff</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    
     <style name="style_emptyBoxRegular">
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginLeft">10dp</item>

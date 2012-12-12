@@ -29,7 +29,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/tv_welcomeMessage"
-	        style="@style/style_whiteBoxCapsBold" />	
+	        style="@style/style_whiteBoxCapsRegular" />	
 	    <LinearLayout 
 	        android:id="@+id/stats_linearOne"
 	        android:layout_width="fill_parent"
@@ -38,7 +38,7 @@
 	        
     	    <TextView
 		        android:id="@+id/stats_squats"
-		        style="@style/style_whiteBoxCapsBold"
+		        style="@style/style_whiteBoxCapsRegular"
 		        android:layout_width="0dp"
 		        android:layout_height="40dp"
 		        android:layout_weight="0.5"
@@ -52,7 +52,7 @@
 		        android:layout_height="40dp"
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_benchPress"
-		        style="@style/style_whiteBoxCapsBold"
+		        style="@style/style_whiteBoxCapsRegular"
 		        android:layout_marginLeft="5dp"
 		        android:layout_marginBottom="0dp"  />
 
@@ -100,7 +100,7 @@
 		        android:layout_height="40dp"
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_rowing"
-		        style="@style/style_whiteBoxCapsBold"
+		        style="@style/style_whiteBoxCapsRegular"
 		        android:layout_marginRight="5dp"
 		        android:layout_marginBottom="0dp" />
 		    
@@ -110,7 +110,7 @@
 		        android:layout_height="40dp"
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_deadlift"
-		        style="@style/style_whiteBoxCapsBold"
+		        style="@style/style_whiteBoxCapsRegular"
 		        android:layout_marginLeft="5dp"
 		        android:layout_marginBottom="0dp" />
 		</LinearLayout>
@@ -157,7 +157,7 @@
 		        android:layout_height="40dp"
 		        android:layout_weight="0.5"
 		        android:text="@string/ex_ohp"
-		        style="@style/style_whiteBoxCapsBold"
+		        style="@style/style_whiteBoxCapsRegular"
 		        android:layout_marginRight="5dp"
 		        android:layout_marginBottom="0dp" />
 		    
