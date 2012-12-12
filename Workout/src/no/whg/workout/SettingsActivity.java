@@ -23,15 +23,24 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         
+        /*
+         *  Initiating button elements.
+         */
         Button settings_kgBtn 	= (Button) findViewById(R.id.settings_kgBtn);
         Button settings_lbsBtn 	= (Button) findViewById(R.id.settings_lbsBtn);
         Button settings_doneBtn = (Button) findViewById(R.id.settings_donBtn);
         
+        /*
+         *  Sets up the buttons so that they can be focused.
+         */
         settings_kgBtn.setFocusable(true);
         settings_kgBtn.setFocusableInTouchMode(true);
         settings_lbsBtn.setFocusable(true);
         settings_lbsBtn.setFocusableInTouchMode(true);
         
+        /*
+         *  Checks for which unit of measurement is active and focuses the correct button.
+         */
         if (MainActivity.SLCalc.getWeightUnitTypeKilograms()){
         	settings_kgBtn.requestFocus();
         	setIsKG(true);
@@ -41,6 +50,16 @@ public class SettingsActivity extends Activity {
         	setIsKG(false);
         }
         
+        /* 
+         * TODO:
+         * - Set up a button that resets the application to default state.
+         * 
+         * - Set up a way for the user to change values in each exercise, reps etc.
+         */ 
+        
+        /*
+         *  Saves the settings and exits the activity
+         */
         settings_doneBtn.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				saveSettings();
@@ -60,7 +79,9 @@ public class SettingsActivity extends Activity {
     	}
     	
     	if(item.getItemId() == R.id.menu_music) {
-    		// start the music player
+    		/*
+    		 *  Start the music player
+    		 */
     	}
     	
     	if(item.getItemId() == android.R.id.home) {
@@ -71,14 +92,19 @@ public class SettingsActivity extends Activity {
         return true;
     }
     
+    /*
+     *  Setter for isKG.
+     */
     private void setIsKG(boolean value){
     	isKG = value;
     }
     
+    /*
+     *  Saves the settings and exits the activity.
+     */
     private void saveSettings(){
 		Toast.makeText(getApplicationContext(), getResources().getString(R.string.set_saved), Toast.LENGTH_SHORT).show();
 		
-		// Exits the app
 		finish();
     }
 }
