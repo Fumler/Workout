@@ -216,22 +216,47 @@ public class MainActivity extends FragmentActivity {
         		break;
         	case 2:
         		// Tab 3 - Stats
-        		
         		// Initializing the TextViews.
-        		tv_squats 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
-        		tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
-        		tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
-        		tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
-        		tv_OHP 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
-        		
+        		initTab3();
         		refreshTab3();
         		break;
         	case 3:
         		// Tab 4 - Gallery
-        		
         		break;
-        		
         	}
+		}
+
+		@Override
+		public void onResume() {
+			// TODO Auto-generated method stub
+			super.onResume();
+			
+			Bundle args = getArguments();
+			int position = args.getInt(ARG_SECTION_NUMBER);
+			
+			switch(position) {
+			case 0:
+				// Tab 1 - Log Workout
+				break;
+			case 1:
+				// Tab 2 - Home
+				break;
+			case 2:
+				// Tab 3 - Stats
+				refreshTab3();
+				break;
+			case 3:
+				// Tab 4 - Gallery
+				break;
+			}
+		}
+
+		public void initTab3(){
+			tv_squats 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
+    		tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
+    		tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
+    		tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
+    		tv_OHP 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
 		}
 		
 		public void refreshTab3(){
