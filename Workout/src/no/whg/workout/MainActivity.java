@@ -214,8 +214,8 @@ public class MainActivity extends FragmentActivity {
         	switch(position) {
         	case 0:
         		// Tab 1 - Log Workout
-    			TextView logStart = (TextView) getActivity().findViewById(R.id.tv_log1);
-    			logStart.setText("Herp a derp a derp");
+    			initTab1();
+    			refreshTab1();
         		break;
         	case 1:
         		// Tab 2 - Home
@@ -262,7 +262,7 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
 			tab3_tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
 			tab3_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
-			tab3_tv_OHP 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
+			tab3_tv_OHP 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
 		}
 		
 		public void refreshTab3(){
@@ -285,10 +285,30 @@ public class MainActivity extends FragmentActivity {
 		}
 		
 		public void initTab1() {
-			
+			tab1_tv_squats 		= (TextView) getActivity().findViewById(R.id.log_squatsDetailed);
+			tab1_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.log_benchPressDetailed);
+			tab1_tv_rowing 		= (TextView) getActivity().findViewById(R.id.log_rowingDetailed);
+			tab1_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.log_deadliftDetailed);
+			tab1_tv_OHP 		= (TextView) getActivity().findViewById(R.id.log_ohpDetailed);
 		}
 		
 		public void refreshTab1() {
+			List<Exercise> 	exercises;
+			exercises = SLCalc.getBothSessions();
+			
+			// Number in list -> exercise:
+			// 0 - Squats
+			// 1 - Benchpress
+			// 2 - Rowing
+			// 3 - Squats (not used)
+			// 4 - OHP
+			// 5 - Deadlift
+			
+			tab1_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
+			tab1_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
+			tab1_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
+			tab1_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
+			tab1_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
 			
 		}
     }
