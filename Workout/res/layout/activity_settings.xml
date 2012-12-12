@@ -5,10 +5,21 @@
     android:background="@drawable/main_gradient" >
     
 	<TextView 
-	    android:id="@+id/settings_main"
+	    android:id="@+id/settings_weight"
 	    android:layout_height="wrap_content"
 	    android:layout_width="fill_parent"
-	    style="@style/style_whiteBoxRegular"
-	    android:text="DERP" />
+	    style="@style/style_whiteBoxCapsRegular"
+	    android:text="@string/set_weight"
+	    android:layout_marginTop="0dp"
+	    android:gravity="bottom|center_horizontal" />
+		
+	<LinearLayout
+        android:id="@+id/settings_weightBtns"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/settings_weight">
+            
+    </LinearLayout>
 	
 </RelativeLayout>
