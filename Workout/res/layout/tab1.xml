@@ -305,20 +305,25 @@
 	 	
 	    <Button 
 	        android:id="@+id/log_button"
-	        android:background="@drawable/custom_button_normal"
+	        android:background="@drawable/button_custom_normal"
+	        android:layout_below="@id/log_linearFive"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        
+	        
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        
 	        />
 	    
-	 	
 
    	    <View
    	        android:layout_width="fill_parent"
-   	        android:layout_height="15dp"
+   	        android:layout_height="10dp"
    	        android:id="@+id/viewlol"
-   	        android:layout_below="@id/log_linearFive"
+   	        android:layout_below="@id/log_button"
    	        />
+	    
 
 	</RelativeLayout>
 </ScrollView>
