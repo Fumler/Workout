@@ -279,6 +279,7 @@ public class MainActivity extends FragmentActivity {
           			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
           				//set the larger image view to display the chosen bitmap calling method of adapter class
           				picView.setImageBitmap(imgAdapt.getPic(position));
+          				currentPic = position;
           			}
           		});
     	        break;
@@ -619,19 +620,12 @@ public class MainActivity extends FragmentActivity {
 	
 						//now decode the bitmap using sample options
 						bmpOptions.inJustDecodeBounds = false;
-	
-						System.out.println("WTFBBQ");
+						
 						//get the file as a bitmap
 						pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-						System.out.println("dafuq");
 	
 						//pass bitmap to ImageAdapter to add to array
 						imgAdapt.addPic(pic, counter);
-	
-						//display the newly selected image at larger size
-						//picView.setImageBitmap(pic);
-						//scale options
-						//picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 					}
 					counter++;
 					if (counter >= 10)
@@ -661,8 +655,7 @@ public class MainActivity extends FragmentActivity {
 		if (resultCode == RESULT_OK) {
 			
 			//check if we are returning from picture selection
-			if (requestCode == PICKER) {
-				System.out.println("result, motherfucker. do you have it?");
+			//if (requestCode == PICKER) {
 				//the returned picture URI
 				Uri pickedUri = data.getData();
 
@@ -740,7 +733,7 @@ public class MainActivity extends FragmentActivity {
 					//scale options
 					picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				}
-			}
+			//}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
