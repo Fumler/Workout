@@ -200,6 +200,8 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_deadlift;
         public TextView tab1_tv_OHP;
         
+        public String weightUnit;
+        
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -377,7 +379,7 @@ public class MainActivity extends FragmentActivity {
 			// 2 - Rowing
 			// 3 - OHP
 			// 4 - Deadlift
-			
+
 			tab1_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
 			tab1_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
 			tab1_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
@@ -399,18 +401,20 @@ public class MainActivity extends FragmentActivity {
 			List<Exercise> 	exercises;
 			exercises = SLCalc.getBothSessions();
 			
+			setWeightString();
+			
 			// Number in list -> exercise:
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
 			// 3 - OHP
 			// 4 - Deadlift
-			
-			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
-			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
-			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
-			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
-			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + " KG");
+
+			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + weightUnit);
+			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + weightUnit);
+			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + weightUnit);
+			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + weightUnit);
+			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
 		}
 		
 		//Initializes tab 4
@@ -423,6 +427,13 @@ public class MainActivity extends FragmentActivity {
             picGallery.setAdapter(imgAdapt);
             //initialize the gallery
 	        initGallery();
+		}
+		
+		public void setWeightString(){
+			if (SLCalc.getWeightUnitKilograms())
+				weightUnit  = " KG";
+			else
+				weightUnit = " Lbs";
 		}
     }
     

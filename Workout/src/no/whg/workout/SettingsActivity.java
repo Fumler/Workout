@@ -14,9 +14,12 @@ import no.whg.workout.MainActivity;
  */
 
 public class SettingsActivity extends Activity {
-
+	
 	private boolean isKG;
-	private boolean previousKG;
+	
+	private Button settings_kgBtn;
+	private Button settings_lbsBtn;
+	private Button settings_doneBtn;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,9 +30,9 @@ public class SettingsActivity extends Activity {
         /*
          *  Initiating button elements.
          */
-        Button settings_kgBtn 	= (Button) findViewById(R.id.settings_kgBtn);
-        Button settings_lbsBtn 	= (Button) findViewById(R.id.settings_lbsBtn);
-        Button settings_doneBtn = (Button) findViewById(R.id.settings_doneBtn);
+        settings_kgBtn 	= (Button) findViewById(R.id.settings_kgBtn);
+        settings_lbsBtn 	= (Button) findViewById(R.id.settings_lbsBtn);
+        settings_doneBtn = (Button) findViewById(R.id.settings_doneBtn);
         
         /*
          *  Sets up the buttons so that they can be focused.
@@ -38,9 +41,7 @@ public class SettingsActivity extends Activity {
         settings_kgBtn.setFocusableInTouchMode(true);
         settings_lbsBtn.setFocusable(true);
         settings_lbsBtn.setFocusableInTouchMode(true);
-        
-        previousKG = isKG;
-        
+
         /*
          *  Checks for which unit of measurement is active and focuses the correct button.
          */
@@ -52,6 +53,7 @@ public class SettingsActivity extends Activity {
         	settings_lbsBtn.requestFocus();
         	setIsKG(false);
         }
+        	
         
         /* 
          * TODO:
@@ -69,6 +71,8 @@ public class SettingsActivity extends Activity {
 			}
         });
     }
+    
+    
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -96,7 +100,7 @@ public class SettingsActivity extends Activity {
     }
     
     /*
-     *  Setter for isKG.
+     *  Setter for isKG
      */
     private void setIsKG(boolean value){
     	isKG = value;
@@ -106,7 +110,12 @@ public class SettingsActivity extends Activity {
      *  Saves the settings and exits the activity.
      */
     private void saveSettings(){
-    	if (previousKG != isKG){
+		if (settings_kgBtn.isFocused())
+			setIsKG(true);
+		else
+			setIsKG(false);
+    	
+    	if (isKG != MainActivity.SLCalc.getWeightUnitKilograms()){
     		MainActivity.SLCalc.changeWeightUnit();
     	}
     	
