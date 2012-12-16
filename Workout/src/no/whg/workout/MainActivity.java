@@ -49,7 +49,19 @@ public class MainActivity extends FragmentActivity {
     ViewPager mViewPager;
     
     TextView testText;
-
+    
+	//variable for selection intent
+	private final static int PICKER = 1;
+	//variable to store the currently selected image
+	private static int currentPic = 0;
+	//adapter for gallery view
+	private static PicAdapter imgAdapt;
+	//gallery object
+	private static Gallery picGallery;
+	//image view for larger display
+	private static ImageView picView;
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +124,7 @@ public class MainActivity extends FragmentActivity {
         
     }
         
-    public void videoCapture(View view){
+    public void videoCapture(View view){	//Commented out until it gets put in use
 //    	String lift = "SL_VID_";
 //    	Intent intent = new Intent(this, MediaCaptureActivity.class);
 //    	intent.putExtra("MEDIA_TYPE", 2);
@@ -242,18 +254,10 @@ public class MainActivity extends FragmentActivity {
         		refreshTab3();
         		break;
         	case 3:
-    		
-        		//get the large image view
-          		picView = (ImageView) getActivity().findViewById(R.id.tab4_picture);
-          		//get the gallery view
-          		picGallery = (Gallery) getActivity().findViewById(R.id.tab4_gallery);
-          		if (picView == null)
-          			System.out.println("picture is null");
-          		if (picGallery == null)
-          			System.out.println("gallery is null");
-                picGallery.setAdapter(imgAdapt);
+        		// Tab 4 - Gallery
+        		initTab4();
 
-              //set long click listener for each gallery thumbnail item
+                //set long click listener for each gallery thumbnail item
           		picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
           			//handle long clicks
           			public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
@@ -277,9 +281,8 @@ public class MainActivity extends FragmentActivity {
           				picView.setImageBitmap(imgAdapt.getPic(position));
           			}
           		});
-    	        initGallery();
     	        break;
-			        	}
+        	}
 		}
 		@Override
 		public void onResume() {
@@ -288,8 +291,7 @@ public class MainActivity extends FragmentActivity {
 			
 			Bundle args = getArguments();
 			int position = args.getInt(ARG_SECTION_NUMBER);
-
-    
+			
 			switch(position) {
 			case 0:
 				// Tab 1 - Log Workout
@@ -303,10 +305,41 @@ public class MainActivity extends FragmentActivity {
 				break;
 			case 3:
 				// Tab 4 - Gallery
+				refreshTab4();
 				break;
 			}
 		}
-
+		
+		//Initializes tab 1
+		public void initTab1() {
+			tab1_tv_squats 		= (TextView) getActivity().findViewById(R.id.log_squatsDetailed);
+			tab1_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.log_benchPressDetailed);
+			tab1_tv_rowing 		= (TextView) getActivity().findViewById(R.id.log_rowingDetailed);
+			tab1_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.log_deadliftDetailed);
+			tab1_tv_OHP 		= (TextView) getActivity().findViewById(R.id.log_ohpDetailed);
+		}
+		
+		public void refreshTab1() {
+			List<Exercise> 	exercises;
+			exercises = SLCalc.getBothSessions();
+			
+			// Number in list -> exercise:
+			// 0 - Squats
+			// 1 - Benchpress
+			// 2 - Rowing
+			// 3 - Squats (not used)
+			// 4 - OHP
+			// 5 - Deadlift
+			
+			tab1_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
+			tab1_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
+			tab1_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
+			tab1_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
+			tab1_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			
+		}
+		
+		//Initializes tab 3
 		public void initTab3(){
 			tab3_tv_squats 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
 			tab3_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
@@ -334,31 +367,19 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
 		}
 		
-		public void initTab1() {
-			tab1_tv_squats 		= (TextView) getActivity().findViewById(R.id.log_squatsDetailed);
-			tab1_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.log_benchPressDetailed);
-			tab1_tv_rowing 		= (TextView) getActivity().findViewById(R.id.log_rowingDetailed);
-			tab1_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.log_deadliftDetailed);
-			tab1_tv_OHP 		= (TextView) getActivity().findViewById(R.id.log_ohpDetailed);
+		//Initializes tab 4
+		public void initTab4(){
+			//get the large image view
+      		picView = (ImageView) getActivity().findViewById(R.id.tab4_picture);
+      		//get the gallery view
+      		picGallery = (Gallery) getActivity().findViewById(R.id.tab4_gallery);
+      		//set the imgadapter for picgallery
+            picGallery.setAdapter(imgAdapt);
+            //initialize the gallery
+	        initGallery();
 		}
 		
-		public void refreshTab1() {
-			List<Exercise> 	exercises;
-			exercises = SLCalc.getBothSessions();
-			
-			// Number in list -> exercise:
-			// 0 - Squats
-			// 1 - Benchpress
-			// 2 - Rowing
-			// 3 - Squats (not used)
-			// 4 - OHP
-			// 5 - Deadlift
-			
-			tab1_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
-			tab1_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
-			tab1_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
-			tab1_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
-			tab1_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+		public void refreshTab4(){
 			
 		}
     }
@@ -556,10 +577,13 @@ public class MainActivity extends FragmentActivity {
 	@SuppressWarnings("deprecation")
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+		System.out.println("onactivityresult()");
 		if (resultCode == RESULT_OK) {
+			System.out.println("resultcode == result_ok");
 			//check if we are returning from picture selection
+			System.out.println("requestcode == " + requestCode + " picker == " + PICKER);
 			if (requestCode == PICKER) {
-
+				System.out.println("result, motherfucker. do you have it?");
 				//the returned picture URI
 				Uri pickedUri = data.getData();
 
@@ -639,18 +663,6 @@ public class MainActivity extends FragmentActivity {
 				}
 			}
 		}
-		//superclass method
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-
-	//variable for selection intent
-	private final static int PICKER = 1;
-	//variable to store the currently selected image
-	private static int currentPic = 0;
-	//adapter for gallery view
-	private static PicAdapter imgAdapt;
-	//gallery object
-	private static Gallery picGallery;
-	//image view for larger display
-	private static ImageView picView;
 }

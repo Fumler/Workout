@@ -41,7 +41,7 @@ public class SettingsActivity extends Activity {
         /*
          *  Checks for which unit of measurement is active and focuses the correct button.
          */
-        if (MainActivity.SLCalc.getWeightUnitTypeKilograms()){
+        if (MainActivity.SLCalc.getWeightUnitKilograms()){
         	settings_kgBtn.requestFocus();
         	setIsKG(true);
         }
