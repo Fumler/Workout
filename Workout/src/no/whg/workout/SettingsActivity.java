@@ -14,12 +14,18 @@ import no.whg.workout.MainActivity;
  */
 
 public class SettingsActivity extends Activity {
-	
+	/*
+	 * 
+	 * FUCK THIS SHIT, WILL USE PREFERENCE STUFF INSTEAD
+	 * FUCK IT
+	 * FUCK
+	 */
 	private boolean isKG;
 	
 	private Button settings_kgBtn;
 	private Button settings_lbsBtn;
 	private Button settings_doneBtn;
+	private Button settings_reset;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,9 +36,10 @@ public class SettingsActivity extends Activity {
         /*
          *  Initiating button elements.
          */
-        settings_kgBtn 	= (Button) findViewById(R.id.settings_kgBtn);
+        settings_kgBtn 		= (Button) findViewById(R.id.settings_kgBtn);
         settings_lbsBtn 	= (Button) findViewById(R.id.settings_lbsBtn);
-        settings_doneBtn = (Button) findViewById(R.id.settings_doneBtn);
+        settings_doneBtn 	= (Button) findViewById(R.id.settings_doneBtn);
+        settings_reset		= (Button) findViewById(R.id.settings_resetBtn);
         
         /*
          *  Sets up the buttons so that they can be focused.
@@ -45,15 +52,10 @@ public class SettingsActivity extends Activity {
         /*
          *  Checks for which unit of measurement is active and focuses the correct button.
          */
-        if (MainActivity.SLCalc.getWeightUnitKilograms()){
+        if (MainActivity.SLCalc.getWeightUnitKilograms())
         	settings_kgBtn.requestFocus();
-        	setIsKG(true);
-        }
-        else{
+        else
         	settings_lbsBtn.requestFocus();
-        	setIsKG(false);
-        }
-        	
         
         /* 
          * TODO:
@@ -61,6 +63,10 @@ public class SettingsActivity extends Activity {
          * 
          * - Set up a way for the user to change values in each exercise, reps etc.
          */ 
+        
+        /*
+         *  Listener for the reset data button
+         */
         
         /*
          *  Saves the settings and exits the activity
