@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity {
         
         imgAdapt = new PicAdapter(getApplicationContext());
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
@@ -124,7 +124,7 @@ public class MainActivity extends FragmentActivity {
         
     }
         
-    public void videoCapture(View view){	//Commented out until it gets put in use
+    public void videoCapture(int i){	//Commented out until it gets put in use
 //    	String lift = "SL_VID_";
 //    	Intent intent = new Intent(this, MediaCaptureActivity.class);
 //    	intent.putExtra("MEDIA_TYPE", 2);
@@ -305,7 +305,55 @@ public class MainActivity extends FragmentActivity {
 				break;
 			case 3:
 				// Tab 4 - Gallery
-				refreshTab4();
+				break;
+			}
+		}
+		
+		@Override
+		public void onPause() {
+			// TODO Auto-generated method stub
+			super.onPause();
+			
+			Bundle args = getArguments();
+			int position = args.getInt(ARG_SECTION_NUMBER);
+			
+			switch(position) {
+			case 0:
+				// Tab 1 - Log Workout
+				break;
+			case 1:
+				// Tab 2 - Home
+				break;
+			case 2:
+				// Tab 3 - Stats
+				break;
+			case 3:
+				// Tab 4 - Gallery
+				break;
+			}
+		}
+		
+		@Override
+		public void onStop() {
+			// TODO Auto-generated method stub
+			super.onStop();
+			
+			Bundle args = getArguments();
+			int position = args.getInt(ARG_SECTION_NUMBER);
+			
+			switch(position) {
+			case 0:
+				// Tab 1 - Log Workout
+				break;
+			case 1:
+				// Tab 2 - Home
+				break;
+			case 2:
+				// Tab 3 - Stats
+				break;
+			case 3:
+				// Tab 4 - Gallery
+				//cleanTab4();
 				break;
 			}
 		}
@@ -396,6 +444,12 @@ public class MainActivity extends FragmentActivity {
 		public void refreshTab4(){
 			
 		}
+		
+		public void cleanTab4(){
+			imgAdapt.resetBitmapArray();
+			System.out.println("destroyed");
+			System.gc();
+		}
     }
     
     /**
@@ -408,7 +462,7 @@ public class MainActivity extends FragmentActivity {
 
 		//use the default gallery background image
 		int defaultItemBackground;
-
+		boolean running = false;
 		//gallery context
 		private Context galleryContext;
 
@@ -491,10 +545,24 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		//return bitmap at specified position for larger display
-		public Bitmap getPic(int posn)
+		public Bitmap getPic(int pos)
 		{
-			//return bitmap at posn index
-			return imageBitmaps[posn];
+			//return bitmap at pos index
+			return imageBitmaps[pos];
+		}
+		
+		public void resetBitmapArray(){
+			//recycle all thumbnail images in the gallery
+			for(int i=0; i<imageBitmaps.length; i++)
+				imageBitmaps[i].recycle();
+		}
+		
+		public boolean getRunning(){
+			return running;
+		}
+		
+		public void setRunning(){
+			running = true;
 		}
 	}
 	
@@ -503,85 +571,98 @@ public class MainActivity extends FragmentActivity {
 	 * - import the image bitmap
 	 */
 	protected static void initGallery(){
-		File dir = new File(
-				Environment
-						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-						"StrongLifts"); // set destination folder
-		
-		if (dir.exists()) {
-
-			//declare the bitmap
-			Bitmap pic = null;
-			//declare the path string
-			String imgPath = "";
-			//File[] files = dir.listFiles();
-			int counter = 0;
-			for (File file : dir.listFiles()){
-				//the returned picture URI
-				Uri pickedUri = Uri.fromFile(file);
-				
-				imgPath = pickedUri.getPath();
-				
-				if(pickedUri!=null) {
-
-					//set the width and height we want to use as maximum display
-					int targetWidth = 600;
-					int targetHeight = 400;
-
-					//sample the incoming image to save on memory resources
-
-					//create bitmap options to calculate and use sample size
-					BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-
-					//first decode image dimensions only - not the image bitmap itself
-					bmpOptions.inJustDecodeBounds = true;
-					BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-					//work out what the sample size should be
-
-					//image width and height before sampling
-					int currHeight = bmpOptions.outHeight;
-					int currWidth = bmpOptions.outWidth;
-
-					//variable to store new sample size
-					int sampleSize = 1;
-
-					//calculate the sample size if the existing size is larger than target size
-					if (currHeight>targetHeight || currWidth>targetWidth) 
-					{
-						//use either width or height
-						if (currWidth>currHeight)
-							sampleSize = Math.round((float)currHeight/(float)targetHeight);
-						else 
-							sampleSize = Math.round((float)currWidth/(float)targetWidth);
+		if (!imgAdapt.getRunning()){
+			imgAdapt.setRunning();
+			File dir = new File(
+					Environment
+							.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+							"StrongLifts"); // set destination folder
+			
+			//reset stored array in imgAdapt to prevent rampant growth of heap
+			//imgAdapt.resetBitmapArray();
+			
+			if (dir.exists()) {
+	
+				//declare the bitmap
+				Bitmap pic = null;
+				//declare the path string
+				String imgPath = "";
+				//File[] files = dir.listFiles();
+				int counter = 0;
+				for (File file : dir.listFiles()){
+					//the returned picture URI
+					Uri pickedUri = Uri.fromFile(file);
+					
+					imgPath = pickedUri.getPath();
+					
+					if(pickedUri!=null) {
+	
+						//set the width and height we want to use as maximum display
+						int targetWidth = 600;
+						int targetHeight = 400;
+	
+						//sample the incoming image to save on memory resources
+	
+						//create bitmap options to calculate and use sample size
+						BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+	
+						//first decode image dimensions only - not the image bitmap itself
+						bmpOptions.inJustDecodeBounds = true;
+						BitmapFactory.decodeFile(imgPath, bmpOptions);
+	
+						//work out what the sample size should be
+	
+						//image width and height before sampling
+						int currHeight = bmpOptions.outHeight;
+						int currWidth = bmpOptions.outWidth;
+	
+						//variable to store new sample size
+						int sampleSize = 1;
+	
+						//calculate the sample size if the existing size is larger than target size
+						if (currHeight>targetHeight || currWidth>targetWidth) 
+						{
+							//use either width or height
+							if (currWidth>currHeight)
+								sampleSize = Math.round((float)currHeight/(float)targetHeight);
+							else 
+								sampleSize = Math.round((float)currWidth/(float)targetWidth);
+						}
+						//use the new sample size
+						bmpOptions.inSampleSize = sampleSize;
+	
+						//now decode the bitmap using sample options
+						bmpOptions.inJustDecodeBounds = false;
+	
+						System.out.println("WTFBBQ");
+						//get the file as a bitmap
+						pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
+						System.out.println("dafuq");
+	
+						//pass bitmap to ImageAdapter to add to array
+						imgAdapt.addPic(pic, counter);
+	
+						//display the newly selected image at larger size
+						//picView.setImageBitmap(pic);
+						//scale options
+						//picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 					}
-					//use the new sample size
-					bmpOptions.inSampleSize = sampleSize;
-
-					//now decode the bitmap using sample options
-					bmpOptions.inJustDecodeBounds = false;
-
-					//get the file as a bitmap
-					pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-					//pass bitmap to ImageAdapter to add to array
-					imgAdapt.addPic(pic, counter);
-					//redraw the gallery thumbnails to reflect the new addition
-					picGallery.setAdapter(imgAdapt);
-
-					//display the newly selected image at larger size
-					picView.setImageBitmap(pic);
-					//scale options
-					picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+					counter++;
+					if (counter >= 10)
+							break;
 				}
+	
 				
-				counter++;
-				if (counter >= 10)
-						break;
+			} else {
+				// error message
 			}
-		} else {
-			// error message
+			
 		}
+		//redraw the gallery thumbnails to reflect the new addition
+		picGallery.setAdapter(imgAdapt);
+		//display the newly selected image at larger size
+		picView.setImageBitmap(imgAdapt.getPic(currentPic));
+		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	}
 
 	/**
@@ -590,12 +671,10 @@ public class MainActivity extends FragmentActivity {
 	 */
 	@SuppressWarnings("deprecation")
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		System.out.println("onactivityresult()");
+		
 		if (resultCode == RESULT_OK) {
-			System.out.println("resultcode == result_ok");
+			
 			//check if we are returning from picture selection
-			System.out.println("requestcode == " + requestCode + " picker == " + PICKER);
 			if (requestCode == PICKER) {
 				System.out.println("result, motherfucker. do you have it?");
 				//the returned picture URI
