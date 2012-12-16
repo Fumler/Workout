@@ -15,7 +15,8 @@ import no.whg.workout.MainActivity;
 
 public class SettingsActivity extends Activity {
 
-	public boolean isKG;
+	private boolean isKG;
+	private boolean previousKG;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class SettingsActivity extends Activity {
         settings_kgBtn.setFocusableInTouchMode(true);
         settings_lbsBtn.setFocusable(true);
         settings_lbsBtn.setFocusableInTouchMode(true);
+        
+        previousKG = isKG;
         
         /*
          *  Checks for which unit of measurement is active and focuses the correct button.
@@ -103,8 +106,11 @@ public class SettingsActivity extends Activity {
      *  Saves the settings and exits the activity.
      */
     private void saveSettings(){
-		Toast.makeText(getApplicationContext(), getResources().getString(R.string.set_saved), Toast.LENGTH_SHORT).show();
-		
+    	if (previousKG != isKG){
+    		MainActivity.SLCalc.changeWeightUnit();
+    	}
+    	
+		Toast.makeText(getApplicationContext(), getResources().getString(R.string.set_saved), Toast.LENGTH_SHORT).show();				
 		finish();
     }
 }
