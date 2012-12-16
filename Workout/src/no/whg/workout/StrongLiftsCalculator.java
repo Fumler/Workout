@@ -69,7 +69,7 @@ public class StrongLiftsCalculator {
 		b_session.add(new Exercise(40, "Deadlift", 		5, 5.0d));
 		
 		sessionTypeA 			= true;
-		weightUnitTypeKilograms = true;
+		weightUnitKilograms = true;
 		numberOfSessionsLogged  = 0;	
 	}
 	
