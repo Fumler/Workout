@@ -35,10 +35,13 @@ import java.util.List;
  *  
  *  deleteExercise(Exercise exerciseToDelete)
  *  					Deletes all references to 'exerciseToDelete'. Returns true if success.
+ *
+ *  changeWeightUnit()	Modifies all exercise currentWeights, weightIncrements and progressList
+ *  					to pounds or kilograms, depending on current unit type. 
  *  					
  *  Also contains information on
  *  			- boolean sessionTypeA 
- *  			- boolean weightUnitTypeKilograms
+ *  			- boolean weightUnitKilograms
  *  			- int numberOfSessionsLogged
  */
 
@@ -245,27 +248,65 @@ public class StrongLiftsCalculator {
 		return weightUnitKilograms;
 	}
 	
-	public void changeWeightunit()
+	
+	/*
+	 * Changes weight unit type in all exercises. 
+	 */
+	public void changeWeightUnit()
 	{
 		if(weightUnitKilograms)
 		{
-			for(Exercise exercise : a_session)
-			{
-				exercise.setCurrentWeight(exercise.getCurrentWeight() * 2);
-				exercise.setWeightIncrement(exercise.getWeightIncrement() * 2);
-				
-				List<Double> progressList = exercise.getProgressList();
-				
-				for(Double loggedWeight : progressList)
-				{
-					loggedWeight = loggedWeight * 2;
-				}
-				
-			}
+			changeToPounds(a_session);
+			changeToPounds(b_session);
 		}
 		else
 		{
+			changeToKilograms(a_session);
+			changeToKilograms(b_session);
+		}
+	}
+	
+	/*
+	 * Actually does unit calculation to pounds. We're not interested in exact conversion
+	 * except in the progressList.
+	 * 
+	 * @param List<Exercise> session
+	 */
+	private void changeToPounds(List<Exercise> session)
+	{
+		for(Exercise exercise : session)
+		{
+			exercise.setCurrentWeight(exercise.getCurrentWeight() * 2);
+			exercise.setWeightIncrement(exercise.getWeightIncrement() * 2);
 			
+			List<Double> progressList = exercise.getProgressList();
+			
+			for(Double loggedWeight : progressList)
+			{
+				loggedWeight = (double) Math.round((loggedWeight * 2.20462262f) * 100) / 100; 
+			}	
+		}
+	}
+	
+	/*
+	 * Actually does unit calculation to pounds. We're not interested in exact conversion except
+	 * in the progressList.
+	 * 
+	 * @param List<Exercise> session
+	 */
+	private void changeToKilograms(List<Exercise> session)
+	{
+		for(Exercise exercise : session)
+		{
+			exercise.setCurrentWeight(exercise.getCurrentWeight() / 2);
+			exercise.setWeightIncrement(exercise.getWeightIncrement() / 2);
+			
+			List<Double> progressList = exercise.getProgressList();
+			
+			for(Double loggedWeight : progressList)
+			{
+				loggedWeight = (double) Math.round((loggedWeight * 0.45359237f) * 100) / 100; 
+			}
 		}
 	}
 	
