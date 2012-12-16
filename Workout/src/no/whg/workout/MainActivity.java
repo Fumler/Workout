@@ -323,7 +323,7 @@ public class MainActivity extends FragmentActivity {
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
-			// 3 - Squats (not used)
+			// 3 - Squats (not used) I CAN CHANGE THIS - Simen
 			// 4 - OHP
 			// 5 - Deadlift
 			

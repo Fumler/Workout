@@ -223,9 +223,9 @@ public class StrongLiftsCalculator {
 		{
 			bothSessions.add(exercise);
 		}
-		for(Exercise exercise : b_session)
+		for(int i = 1; i < b_session.size(); i++)
 		{
-			bothSessions.add(exercise);
+			bothSessions.add(b_session.get(i));
 		}
 		
 		return bothSessions;
