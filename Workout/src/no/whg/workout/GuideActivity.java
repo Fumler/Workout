@@ -177,23 +177,23 @@ public class GuideActivity extends FragmentActivity {
         		break;
         	case 1:
         		tabLayout = R.layout.guide_tab2;
-        		initTab2();
+        		//initTab2();
         		break;
         	case 2:
         		tabLayout = R.layout.guide_tab3;
-        		initTab3();
+        		//initTab3();
         		break;
         	case 3:
         		tabLayout = R.layout.guide_tab4;
-        		initTab4();
+//        		initTab4();
         		break;
         	case 4:
         		tabLayout = R.layout.guide_tab5;
-        		initTab5();
+//        		initTab5();
         		break;
         	case 5:
         		tabLayout = R.layout.guide_tab6;
-        		initTab6();
+//        		initTab6();
         		break;
         		
         	}

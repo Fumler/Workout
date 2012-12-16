@@ -375,15 +375,14 @@ public class MainActivity extends FragmentActivity {
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
-			// 3 - Squats (not used)
-			// 4 - OHP
-			// 5 - Deadlift
+			// 3 - OHP
+			// 4 - Deadlift
 			
 			tab1_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
 			tab1_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
 			tab1_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
-			tab1_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
-			tab1_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			tab1_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			tab1_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + " KG");
 			
 		}
 		
@@ -404,15 +403,14 @@ public class MainActivity extends FragmentActivity {
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
-			// 3 - Squats (not used)
-			// 4 - OHP
-			// 5 - Deadlift
+			// 3 - OHP
+			// 4 - Deadlift
 			
 			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
 			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
 			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
-			tab3_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
-			tab3_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + " KG");
 		}
 		
 		//Initializes tab 4
