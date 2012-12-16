@@ -40,6 +40,15 @@
     <string name="set_lbs_btn">Lbs</string>
     
     <!-- GUIDE ACTIVITY -->
+    <string name="guide_tv_video">VIDEO:</string>
+    
+    <!-- GUIDE ACTIVITY SECTIONS / TABS -->
+    <string name="guide_title_section6">Rowing</string>
+    <string name="guide_title_section5">Overhead Press</string>
+    <string name="guide_title_section4">Deadlift</string>
+    <string name="guide_title_section3">Bench Press</string>
+    <string name="guide_title_section2">Squats</string>
+    <string name="guide_title_section1">Guide</string>
     
     <!-- GALLERY ACTIVITY -->
 	<string name="gallery_picture">Picture</string>
