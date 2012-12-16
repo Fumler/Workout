@@ -40,6 +40,22 @@
 
     </LinearLayout>
     
+	<LinearLayout
+	    android:id="@+id/settings_resetStuff"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_below="@id/settings_weightBtns" >
+   	    
+	    <Button 
+	        android:id="@+id/settings_resetBtn"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/button_custom_normal"
+	        android:text="@string/set_reset" />
+	    
+	</LinearLayout>
+    
 	<Button 
 	    android:id="@+id/settings_doneBtn"
 	    android:layout_width="fill_parent"

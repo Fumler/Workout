@@ -223,9 +223,9 @@ public class StrongLiftsCalculator {
 		{
 			bothSessions.add(exercise);
 		}
-		for(Exercise exercise : b_session)
+		for(int i = 1; i < b_session.size(); i++)
 		{
-			bothSessions.add(exercise);
+			bothSessions.add(b_session.get(i));
 		}
 		
 		return bothSessions;
@@ -256,13 +256,19 @@ public class StrongLiftsCalculator {
 	{
 		if(weightUnitKilograms)
 		{
-			changeToPounds(a_session);
-			changeToPounds(b_session);
+			for(Exercise exercise : getBothSessions())
+			{
+				changeToPounds(exercise);
+			}			
+			weightUnitKilograms = false;
 		}
 		else
 		{
-			changeToKilograms(a_session);
-			changeToKilograms(b_session);
+			for(Exercise exercise : getBothSessions())
+			{
+				changeToKilograms(exercise);
+			}
+			weightUnitKilograms = true;
 		}
 	}
 	
@@ -272,20 +278,19 @@ public class StrongLiftsCalculator {
 	 * 
 	 * @param List<Exercise> session
 	 */
-	private void changeToPounds(List<Exercise> session)
+	private void changeToPounds(Exercise exercise)
 	{
-		for(Exercise exercise : session)
+		
+		exercise.setCurrentWeight(exercise.getCurrentWeight() * 2);
+		exercise.setWeightIncrement(exercise.getWeightIncrement() * 2);
+		
+		List<Double> progressList = exercise.getProgressList();
+		
+		for(Double loggedWeight : progressList)
 		{
-			exercise.setCurrentWeight(exercise.getCurrentWeight() * 2);
-			exercise.setWeightIncrement(exercise.getWeightIncrement() * 2);
-			
-			List<Double> progressList = exercise.getProgressList();
-			
-			for(Double loggedWeight : progressList)
-			{
-				loggedWeight = (double) Math.round((loggedWeight * 2.20462262f) * 100) / 100; 
-			}	
-		}
+			loggedWeight = (double) Math.round((loggedWeight * 2.20462262f) * 100) / 100; 
+		}	
+		
 	}
 	
 	/*
@@ -294,19 +299,16 @@ public class StrongLiftsCalculator {
 	 * 
 	 * @param List<Exercise> session
 	 */
-	private void changeToKilograms(List<Exercise> session)
+	private void changeToKilograms(Exercise exercise)
 	{
-		for(Exercise exercise : session)
+		exercise.setCurrentWeight(exercise.getCurrentWeight() / 2);
+		exercise.setWeightIncrement(exercise.getWeightIncrement() / 2);
+		
+		List<Double> progressList = exercise.getProgressList();
+		
+		for(Double loggedWeight : progressList)
 		{
-			exercise.setCurrentWeight(exercise.getCurrentWeight() / 2);
-			exercise.setWeightIncrement(exercise.getWeightIncrement() / 2);
-			
-			List<Double> progressList = exercise.getProgressList();
-			
-			for(Double loggedWeight : progressList)
-			{
-				loggedWeight = (double) Math.round((loggedWeight * 0.45359237f) * 100) / 100; 
-			}
+			loggedWeight = (double) Math.round((loggedWeight * 0.45359237f) * 100) / 100; 
 		}
 	}
 	

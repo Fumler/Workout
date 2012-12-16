@@ -217,6 +217,7 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_OHP;
         
         public Button tab1_b_log;
+        public String weightUnit;
         
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -297,6 +298,7 @@ public class MainActivity extends FragmentActivity {
           			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
           				//set the larger image view to display the chosen bitmap calling method of adapter class
           				picView.setImageBitmap(imgAdapt.getPic(position));
+          				currentPic = position;
           			}
           		});
     	        break;
@@ -371,7 +373,6 @@ public class MainActivity extends FragmentActivity {
 				break;
 			case 3:
 				// Tab 4 - Gallery
-				//cleanTab4();
 				break;
 			}
 		}
@@ -422,15 +423,16 @@ public class MainActivity extends FragmentActivity {
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
-			// 3 - Squats (not used)
-			// 4 - OHP
-			// 5 - Deadlift
-			
+			// 3 - OHP
+			// 4 - Deadlift
+
 			if(isA) {
 				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weight);
 				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + " " + weight);
 				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " " + weight);
 
+			tab1_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			tab1_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + " KG");
 				
 				
 				tab1_ll_deadlift.setVisibility(View.GONE);
@@ -473,17 +475,20 @@ public class MainActivity extends FragmentActivity {
 			List<Exercise> 	exercises;
 			exercises = SLCalc.getBothSessions();
 			
+			setWeightString();
+			
 			// Number in list -> exercise:
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
-			// 3 - Squats (not used)
-			// 4 - OHP
-			// 5 - Deadlift
-			
-			
+			// 3 - OHP
+			// 4 - Deadlift
 
-
+			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + weightUnit);
+			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + weightUnit);
+			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + weightUnit);
+			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + weightUnit);
+			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
 		}
 		
 		//Initializes tab 4
@@ -498,14 +503,11 @@ public class MainActivity extends FragmentActivity {
 	        initGallery();
 		}
 		
-		public void refreshTab4(){
-			
-		}
-		
-		public void cleanTab4(){
-			imgAdapt.resetBitmapArray();
-			System.out.println("destroyed");
-			System.gc();
+		public void setWeightString(){
+			if (SLCalc.getWeightUnitKilograms())
+				weightUnit  = " KG";
+			else
+				weightUnit = " Lbs";
 		}
     }
     
@@ -690,19 +692,12 @@ public class MainActivity extends FragmentActivity {
 	
 						//now decode the bitmap using sample options
 						bmpOptions.inJustDecodeBounds = false;
-	
-						System.out.println("WTFBBQ");
+						
 						//get the file as a bitmap
 						pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-						System.out.println("dafuq");
 	
 						//pass bitmap to ImageAdapter to add to array
 						imgAdapt.addPic(pic, counter);
-	
-						//display the newly selected image at larger size
-						//picView.setImageBitmap(pic);
-						//scale options
-						//picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 					}
 					counter++;
 					if (counter >= 10)
@@ -732,8 +727,7 @@ public class MainActivity extends FragmentActivity {
 		if (resultCode == RESULT_OK) {
 			
 			//check if we are returning from picture selection
-			if (requestCode == PICKER) {
-				System.out.println("result, motherfucker. do you have it?");
+			//if (requestCode == PICKER) {
 				//the returned picture URI
 				Uri pickedUri = data.getData();
 
@@ -811,7 +805,7 @@ public class MainActivity extends FragmentActivity {
 					//scale options
 					picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				}
-			}
+			//}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
