@@ -429,11 +429,7 @@ public class MainActivity extends FragmentActivity {
 			if(isA) {
 				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weight);
 				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + " " + weight);
-				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " " + weight);
-
-			tab1_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
-			tab1_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + " KG");
-				
+				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " " + weight);				
 				
 				tab1_ll_deadlift.setVisibility(View.GONE);
 				tab1_tv_deadliftTitle.setVisibility(View.GONE);
