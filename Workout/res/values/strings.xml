@@ -34,6 +34,8 @@
     <string name="set_main">Settings</string>
     <string name="set_weight">Weight should be displayed in:</string>
     <string name="set_reset">Reset data</string>
+    <string name="set_done">Done</string>
+    <string name="set_saved">Settings saved!</string>
 
     <!-- SETTINGS WEIGHT BUTTONS -->
     <string name="set_kg_btn">KG</string>

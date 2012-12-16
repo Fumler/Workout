@@ -208,6 +208,12 @@
         	android:layout_below="@id/stats_linearThreeDetailed"
         	style="@style/style_whiteBoxCapsBold"
         	android:layout_marginBottom="20dp" />
+        
+        <!-- This View element makes sure there is some space between the last element and the bottom of the page -->
+        <View 
+            android:layout_below="@id/stats_graphView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
 
 	</RelativeLayout>
 </ScrollView>
