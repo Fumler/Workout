@@ -43,13 +43,6 @@ public class GuideActivity extends FragmentActivity {
 	private static ProgressDialog pd;
 	protected static String [] videos;
 	
-	public TextView tv_strongLiftsGuide;
-	public TextView tv_squatsGuide;
-	public TextView tv_benchPressGuide;
-	public TextView tv_deadLiftGuide;
-	public TextView tv_ohpGuide;
-	public TextView tv_rowingGuide;
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,7 +148,15 @@ public class GuideActivity extends FragmentActivity {
      * A dummy fragment representing a section of the app, but that simply displays dummy text.
      */
     public static class GuideFragment extends Fragment {
-        public GuideFragment() {
+        
+    	public TextView tv_strongLiftsGuide;
+    	public TextView tv_squatsGuide;
+    	public TextView tv_benchPressGuide;
+    	public TextView tv_deadLiftGuide;
+    	public TextView tv_ohpGuide;
+    	public TextView tv_rowingGuide;
+    	
+    	public GuideFragment() {
         }
 
         public static final String ARG_SECTION_NUMBER = "section_number";
@@ -172,21 +173,27 @@ public class GuideActivity extends FragmentActivity {
         	switch(position) {
         	case 0:
         		tabLayout = R.layout.guide_tab1;
+        		initTab1();
         		break;
         	case 1:
         		tabLayout = R.layout.guide_tab2;
+        		initTab2();
         		break;
         	case 2:
         		tabLayout = R.layout.guide_tab3;
+        		initTab3();
         		break;
         	case 3:
         		tabLayout = R.layout.guide_tab4;
+        		initTab4();
         		break;
         	case 4:
         		tabLayout = R.layout.guide_tab5;
+        		initTab5();
         		break;
         	case 5:
         		tabLayout = R.layout.guide_tab6;
+        		initTab6();
         		break;
         		
         	}
@@ -194,6 +201,12 @@ public class GuideActivity extends FragmentActivity {
         	View view = inflater.inflate(tabLayout, container, false);
         	
             return view;
+            
+        }
+        
+        private void initTab1()
+        {
+        	tv_squatsGuide = (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
         }
         
         @Override

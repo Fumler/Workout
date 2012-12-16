@@ -258,11 +258,13 @@ public class StrongLiftsCalculator {
 		{
 			changeToPounds(a_session);
 			changeToPounds(b_session);
+			weightUnitKilograms = false;
 		}
 		else
 		{
 			changeToKilograms(a_session);
 			changeToKilograms(b_session);
+			weightUnitKilograms = true;
 		}
 	}
 	
