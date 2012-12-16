@@ -61,6 +61,11 @@ public class Exercise {
 		progressList.add(currentWeight);
 	}
 	
+	public List<Double> getProgressList()
+	{
+		return progressList;
+	}
+	
 	// Current weight
 	public double getCurrentWeight() {
 		return currentWeight;

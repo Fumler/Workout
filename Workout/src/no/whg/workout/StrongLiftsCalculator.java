@@ -48,7 +48,7 @@ public class StrongLiftsCalculator {
 	private List<Exercise> 	a_session;
 	private List<Exercise> 	b_session;
 	private boolean 		sessionTypeA;
-	private boolean 		weightUnitTypeKilograms;
+	private boolean 		weightUnitKilograms;
 	
 	/*
 	 * Constructs a StrongLiftsCalculator and adds default exercises
@@ -240,9 +240,33 @@ public class StrongLiftsCalculator {
 	/*
 	 * @return boolean weightUnitTypeKilograms telling what unit type is used. 
 	 */
-	public boolean getWeightUnitTypeKilograms()
+	public boolean getWeightUnitKilograms()
 	{
-		return weightUnitTypeKilograms;
+		return weightUnitKilograms;
+	}
+	
+	public void changeWeightunit()
+	{
+		if(weightUnitKilograms)
+		{
+			for(Exercise exercise : a_session)
+			{
+				exercise.setCurrentWeight(exercise.getCurrentWeight() * 2);
+				exercise.setWeightIncrement(exercise.getWeightIncrement() * 2);
+				
+				List<Double> progressList = exercise.getProgressList();
+				
+				for(Double loggedWeight : progressList)
+				{
+					loggedWeight = loggedWeight * 2;
+				}
+				
+			}
+		}
+		else
+		{
+			
+		}
 	}
 	
 	
