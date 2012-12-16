@@ -354,7 +354,6 @@ public class MainActivity extends FragmentActivity {
 				break;
 			case 3:
 				// Tab 4 - Gallery
-				//cleanTab4();
 				break;
 			}
 		}
@@ -426,16 +425,6 @@ public class MainActivity extends FragmentActivity {
             picGallery.setAdapter(imgAdapt);
             //initialize the gallery
 	        initGallery();
-		}
-		
-		public void refreshTab4(){
-			
-		}
-		
-		public void cleanTab4(){
-			imgAdapt.resetBitmapArray();
-			System.out.println("destroyed");
-			System.gc();
 		}
     }
     
