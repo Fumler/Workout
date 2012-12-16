@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 public class GuideActivity extends FragmentActivity {
@@ -41,7 +42,14 @@ public class GuideActivity extends FragmentActivity {
 	private static MediaController mc;
 	private static ProgressDialog pd;
 	protected static String [] videos;
-
+	
+	public TextView tv_strongLiftsGuide;
+	public TextView tv_squatsGuide;
+	public TextView tv_benchPressGuide;
+	public TextView tv_deadLiftGuide;
+	public TextView tv_ohpGuide;
+	public TextView tv_rowingGuide;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +72,10 @@ public class GuideActivity extends FragmentActivity {
         	"http://hum.re/getfit/rowing.mp4",
         };
         
+        
+        
+        //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("youtube-lenke")));
+        // Denne vil trigge spørsmål om du vil launche youtube-appen, med mindre default allerede er satt. 
         
     }
 
@@ -115,7 +127,7 @@ public class GuideActivity extends FragmentActivity {
         public Fragment getItem(int i) {
             Fragment fragment = new GuideFragment();
             Bundle args = new Bundle();
-            args.putInt(GuideFragment.ARG_SECTION_NUMBER, i + 1);
+            args.putInt(GuideFragment.ARG_SECTION_NUMBER, i);
             fragment.setArguments(args);
             return fragment;
         }
@@ -150,7 +162,8 @@ public class GuideActivity extends FragmentActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                				 Bundle savedInstanceState) 
+        {
         	super.onCreate(savedInstanceState);
         	Bundle args = getArguments();
         	int position = args.getInt(ARG_SECTION_NUMBER);
