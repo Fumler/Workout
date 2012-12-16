@@ -320,8 +320,10 @@ public class MainActivity extends FragmentActivity {
 		}
 		
 		public void refreshTab1() {
-			List<Exercise> 	exercises;
-			exercises = SLCalc.getBothSessions();
+			List<Exercise> currentSession = SLCalc.getCurrentSession();
+			boolean isA = SLCalc.getSessionTypeA();
+			boolean isKg = SLCalc.getWeightUnitKilograms();
+	
 			
 			// Number in list -> exercise:
 			// 0 - Squats
@@ -331,11 +333,25 @@ public class MainActivity extends FragmentActivity {
 			// 4 - OHP
 			// 5 - Deadlift
 			
-			tab1_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
-			tab1_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
-			tab1_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
-			tab1_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
-			tab1_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			if(isA) {
+				if(isKg) {
+					tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " KG");
+					tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + " KG");
+					tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " KG");
+				}
+
+			} else {
+				if(isKg) {
+					tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " KG");
+					tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + " KG");
+					tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + " KG");
+				}
+
+			}
+			
+			
+			
+
 			
 		}
 		
@@ -360,11 +376,9 @@ public class MainActivity extends FragmentActivity {
 			// 4 - OHP
 			// 5 - Deadlift
 			
-			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
-			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
-			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
-			tab3_tv_deadlift.setText(String.valueOf(exercises.get(5).getCurrentWeight()) + " KG");
-			tab3_tv_OHP.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
+			
+
+
 		}
 		
 		//Initializes tab 4
