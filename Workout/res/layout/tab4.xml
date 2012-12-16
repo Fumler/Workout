@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridView xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:id="@+id/tab4"
+<LinearLayout android:orientation="vertical"
+    android:layout_height="fill_parent" 
     android:layout_width="fill_parent" 
-    android:layout_height="fill_parent"
-    android:layout_margin="20dp"
-    android:columnWidth="90dp"
-    android:numColumns="auto_fit"
-    android:verticalSpacing="10dp"
-    android:horizontalSpacing="10dp"
-    android:stretchMode="columnWidth"
-    android:gravity="center"
-/>
+    android:id="@+id/tab4"
+    xmlns:android="http://schemas.android.com/apk/res/android"> 
+    
+    <TextView android:layout_height="wrap_content" 
+        android:layout_width="fill_parent" 
+        android:textStyle="bold" 
+        android:gravity="center" 
+        android:text="@string/gallery_select_intro" 
+        android:padding="5dp"/> 
+        
+    <Gallery android:layout_height="wrap_content" 
+        android:layout_width="fill_parent" 
+        android:id="@+id/tab4_gallery"/> 
+    
+    <TextView android:layout_height="wrap_content"
+         android:layout_width="fill_parent"
+         android:textStyle="italic"
+         android:gravity="center"
+         android:text="@string/gallery_show_intro"
+         android:padding="5dp"/>
+    
+    <ImageView android:layout_height="fill_parent"
+         android:layout_width="fill_parent"
+         android:id="@+id/tab4_picture"
+         android:contentDescription="@string/gallery_picture"/>
+    
+</LinearLayout>

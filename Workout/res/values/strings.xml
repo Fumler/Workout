@@ -28,17 +28,25 @@
     <string name="tv_welcomeMessage">Welcome to Strongbird! This app will help you keep track of your stronglifts workout.</string>
 
     <!-- LOG WORKOUT ACTIVITY -->
+    <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
     
     <!-- SETTINGS ACTIVITY -->
     <string name="set_main">Settings</string>
     <string name="set_weight">Weight should be displayed in:</string>
     <string name="set_reset">Reset data</string>
+    <string name="set_done">Done</string>
+    <string name="set_saved">Settings saved!</string>
 
-    <!-- SETTINGS RADIO BUTTONS -->
-    <string name="set_kg_rb">KG</string>
-    <string name="set_lbs_rb">Lbs</string>
+    <!-- SETTINGS WEIGHT BUTTONS -->
+    <string name="set_kg_btn">KG</string>
+    <string name="set_lbs_btn">Lbs</string>
     
     <!-- GUIDE ACTIVITY -->
+    
+    <!-- GALLERY ACTIVITY -->
+	<string name="gallery_picture">Picture</string>
+    <string name="gallery_select_intro">Long-press a thumbnail to add an image</string>
+	<string name="gallery_show_intro">Press a thumbnail to display at larger size</string>
     
     <!-- EXERCISE NAMES -->
     <string name="ex_squats">Squats</string>

@@ -1,21 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tab1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
- 
-    <TextView
-        android:id="@+id/tv_log1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_welcomeMessage"
-        android:background="#fff"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="0dp"
-        android:padding="10dp" />
-   
- 
-</RelativeLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/tab1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+	    <TextView
+	        android:id="@+id/log_main"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/tv_welcomeMessage"
+	        style="@style/style_bigWhiteText"
+	        android:layout_marginTop="15dp"
+	        android:textSize="19sp"
+	        android:textAllCaps="false"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginBottom="5dp"
+	        android:padding="5dp"
+	        
+	         />
+	    
+	    <!-- SQUATS -->
+	    <TextView 
+	        android:id="@+id/log_squats"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/ex_squats"
+	        android:layout_margin="5dp"
+	        android:layout_below="@id/log_main"
+	        style="@style/style_bigWhiteText"/>
+	    
+	    <LinearLayout 
+	        android:id="@+id/log_linearOne"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/log_squats"
+	        style="@style/style_whiteBoxRegular"
+	        >
+	        
+	    	<TextView 
+	        	android:id="@+id/log_squatsDetailed"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="fill_parent"
+	        	android:textSize="19sp"
+	        	android:gravity="center_vertical"
+	        />
+	    	
+	    	<LinearLayout
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    >
+	    		<CheckBox android:id="@+id/log_squats_cb1"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_squats_cb2"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_squats_cb3"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_squats_cb4"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_squats_cb5"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"
+	        		/>
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+	    
+	    
+	    <!-- BENCHPRESS -->
+	    <TextView 
+	        android:id="@+id/log_benchPress"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/ex_benchPress"
+	        android:layout_margin="5dp"
+	        android:layout_below="@id/log_linearOne"
+	        style="@style/style_bigWhiteText"/>
+	    
+	    <LinearLayout 
+	        android:id="@+id/log_linearTwo"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/log_benchPress"
+	        style="@style/style_whiteBoxRegular"
+	        >
+	        
+	    	<TextView 
+	        	android:id="@+id/log_benchPressDetailed"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="fill_parent"
+	        	android:textSize="19sp"
+	        	android:gravity="center_vertical"
+	        />
+	    	
+	    	<LinearLayout
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    >
+	    		<CheckBox android:id="@+id/log_benchPress_cb1"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_benchPress_cb2"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_benchPress_cb3"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_benchPress_cb4"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_benchPress_cb5"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"
+	        		/>
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+	    
+	   	<!-- ROWING -->
+	    <TextView 
+	        android:id="@+id/log_rowing"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/ex_rowing"
+	        android:layout_margin="5dp"
+	        android:layout_below="@id/log_linearTwo"
+	        style="@style/style_bigWhiteText"/>
+	    
+	    <LinearLayout 
+	        android:id="@+id/log_linearThree"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/log_rowing"
+	        style="@style/style_whiteBoxRegular"
+	        >
+	        
+	    	<TextView 
+	        	android:id="@+id/log_rowingDetailed"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="fill_parent"
+	        	android:textSize="19sp"
+	        	android:gravity="center_vertical"
+	        />
+	    	
+	    	<LinearLayout
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    >
+	    		<CheckBox android:id="@+id/log_rowing_cb1"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_rowing_cb2"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_rowing_cb3"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_rowing_cb4"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_rowing_cb5"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"
+	        		/>
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+	    
+	    <!-- DEADLIFT -->
+	    <TextView 
+	        android:id="@+id/log_deadlift"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/ex_deadlift"
+	        android:layout_margin="5dp"
+	        android:layout_below="@id/log_linearThree"
+	        style="@style/style_bigWhiteText"/>
+	    
+	    <LinearLayout 
+	        android:id="@+id/log_linearFour"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/log_deadlift"
+	        style="@style/style_whiteBoxRegular"
+	        >
+	        
+	    	<TextView 
+	        	android:id="@+id/log_deadliftDetailed"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="fill_parent"
+	        	android:textSize="19sp"
+	        	android:gravity="center_vertical"
+	        />
+	    	
+	    	<LinearLayout
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    >
+	    		<CheckBox android:id="@+id/log_deadlift_cb1"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_deadlift_cb2"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_deadlift_cb3"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_deadlift_cb4"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_deadlift_cb5"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"
+	        		/>
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+	    
+	    <!-- OHP -->
+	    <TextView 
+	        android:id="@+id/log_ohp"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/ex_ohp"
+	        android:layout_margin="5dp"
+	        android:layout_below="@id/log_linearFour"
+	        style="@style/style_bigWhiteText"/>
+	    
+	    <LinearLayout 
+	        android:id="@+id/log_linearFive"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/log_ohp"
+	        style="@style/style_whiteBoxRegular"
+	        android:layout_marginBottom="15dp"
+	        >
+	        
+	    	<TextView 
+	        	android:id="@+id/log_ohpDetailed"
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="fill_parent"
+	        	android:textSize="19sp"
+	        	android:gravity="center_vertical"
+	        />
+	    	
+	    	<LinearLayout
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    >
+	    		<CheckBox android:id="@+id/log_ohp_cb1"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_ohp_cb2"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_ohp_cb3"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_ohp_cb4"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"/>
+	    		
+	    		<CheckBox android:id="@+id/log_ohp_cb5"
+	        		android:layout_width="wrap_content"
+	        		android:layout_height="wrap_content"
+	        		/>
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+	    
+	 	
+	    <Button 
+	        android:id="@+id/log_button"
+	        android:background="@drawable/button_custom_normal"
+	        android:layout_below="@id/log_linearFive"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        
+	        
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        
+	        />
+	    
+
+   	    <View
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="10dp"
+   	        android:id="@+id/viewlol"
+   	        android:layout_below="@id/log_button"
+   	        />
+	    
+
+	</RelativeLayout>
+</ScrollView>
