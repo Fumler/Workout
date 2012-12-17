@@ -23,6 +23,7 @@
     <string name="str_menu_music">Music</string>
     <string name="str_menu_guide">Guide</string>
     <string name="str_menu_help">Help</string>
+    <string name="str_menu_camera">Camera</string>
     
     <!-- MAIN ACTIVITY -->
     <string name="tv_welcomeMessage">Welcome to Strongbird! This app will help you keep track of your stronglifts workout.</string>

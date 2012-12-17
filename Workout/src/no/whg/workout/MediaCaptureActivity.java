@@ -21,14 +21,24 @@ public class MediaCaptureActivity extends Activity {
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	private Uri fileUri;
 	
-	public void onCreate(Bundle savedInstanceState, Intent intent) {
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    	System.out.println("onCreate");
         
-        int i = intent.getIntExtra("MEDIA_TYPE", 0);
-        captureMedia(intent, i);
+        Intent intent = getIntent();
+
+        if(intent.getStringExtra("method").equals("yes")){
+	        int i = intent.getIntExtra("MEDIA_TYPE", 0);
+        	intent.putExtra("method","no");
+			captureMedia(intent, i);
+        } else {
+        	finish();
+        }
+	    
 	}
 	
 	private void captureMedia(Intent intent, int i) {
+    	System.out.println("captureMedia");
 		if (i == MEDIA_TYPE_IMAGE){
 			captureImage();
 		} else if (i == MEDIA_TYPE_VIDEO) {
@@ -39,6 +49,7 @@ public class MediaCaptureActivity extends Activity {
 	}
 	
 	private void captureImage() {
+    	System.out.println("captureImage");
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 		fileUri = getMediaFileUri(MEDIA_TYPE_IMAGE, "SL_IMG_");
@@ -76,6 +87,7 @@ public class MediaCaptureActivity extends Activity {
 				// something went wrong
 			}
 		}
+		System.out.println("finish!");
 		finish();
 	}
 

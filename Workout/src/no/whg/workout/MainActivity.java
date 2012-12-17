@@ -97,6 +97,14 @@ public class MainActivity extends FragmentActivity {
     		startActivity(new Intent(this, GuideActivity.class));
     	}
     	
+    	if (item.getItemId() == R.id.menu_camera){
+    		Intent intent = new Intent(MainActivity.this, MediaCaptureActivity.class);
+        	intent.putExtra("MEDIA_TYPE", 1);
+        	intent.putExtra("method","yes");
+        	System.out.println("clicked, intent set");
+        	startActivity(intent);
+    	}
+    	
     	if(item.getItemId() == R.id.menu_music) {	//THIS DOES NOT WANT TO WORK ON 4.0
     		try {
     			Intent i = new Intent(Intent.ACTION_MAIN);
