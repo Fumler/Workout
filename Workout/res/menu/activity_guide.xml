@@ -1,14 +1,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
     <item android:id="@+id/menu_settings"
         android:title="@string/str_menu_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
-    <item android:id="@+id/menu_music"
-        android:title="@string/str_menu_music"
-        android:icon="@drawable/ic_music"
-        android:showAsAction="ifRoom|withText" />
+    
+    <group>
+	    <item android:id="@+id/menu_camera"
+	        android:title="@string/str_menu_camera"
+	        android:icon="@drawable/ic_menu_camera"
+	        android:orderInCategory="100"
+	        android:showAsAction="ifRoom|withText" />
+	    
+	    <item android:id="@+id/menu_music"
+	        android:title="@string/str_menu_music"
+	        android:icon="@drawable/ic_action_play"
+	        android:orderInCategory="200"
+	        android:showAsAction="ifRoom|withText" />
+	    
+	    <item android:id="@+id/menu_help"
+	        android:title="@string/str_menu_help"
+	        android:icon="@drawable/ic_menu_help"
+	        android:orderInCategory="300"
+	        android:showAsAction="ifRoom|withText" />
+    </group>
+    
     <item android:id="@+id/menu_guide"
         android:title="@string/str_menu_guide"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    
 </menu>

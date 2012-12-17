@@ -55,20 +55,20 @@
 	    	    >
 
 		    	<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb0"
-		        	style="@style/cbStyle"
+		        	style="@style/style_cbStyle"
 		        		/>
 		    		    
 		    	<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb1"
-					style="@style/cbStyle"/>
+					style="@style/style_cbStyle"/>
 		    		
 		    	<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb2"
-					style="@style/cbStyle"/>
+					style="@style/style_cbStyle"/>
 		    		
 		    	<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb3"
-					style="@style/cbStyle"/>
+					style="@style/style_cbStyle"/>
 		    		
 		    	<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb4"
-						style="@style/cbStyle"
+						style="@style/style_cbStyle"
 		        		/>
 	        </LinearLayout>
 	        
@@ -104,19 +104,19 @@
 	    	    android:gravity="right"
 	    	    >
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_benchPress_cb0"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_benchPress_cb1"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_benchPress_cb2"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_benchPress_cb3"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_benchPress_cb4"
-	        		style="@style/cbStyle"
+	        		style="@style/style_cbStyle"
 	        		/>
 	        </LinearLayout>
 	        
@@ -151,19 +151,19 @@
 	    	    android:gravity="right"
 	    	    >
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_rowing_cb0"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_rowing_cb1"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_rowing_cb2"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_rowing_cb3"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_rowing_cb4"
-	        		style="@style/cbStyle"
+	        		style="@style/style_cbStyle"
 	        		/>
 	        </LinearLayout>
 	        
@@ -198,19 +198,19 @@
 	    	    android:gravity="right"
 	    	    >
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb0"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb1"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb2"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb3"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb4"
-	        		style="@style/cbStyle"
+	        		style="@style/style_cbStyle"
 	        		/>
 	        </LinearLayout>
 	        
@@ -246,20 +246,20 @@
 	    	    android:gravity="right"
 	    	    >
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_ohp_cb0"
-	        		style="@style/cbStyle"
+	        		style="@style/style_cbStyle"
 	        		/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_ohp_cb1"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_ohp_cb2"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_ohp_cb3"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	    		
 	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_ohp_cb4"
-	        		style="@style/cbStyle"/>
+	        		style="@style/style_cbStyle"/>
 	        </LinearLayout>
 	        
 	    </LinearLayout>
