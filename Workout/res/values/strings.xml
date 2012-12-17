@@ -36,8 +36,10 @@
     <string name="set_unitMeasure">Units of measurement</string>
     <string name="set_kgLbs">KG or LBS</string>
     <string name="set_kgLbs_summary">Choose which unit of measurement to display weight in</string>
-    <string name="set_done">Done</string>
-    <string name="set_saved">Settings saved!</string>
+    <string name="set_data">Data</string>
+    <string name="set_dataReset">Reset Data</string>
+    <string name="set_dataReset_summary">Resets user data. This can not be undone!</string>
+    <string name="set_dataReset_dialog">Are you sure you want to reset your data?</string>
 
     <!-- SETTINGS WEIGHT BUTTONS -->
     <string name="set_kg_btn">KG</string>

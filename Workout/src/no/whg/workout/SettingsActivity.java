@@ -7,13 +7,17 @@ import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 import no.whg.workout.MainActivity;
+import no.whg.workout.ResetDataAlertDialog;
 
 /*
  * @author Inge Dalby
  */
 
 public class SettingsActivity extends Activity {
-	
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +26,10 @@ public class SettingsActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	
@@ -47,9 +55,13 @@ public class SettingsActivity extends Activity {
         return true;
     }
     
+    /*
+     * Setting up and managing the PreferenceFragment
+     */
     public static class SettingsFragment extends PreferenceFragment{
-    	ListPreference weight;
-    	boolean isKG;
+    	ListPreference 			weight;
+    	ResetDataAlertDialog 	alertDialog;
+    	boolean 				isKG;
     	
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -59,9 +71,15 @@ public class SettingsActivity extends Activity {
             addPreferencesFromResource(R.xml.preferences);
             
             weight = (ListPreference) findPreference("settings_kgLbs");
+            alertDialog = (ResetDataAlertDialog) findPreference("settings_data_id");
+            
             setWeightValueFromCalc();
         }
         
+        /*
+         * (non-Javadoc)
+         * @see android.app.Fragment#onResume()
+         */
 		@Override
 		public void onResume() {
 			// TODO Auto-generated method stub
@@ -70,24 +88,27 @@ public class SettingsActivity extends Activity {
 			setWeightValueFromCalc();
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see android.app.Fragment#onPause()
+		 */
 		@Override
 		public void onPause() {
 			// TODO Auto-generated method stub
 			super.onPause();
-			
-			System.out.println(weight.getValue());
-			
-			if (weight.getValue() == "10")
+
+			if (weight.getValue().equals("10"))
 				isKG = true;
-			else if (weight.getValue() == "20")
+			else if (weight.getValue().equals("20"))
 				isKG = false;
-			
-			System.out.println(isKG);
 			
 			if (MainActivity.SLCalc.getWeightUnitKilograms() != isKG)
 				MainActivity.SLCalc.changeWeightUnit();
 		}
 		
+		/*
+		 * Sets the correct "focus" on the weight ListPreference
+		 */
 		public void setWeightValueFromCalc() {
             if (MainActivity.SLCalc.getWeightUnitKilograms())
             	weight.setValue("10");

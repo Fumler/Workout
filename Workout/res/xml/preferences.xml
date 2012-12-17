@@ -14,4 +14,16 @@
             android:entryValues="@array/sa_kgLbsValues" />
         
     </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="@string/set_data"
+        android:key="settings_data" >
+        
+        <no.whg.workout.ResetDataAlertDialog
+            android:id="@+id/settings_data_id"
+            android:title="@string/set_dataReset"
+            android:key="settings_dataReset"
+            android:summary="@string/set_dataReset_summary" />
+        
+    </PreferenceCategory>
 </PreferenceScreen>
