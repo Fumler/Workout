@@ -79,6 +79,7 @@ public class GuideActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_guide, menu);
+        getActionBar().setDisplayShowTitleEnabled(false);
         return true;
     }
 

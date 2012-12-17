@@ -71,5 +71,12 @@
     	<item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>    
     </style>
+        <item name="android:layout_height">32px</item>
+        <item name="android:layout_width">32px</item>
+        <item name="android:background">@drawable/unchecked</item>
+        <item name="android:layout_margin">5dp</item>
+        
+    </style>
+    
     
 </resources>
