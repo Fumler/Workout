@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sa_kgLbs">
+        <item name="10">KG</item>
+        <item name="20">LBS</item>
+    </string-array>
+    
+    <string-array name="sa_kgLbsValues">
+        <item name="10">10</item>
+        <item name="20">20</item>
+    </string-array>
+</resources>
