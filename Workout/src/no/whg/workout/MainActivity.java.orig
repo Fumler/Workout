@@ -10,6 +10,7 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -36,6 +37,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
+	public static int iterator = 0;
+
 	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
 	
     /**
@@ -80,6 +83,8 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setCurrentItem(1);
         
         imgAdapt = new PicAdapter(getApplicationContext());
+        
+
     }
     
     @Override
@@ -98,6 +103,14 @@ public class MainActivity extends FragmentActivity {
     	
     	if(item.getItemId() == R.id.menu_guide) {
     		startActivity(new Intent(this, GuideActivity.class));
+    	}
+    	
+    	if (item.getItemId() == R.id.menu_camera){
+    		Intent intent = new Intent(MainActivity.this, MediaCaptureActivity.class);
+        	intent.putExtra("MEDIA_TYPE", 1);
+        	intent.putExtra("method","yes");
+        	imgAdapt.setRunning(false);	// lets the gallery know that images have to be reloaded
+        	startActivity(intent);
     	}
     	
     	if(item.getItemId() == R.id.menu_music) {	//THIS DOES NOT WANT TO WORK ON 4.0
@@ -126,26 +139,18 @@ public class MainActivity extends FragmentActivity {
         return true;
         
     }
-        
-    public void videoCapture(int i){	//Commented out until it gets put in use
-//    	String lift = "SL_VID_";
-//    	Intent intent = new Intent(this, MediaCaptureActivity.class);
-//    	intent.putExtra("MEDIA_TYPE", 2);
-//		ImageButton ib = (ImageButton) view;
-//		if (ib.equals(findViewById(R.id.btn_video0))) {
-//			//lift += exercises[0].getName();
-//		} else if (ib.equals(findViewById(R.id.btn_video1))) {
-//			//lift += exercises[1].getName();
-//		} else if (ib.equals(findViewById(R.id.btn_video2))) {
-//			//lift += exercises[2].getName();
-//		} else {
-//			// oops!
-//			
-//		}
-//		
-//    	intent.putExtra("lift", lift);
-//
-//		this.startActivity(intent);
+    
+    public void videoCapture(int i){
+    	Exercise exercise = SLCalc.getBothSessions().get(i);
+    	String lift = "SL_VID_";
+    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+    	intent.putExtra("MEDIA_TYPE", 2);
+    	
+    	lift += exercise.getShortName();
+		
+    	intent.putExtra("lift", lift);
+
+		this.startActivity(intent);
     }
 
 
@@ -216,11 +221,16 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_deadlift;
         public TextView tab1_tv_OHP;
         
-<<<<<<< HEAD
+        public ThreeStateCheckbox tab1_squats_cb1;
+        public ThreeStateCheckbox tab1_squats_cb2;
+        public ThreeStateCheckbox tab1_squats_cb3;
+        public ThreeStateCheckbox tab1_squats_cb4;
+        public ThreeStateCheckbox tab1_squats_cb5;
+        
         public Button tab1_b_log;
-=======
         public String weightUnit;
->>>>>>> 47df54ba059883aff8cbe167351303b1eb94c49e
+        
+        
         
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -300,7 +310,9 @@ public class MainActivity extends FragmentActivity {
           			//handle clicks
           			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
           				//set the larger image view to display the chosen bitmap calling method of adapter class
-          				picView.setImageBitmap(imgAdapt.getPic(position));
+          				Matrix matrix = new Matrix();
+    					matrix.setRotate(90);
+    					picView.setImageBitmap(Bitmap.createBitmap(imgAdapt.getPic(position), 0, 0, imgAdapt.getPic(position).getWidth(), imgAdapt.getPic(position).getHeight(), matrix, false));
           				currentPic = position;
           			}
           		});
@@ -400,43 +412,34 @@ public class MainActivity extends FragmentActivity {
 			tab1_tv_OHPTitle		= (TextView) getActivity().findViewById(R.id.log_ohp);
 			
 			tab1_b_log				= (Button) getActivity().findViewById(R.id.log_button);
+			
+	        tab1_squats_cb1 		= (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
+
 		}
 		
 		public void refreshTab1() {
 			List<Exercise> currentSession = SLCalc.getCurrentSession();
 			boolean isA = SLCalc.getSessionTypeA();
-			boolean isKg = SLCalc.getWeightUnitKilograms();
-			String weight;
 			@SuppressWarnings("deprecation")
 			RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
 			        ViewGroup.LayoutParams.WRAP_CONTENT);
 			
 			p.setMargins(15, 15, 15, 15); // left, top, right, bottom
-
 			
-			if(isKg) {		
-				weight = "KG";
-			}
-			else {
-				weight = "LBS";
-			}
-	
 			
 			// Number in list -> exercise:
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
-<<<<<<< HEAD
-			// 3 - Squats (not used)
-			// 4 - OHP
-			// 5 - Deadlift
-			
-			if(isA) {
-				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weight);
-				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + " " + weight);
-				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " " + weight);
+			// 3 - OHP
+			// 4 - Deadlift
+	        
+	        setWeightString();
 
-				
+			if(isA) {
+				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);
+				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + weightUnit);
+				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + weightUnit);				
 				
 				tab1_ll_deadlift.setVisibility(View.GONE);
 				tab1_tv_deadliftTitle.setVisibility(View.GONE);
@@ -447,11 +450,31 @@ public class MainActivity extends FragmentActivity {
 				
 				
 				tab1_b_log.setLayoutParams(p);
+				
+		        tab1_squats_cb1 = (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb1);
+		        tab1_squats_cb1.setOnClickListener(new View.OnClickListener() {
+		        	public void onClick(View v) {
+		        		int state = tab1_squats_cb1.getState();
+		        		
+		        		switch(state) {
+		        		case 0: // do stuff if unchecked
+		        			tab1_squats_cb1.setText("1");
+		        			break;
+		        		case 1: // do stuff if checked
+		        			tab1_squats_cb1.setText("2");
+		        			break;
+		        		case 2: // do stuff if crossed
+		        			tab1_squats_cb1.setText("3");
+		        			break;
+		        			default: break;
+		        		}
+		        	}
+		        });
 			} else {
 				
-				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weight);
-				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + " " + weight);
-				tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + " " + weight);	
+				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);
+				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + weightUnit);
+				tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + weightUnit);	
 				
 				tab1_ll_benchpress.setVisibility(View.GONE);
 				tab1_tv_benchPressTitle.setVisibility(View.GONE);
@@ -463,17 +486,6 @@ public class MainActivity extends FragmentActivity {
 				tab1_b_log.setLayoutParams(p);
 				}
 
-=======
-			// 3 - OHP
-			// 4 - Deadlift
-
-			tab1_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + " KG");
-			tab1_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + " KG");
-			tab1_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + " KG");
-			tab1_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + " KG");
-			tab1_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + " KG");
-			
->>>>>>> 47df54ba059883aff8cbe167351303b1eb94c49e
 		}
 		
 		//Initializes tab 3
@@ -495,15 +507,6 @@ public class MainActivity extends FragmentActivity {
 			// 0 - Squats
 			// 1 - Benchpress
 			// 2 - Rowing
-<<<<<<< HEAD
-			// 3 - Squats (not used)
-			// 4 - OHP
-			// 5 - Deadlift
-			
-			
-
-
-=======
 			// 3 - OHP
 			// 4 - Deadlift
 
@@ -512,7 +515,6 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + weightUnit);
 			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + weightUnit);
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
->>>>>>> 47df54ba059883aff8cbe167351303b1eb94c49e
 		}
 		
 		//Initializes tab 4
@@ -644,8 +646,8 @@ public class MainActivity extends FragmentActivity {
 			return running;
 		}
 		
-		public void setRunning(){
-			running = true;
+		public void setRunning(boolean r){
+			running = r;
 		}
 	}
 	
@@ -655,7 +657,7 @@ public class MainActivity extends FragmentActivity {
 	 */
 	protected static void initGallery(){
 		if (!imgAdapt.getRunning()){
-			imgAdapt.setRunning();
+			imgAdapt.setRunning(true);
 			File dir = new File(
 					Environment
 							.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
@@ -670,11 +672,12 @@ public class MainActivity extends FragmentActivity {
 				Bitmap pic = null;
 				//declare the path string
 				String imgPath = "";
-				//File[] files = dir.listFiles();
-				int counter = 0;
-				for (File file : dir.listFiles()){
+				File[] files = dir.listFiles();
+				//int counter = 0;
+				//for (File file : dir.listFiles()){
+				for (int i = 0; i < 10; i++){
 					//the returned picture URI
-					Uri pickedUri = Uri.fromFile(file);
+					Uri pickedUri = Uri.fromFile(files[files.length - i - 1]);
 					
 					imgPath = pickedUri.getPath();
 					
@@ -719,13 +722,15 @@ public class MainActivity extends FragmentActivity {
 						
 						//get the file as a bitmap
 						pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
+						
+						
 	
 						//pass bitmap to ImageAdapter to add to array
-						imgAdapt.addPic(pic, counter);
+						imgAdapt.addPic(pic, i);
 					}
-					counter++;
-					if (counter >= 10)
-							break;
+					//counter++;
+					//if (counter >= 10)
+					//		break;
 				}
 	
 				
@@ -737,7 +742,10 @@ public class MainActivity extends FragmentActivity {
 		//redraw the gallery thumbnails to reflect the new addition
 		picGallery.setAdapter(imgAdapt);
 		//display the newly selected image at larger size
-		picView.setImageBitmap(imgAdapt.getPic(currentPic));
+		Matrix matrix = new Matrix();
+		matrix.setRotate(90);
+		//pic = Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, false);
+		picView.setImageBitmap(Bitmap.createBitmap(imgAdapt.getPic(currentPic), 0, 0, imgAdapt.getPic(currentPic).getWidth(), imgAdapt.getPic(currentPic).getHeight(), matrix, false));
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	}
 
@@ -825,7 +833,9 @@ public class MainActivity extends FragmentActivity {
 					picGallery.setAdapter(imgAdapt);
 
 					//display the newly selected image at larger size
-					picView.setImageBitmap(pic);
+					Matrix matrix = new Matrix();
+					matrix.setRotate(90);
+					picView.setImageBitmap(Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, false));
 					//scale options
 					picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				}
@@ -833,4 +843,16 @@ public class MainActivity extends FragmentActivity {
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
+	
+<<<<<<< HEAD
+	public static int getIterator() {
+		return iterator;
+	}
+
+	public static void incrementIterator() {
+		iterator++;
+	}
+=======
+	
+>>>>>>> fb3ee38ece6488ec5ec757b714c867fdddbf2c93
 }
