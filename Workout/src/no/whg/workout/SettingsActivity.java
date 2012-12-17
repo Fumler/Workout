@@ -3,10 +3,9 @@ package no.whg.workout;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.PreferenceFragment;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 import no.whg.workout.MainActivity;
 
 /*
@@ -14,62 +13,15 @@ import no.whg.workout.MainActivity;
  */
 
 public class SettingsActivity extends Activity {
-
-	private boolean isKG;
-	private boolean previousKG;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+        
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        
-        /*
-         *  Initiating button elements.
-         */
-        Button settings_kgBtn 	= (Button) findViewById(R.id.settings_kgBtn);
-        Button settings_lbsBtn 	= (Button) findViewById(R.id.settings_lbsBtn);
-        Button settings_doneBtn = (Button) findViewById(R.id.settings_doneBtn);
-        
-        /*
-         *  Sets up the buttons so that they can be focused.
-         */
-        settings_kgBtn.setFocusable(true);
-        settings_kgBtn.setFocusableInTouchMode(true);
-        settings_lbsBtn.setFocusable(true);
-        settings_lbsBtn.setFocusableInTouchMode(true);
-        
-        previousKG = isKG;
-        
-        /*
-         *  Checks for which unit of measurement is active and focuses the correct button.
-         */
-        if (MainActivity.SLCalc.getWeightUnitKilograms()){
-        	settings_kgBtn.requestFocus();
-        	setIsKG(true);
-        }
-        else{
-        	settings_lbsBtn.requestFocus();
-        	setIsKG(false);
-        }
-        
-        /* 
-         * TODO:
-         * - Set up a button that resets the application to default state.
-         * 
-         * - Set up a way for the user to change values in each exercise, reps etc.
-         */ 
-        
-        /*
-         *  Saves the settings and exits the activity
-         */
-        settings_doneBtn.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				saveSettings();
-			}
-        });
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	
@@ -95,22 +47,52 @@ public class SettingsActivity extends Activity {
         return true;
     }
     
-    /*
-     *  Setter for isKG.
-     */
-    private void setIsKG(boolean value){
-    	isKG = value;
-    }
-    
-    /*
-     *  Saves the settings and exits the activity.
-     */
-    private void saveSettings(){
-    	if (previousKG != isKG){
-    		MainActivity.SLCalc.changeWeightUnit();
-    	}
+    public static class SettingsFragment extends PreferenceFragment{
+    	ListPreference weight;
+    	boolean isKG;
     	
-		Toast.makeText(getApplicationContext(), getResources().getString(R.string.set_saved), Toast.LENGTH_SHORT).show();				
-		finish();
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.preferences);
+            
+            weight = (ListPreference) findPreference("settings_kgLbs");
+            setWeightValueFromCalc();
+        }
+        
+		@Override
+		public void onResume() {
+			// TODO Auto-generated method stub
+			super.onResume();
+			
+			setWeightValueFromCalc();
+		}
+
+		@Override
+		public void onPause() {
+			// TODO Auto-generated method stub
+			super.onPause();
+			
+			System.out.println(weight.getValue());
+			
+			if (weight.getValue() == "10")
+				isKG = true;
+			else if (weight.getValue() == "20")
+				isKG = false;
+			
+			System.out.println(isKG);
+			
+			if (MainActivity.SLCalc.getWeightUnitKilograms() != isKG)
+				MainActivity.SLCalc.changeWeightUnit();
+		}
+		
+		public void setWeightValueFromCalc() {
+            if (MainActivity.SLCalc.getWeightUnitKilograms())
+            	weight.setValue("10");
+            else
+            	weight.setValue("20");
+		}
     }
 }

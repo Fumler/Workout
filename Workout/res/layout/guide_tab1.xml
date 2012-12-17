@@ -8,6 +8,8 @@
     android:gravity="center"
     android:orientation="vertical" >
     
-    
+    <TextView
+        android:id="@+id/tv_strongLiftsGuide_p1"
+		style="@style/style_guide" />
     
 </LinearLayout>

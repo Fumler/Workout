@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:title="@string/set_unitMeasure"
+        android:key="settings_unitMeasure" >
+        
+        <ListPreference 
+            android:id="@+id/settings_kgLbs_id"
+            android:title="@string/set_kgLbs"
+            android:key="settings_kgLbs"
+            android:summary="@string/set_kgLbs_summary"
+            android:entries="@array/sa_kgLbs"
+            android:entryValues="@array/sa_kgLbsValues" />
+        
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -149,7 +150,12 @@ public class GuideActivity extends FragmentActivity {
      */
     public static class GuideFragment extends Fragment {
         
-    	public TextView tv_strongLiftsGuide;
+    	public TextView tv_strongLiftsGuide_p1;
+    	public TextView tv_strongLiftsGuide_p2;
+    	public TextView tv_strongLiftsGuide_p3;
+    	public TextView tv_strongLiftsGuide_p4;
+    	public TextView tv_strongLiftsGuide_p5;
+    	public TextView tv_strongLiftsGuide_p6;
     	public TextView tv_squatsGuide;
     	public TextView tv_benchPressGuide;
     	public TextView tv_deadLiftGuide;
@@ -173,27 +179,21 @@ public class GuideActivity extends FragmentActivity {
         	switch(position) {
         	case 0:
         		tabLayout = R.layout.guide_tab1;
-        		initTab1();
         		break;
         	case 1:
         		tabLayout = R.layout.guide_tab2;
-        		//initTab2();
         		break;
         	case 2:
         		tabLayout = R.layout.guide_tab3;
-        		//initTab3();
         		break;
         	case 3:
         		tabLayout = R.layout.guide_tab4;
-//        		initTab4();
         		break;
         	case 4:
         		tabLayout = R.layout.guide_tab5;
-//        		initTab5();
         		break;
         	case 5:
         		tabLayout = R.layout.guide_tab6;
-//        		initTab6();
         		break;
         		
         	}
@@ -204,9 +204,44 @@ public class GuideActivity extends FragmentActivity {
             
         }
         
-        private void initTab1()
+        
+        @Override
+		public void onActivityCreated(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			super.onActivityCreated(savedInstanceState);
+			
+        	Bundle args = getArguments();
+        	int position = args.getInt(ARG_SECTION_NUMBER);
+
+        	switch(position) {
+        	case 0:
+        		initTab1();
+        		break;
+        	case 1:
+        		//initTab2();
+        		break;
+        	case 2:
+        		//initTab3();
+        		break;
+        	case 3:
+//        		initTab4();
+        		break;
+        	case 4:
+//        		initTab5();
+        		break;
+        	case 5:
+//        		initTab6();
+        		break;
+        		
+        	}
+		}
+
+
+
+		private void initTab1()
         {
-        	tv_squatsGuide = (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
+        	tv_strongLiftsGuide_p1 = (TextView) getActivity().findViewById(R.id.tv_strongLiftsGuide_p1);
+        	tv_strongLiftsGuide_p1.setText(Html.fromHtml(getString(R.string.guide_tv_p1)));
         }
         
         @Override
