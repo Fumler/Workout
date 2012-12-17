@@ -724,7 +724,7 @@ public class MainActivity extends FragmentActivity {
 						
 	
 						//pass bitmap to ImageAdapter to add to array
-						imgAdapt.addPic(pic, 9-i);
+						imgAdapt.addPic(pic, i);
 					}
 					//counter++;
 					//if (counter >= 10)
