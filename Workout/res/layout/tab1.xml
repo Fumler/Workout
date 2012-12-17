@@ -53,23 +53,23 @@
 	    	    android:layout_height="wrap_content"
 	    	    android:gravity="right"
 	    	    >
-	    		<CheckBox android:id="@+id/log_squats_cb1"
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb1"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"/>
 	    		
-	    		<CheckBox android:id="@+id/log_squats_cb2"
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb2"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"/>
 	    		
-	    		<CheckBox android:id="@+id/log_squats_cb3"
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb3"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"/>
 	    		
-	    		<CheckBox android:id="@+id/log_squats_cb4"
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb4"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"/>
 	    		
-	    		<CheckBox android:id="@+id/log_squats_cb5"
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_squats_cb5"
 	        		android:layout_width="wrap_content"
 	        		android:layout_height="wrap_content"
 	        		/>

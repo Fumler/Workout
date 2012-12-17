@@ -3,4 +3,9 @@
     <declare-styleable name="PicGallery">
         <attr name="android:galleryItemBackground" />
     </declare-styleable>
+    <declare-styleable name="CustomButtonState">
+        <attr name="unchecked" format="boolean" />
+        <attr name="checked" format="boolean" />
+        <attr name="crossed" format="boolean" />
+	</declare-styleable>
 </resources>

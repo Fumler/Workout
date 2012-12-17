@@ -80,6 +80,8 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setCurrentItem(1);
         
         imgAdapt = new PicAdapter(getApplicationContext());
+        
+
     }
     
     @Override
@@ -402,22 +404,32 @@ public class MainActivity extends FragmentActivity {
 		public void refreshTab1() {
 			List<Exercise> currentSession = SLCalc.getCurrentSession();
 			boolean isA = SLCalc.getSessionTypeA();
-			boolean isKg = SLCalc.getWeightUnitKilograms();
-			String weight;
 			@SuppressWarnings("deprecation")
 			RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
 			        ViewGroup.LayoutParams.WRAP_CONTENT);
 			
 			p.setMargins(15, 15, 15, 15); // left, top, right, bottom
-
 			
-			if(isKg) {		
-				weight = "KG";
-			}
-			else {
-				weight = "LBS";
-			}
-	
+	        final ThreeStateCheckbox checkbox = (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
+	        checkbox.setOnClickListener(new View.OnClickListener() {
+	        	public void onClick(View v) {
+	        		int state = checkbox.getState();
+	        		
+	        		switch(state) {
+	        		case 0: // do stuff if unchecked
+	        			checkbox.setText("1");
+	        			break;
+	        		case 1: // do stuff if checked
+	        			checkbox.setText("2");
+	        			break;
+	        		case 2: // do stuff if crossed
+	        			checkbox.setText("3");
+	        			break;
+	        			default: break;
+	        		}
+	        	}
+	        });
+			
 			
 			// Number in list -> exercise:
 			// 0 - Squats
@@ -427,9 +439,9 @@ public class MainActivity extends FragmentActivity {
 			// 4 - Deadlift
 
 			if(isA) {
-				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weight);
-				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + " " + weight);
-				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " " + weight);				
+				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weightUnit);
+				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + " " + weightUnit);
+				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " " + weightUnit);				
 				
 				tab1_ll_deadlift.setVisibility(View.GONE);
 				tab1_tv_deadliftTitle.setVisibility(View.GONE);
@@ -442,9 +454,9 @@ public class MainActivity extends FragmentActivity {
 				tab1_b_log.setLayoutParams(p);
 			} else {
 				
-				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weight);
-				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + " " + weight);
-				tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + " " + weight);	
+				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weightUnit);
+				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + " " + weightUnit);
+				tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + " " + weightUnit);	
 				
 				tab1_ll_benchpress.setVisibility(View.GONE);
 				tab1_tv_benchPressTitle.setVisibility(View.GONE);
