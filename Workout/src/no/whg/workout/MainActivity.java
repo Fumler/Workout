@@ -106,7 +106,6 @@ public class MainActivity extends FragmentActivity {
     		Intent intent = new Intent(MainActivity.this, MediaCaptureActivity.class);
         	intent.putExtra("MEDIA_TYPE", 1);
         	intent.putExtra("method","yes");
-        	System.out.println("clicked, intent set");
         	startActivity(intent);
     	}
     	
@@ -136,26 +135,21 @@ public class MainActivity extends FragmentActivity {
         return true;
         
     }
-        
-    public void videoCapture(int i){	//Commented out until it gets put in use
-//    	String lift = "SL_VID_";
-//    	Intent intent = new Intent(this, MediaCaptureActivity.class);
-//    	intent.putExtra("MEDIA_TYPE", 2);
-//		ImageButton ib = (ImageButton) view;
-//		if (ib.equals(findViewById(R.id.btn_video0))) {
-//			//lift += exercises[0].getName();
-//		} else if (ib.equals(findViewById(R.id.btn_video1))) {
-//			//lift += exercises[1].getName();
-//		} else if (ib.equals(findViewById(R.id.btn_video2))) {
-//			//lift += exercises[2].getName();
-//		} else {
-//			// oops!
-//			
-//		}
-//		
-//    	intent.putExtra("lift", lift);
-//
-//		this.startActivity(intent);
+    
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // do not fucking use this until getShortName() is implemented in Exercise
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void videoCapture(int i){
+    	Exercise exercise = SLCalc.getBothSessions().get(i);
+    	String lift = "SL_VID_";
+    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+    	intent.putExtra("MEDIA_TYPE", 2);
+    	
+//    	lift += exercise.getShortName();	// commented out pending implementation of getShortName()
+		
+    	intent.putExtra("lift", lift);
+
+		this.startActivity(intent);
     }
 
 
@@ -226,8 +220,16 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_deadlift;
         public TextView tab1_tv_OHP;
         
+        public ThreeStateCheckbox tab1_squats_cb1;
+        public ThreeStateCheckbox tab1_squats_cb2;
+        public ThreeStateCheckbox tab1_squats_cb3;
+        public ThreeStateCheckbox tab1_squats_cb4;
+        public ThreeStateCheckbox tab1_squats_cb5;
+        
         public Button tab1_b_log;
         public String weightUnit;
+        
+        
         
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -407,6 +409,9 @@ public class MainActivity extends FragmentActivity {
 			tab1_tv_OHPTitle		= (TextView) getActivity().findViewById(R.id.log_ohp);
 			
 			tab1_b_log				= (Button) getActivity().findViewById(R.id.log_button);
+			
+	        tab1_squats_cb1 		= (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
+
 		}
 		
 		public void refreshTab1() {
@@ -417,26 +422,6 @@ public class MainActivity extends FragmentActivity {
 			        ViewGroup.LayoutParams.WRAP_CONTENT);
 			
 			p.setMargins(15, 15, 15, 15); // left, top, right, bottom
-			
-	        final ThreeStateCheckbox checkbox = (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
-	        checkbox.setOnClickListener(new View.OnClickListener() {
-	        	public void onClick(View v) {
-	        		int state = checkbox.getState();
-	        		
-	        		switch(state) {
-	        		case 0: // do stuff if unchecked
-	        			checkbox.setText("1");
-	        			break;
-	        		case 1: // do stuff if checked
-	        			checkbox.setText("2");
-	        			break;
-	        		case 2: // do stuff if crossed
-	        			checkbox.setText("3");
-	        			break;
-	        			default: break;
-	        		}
-	        	}
-	        });
 			
 			
 			// Number in list -> exercise:
@@ -462,6 +447,26 @@ public class MainActivity extends FragmentActivity {
 				
 				
 				tab1_b_log.setLayoutParams(p);
+				
+		        tab1_squats_cb1 = (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb1);
+		        tab1_squats_cb1.setOnClickListener(new View.OnClickListener() {
+		        	public void onClick(View v) {
+		        		int state = tab1_squats_cb1.getState();
+		        		
+		        		switch(state) {
+		        		case 0: // do stuff if unchecked
+		        			tab1_squats_cb1.setText("1");
+		        			break;
+		        		case 1: // do stuff if checked
+		        			tab1_squats_cb1.setText("2");
+		        			break;
+		        		case 2: // do stuff if crossed
+		        			tab1_squats_cb1.setText("3");
+		        			break;
+		        			default: break;
+		        		}
+		        	}
+		        });
 			} else {
 				
 				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);
