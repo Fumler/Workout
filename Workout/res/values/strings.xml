@@ -37,9 +37,17 @@
     <string name="set_kgLbs">KG or LBS</string>
     <string name="set_kgLbs_summary">Choose which unit of measurement to display weight in</string>
     <string name="set_data">Data</string>
+    <string name="set_weightChange">Change weights and sets</string>
     <string name="set_dataReset">Reset Data</string>
     <string name="set_dataReset_summary">Resets user data. This can not be undone!</string>
     <string name="set_dataReset_dialog">Are you sure you want to reset your data?</string>
+    <string name="set_squats_summary">Change weight and number of sets for the squat exercise</string>
+    <string name="set_benchPress_summary">Change weight and number of sets for the bench press exercise</string>
+    <string name="set_rowing_summary">Change weight and number of sets for the rowing exercise</string>
+    <string name="set_deadlift_summary">Change weight and number of sets for the deadlift exercise</string>
+    <string name="set_ohp_summary">Change weight and number of sets for the overhead press exercise</string>
+    <string name="set_weight">Weight</string>
+    <string name="set_sets">Sets</string>
 
     <!-- SETTINGS WEIGHT BUTTONS -->
     <string name="set_kg_btn">KG</string>

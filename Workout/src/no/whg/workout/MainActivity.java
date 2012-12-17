@@ -36,6 +36,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
+	public static int iterator = 0;
+
 	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
 	
     /**
@@ -831,5 +833,13 @@ public class MainActivity extends FragmentActivity {
 			//}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	public static int getIterator() {
+		return iterator;
+	}
+
+	public static void incrementIterator() {
+		iterator++;
 	}
 }

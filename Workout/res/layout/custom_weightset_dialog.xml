@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cwd_linearOne"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    
+	    <TextView
+	        android:id="@+id/set_weightSet_tv1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:text="@string/set_weight"
+	        android:textSize="20sp"
+	        android:gravity="center_horizontal" />
+	    
+	    <TextView
+	        android:id="@+id/set_weightSet_tv2"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:text="@string/set_sets"
+	        android:textSize="20sp"
+	        android:gravity="center_horizontal" />
+	</LinearLayout>
+	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_below="@id/cwd_linearOne"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    
+	    <NumberPicker
+	        android:id="@+id/set_weight_np1"
+	        android:layout_width="20dp"
+	        android:layout_height="80dp"
+	        android:layout_marginLeft="30dp" />
+	    
+   	    <NumberPicker
+	        android:id="@+id/set_weight_np2"
+	        android:layout_width="20dp"
+	        android:layout_height="80dp" />
+   	    
+   	    <NumberPicker
+	        android:id="@+id/set_weight_np3"
+	        android:layout_width="20dp"
+	        android:layout_height="80dp" />
+   	    
+   	    <TextView
+   	        android:layout_width="5dp"
+   	        android:layout_height="80dp"
+   	        android:text="."
+   	        android:gravity="center_horizontal|center_vertical" />
+   	    
+   	    <NumberPicker
+	        android:id="@+id/set_weight_np4"
+	        android:layout_width="20dp"
+	        android:layout_height="80dp"
+	        android:layout_marginRight="50dp" />
+	    
+	    <NumberPicker
+	        android:id="@+id/set_sets_np"
+	        android:layout_width="20dp"
+	        android:layout_height="80dp"
+	        android:layout_marginLeft="60dp"
+	        android:layout_marginRight="70dp" />
+	</LinearLayout>
+    
+</RelativeLayout>
