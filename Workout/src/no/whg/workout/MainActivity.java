@@ -10,6 +10,7 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -106,6 +107,7 @@ public class MainActivity extends FragmentActivity {
     		Intent intent = new Intent(MainActivity.this, MediaCaptureActivity.class);
         	intent.putExtra("MEDIA_TYPE", 1);
         	intent.putExtra("method","yes");
+        	imgAdapt.setRunning(false);	// lets the gallery know that images have to be reloaded
         	startActivity(intent);
     	}
     	
@@ -136,16 +138,13 @@ public class MainActivity extends FragmentActivity {
         
     }
     
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // do not fucking use this until getShortName() is implemented in Exercise
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void videoCapture(int i){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
     	String lift = "SL_VID_";
     	Intent intent = new Intent(this, MediaCaptureActivity.class);
     	intent.putExtra("MEDIA_TYPE", 2);
     	
-//    	lift += exercise.getShortName();	// commented out pending implementation of getShortName()
+    	lift += exercise.getShortName();
 		
     	intent.putExtra("lift", lift);
 
@@ -309,7 +308,9 @@ public class MainActivity extends FragmentActivity {
           			//handle clicks
           			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
           				//set the larger image view to display the chosen bitmap calling method of adapter class
-          				picView.setImageBitmap(imgAdapt.getPic(position));
+          				Matrix matrix = new Matrix();
+    					matrix.setRotate(90);
+    					picView.setImageBitmap(Bitmap.createBitmap(imgAdapt.getPic(position), 0, 0, imgAdapt.getPic(position).getWidth(), imgAdapt.getPic(position).getHeight(), matrix, false));
           				currentPic = position;
           			}
           		});
@@ -643,8 +644,8 @@ public class MainActivity extends FragmentActivity {
 			return running;
 		}
 		
-		public void setRunning(){
-			running = true;
+		public void setRunning(boolean r){
+			running = r;
 		}
 	}
 	
@@ -654,7 +655,7 @@ public class MainActivity extends FragmentActivity {
 	 */
 	protected static void initGallery(){
 		if (!imgAdapt.getRunning()){
-			imgAdapt.setRunning();
+			imgAdapt.setRunning(true);
 			File dir = new File(
 					Environment
 							.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
@@ -669,11 +670,12 @@ public class MainActivity extends FragmentActivity {
 				Bitmap pic = null;
 				//declare the path string
 				String imgPath = "";
-				//File[] files = dir.listFiles();
-				int counter = 0;
-				for (File file : dir.listFiles()){
+				File[] files = dir.listFiles();
+				//int counter = 0;
+				//for (File file : dir.listFiles()){
+				for (int i = 0; i < 10; i++){
 					//the returned picture URI
-					Uri pickedUri = Uri.fromFile(file);
+					Uri pickedUri = Uri.fromFile(files[files.length - i - 1]);
 					
 					imgPath = pickedUri.getPath();
 					
@@ -718,13 +720,15 @@ public class MainActivity extends FragmentActivity {
 						
 						//get the file as a bitmap
 						pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
+						
+						
 	
 						//pass bitmap to ImageAdapter to add to array
-						imgAdapt.addPic(pic, counter);
+						imgAdapt.addPic(pic, 9-i);
 					}
-					counter++;
-					if (counter >= 10)
-							break;
+					//counter++;
+					//if (counter >= 10)
+					//		break;
 				}
 	
 				
@@ -736,7 +740,10 @@ public class MainActivity extends FragmentActivity {
 		//redraw the gallery thumbnails to reflect the new addition
 		picGallery.setAdapter(imgAdapt);
 		//display the newly selected image at larger size
-		picView.setImageBitmap(imgAdapt.getPic(currentPic));
+		Matrix matrix = new Matrix();
+		matrix.setRotate(90);
+		//pic = Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, false);
+		picView.setImageBitmap(Bitmap.createBitmap(imgAdapt.getPic(currentPic), 0, 0, imgAdapt.getPic(currentPic).getWidth(), imgAdapt.getPic(currentPic).getHeight(), matrix, false));
 		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	}
 
@@ -824,7 +831,9 @@ public class MainActivity extends FragmentActivity {
 					picGallery.setAdapter(imgAdapt);
 
 					//display the newly selected image at larger size
-					picView.setImageBitmap(pic);
+					Matrix matrix = new Matrix();
+					matrix.setRotate(90);
+					picView.setImageBitmap(Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, false));
 					//scale options
 					picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				}
