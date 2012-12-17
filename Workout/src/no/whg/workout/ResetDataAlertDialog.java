@@ -5,13 +5,14 @@ import android.content.DialogInterface;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
+import no.whg.workout.MainActivity;
 
 /*
  * Custom dialog class used in when user presses the 
  *  reset data preference
  */
 public class ResetDataAlertDialog extends DialogPreference {
-
+	
 	public ResetDataAlertDialog(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setDialogLayoutResource(R.layout.custom_resetdata_dialog);
@@ -24,7 +25,8 @@ public class ResetDataAlertDialog extends DialogPreference {
 	public void onClick(DialogInterface dialog, int which) {
 		switch (which) {
 		case DialogInterface.BUTTON_POSITIVE: // OK
-			
+			MainActivity.SLCalc.resetExercisesToDefault();
+			MainActivity.setResetPressed(true);
 			break;
 		}
 		

@@ -37,7 +37,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
-	public static int iterator = 0;
+	public static boolean resetPressed;
 
 	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
 	
@@ -844,13 +844,12 @@ public class MainActivity extends FragmentActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
-	public static int getIterator() {
-		return iterator;
+
+	public static boolean isResetPressed() {
+		return resetPressed;
 	}
 
-	public static void incrementIterator() {
-		iterator++;
+	public static void setResetPressed(boolean resetPressed) {
+		MainActivity.resetPressed = resetPressed;
 	}
-	
-	
 }

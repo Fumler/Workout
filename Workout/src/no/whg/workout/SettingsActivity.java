@@ -1,7 +1,5 @@
 package no.whg.workout;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -101,10 +99,10 @@ public class SettingsActivity extends Activity {
          */
 		@Override
 		public void onResume() {
+			setWeightValueFromCalc();
+			
 			// TODO Auto-generated method stub
 			super.onResume();
-			
-			setWeightValueFromCalc();
 		}
 
 		/*
@@ -121,8 +119,14 @@ public class SettingsActivity extends Activity {
 			else if (weight.getValue().equals("20"))
 				isKG = false;
 			
-			if (MainActivity.SLCalc.getWeightUnitKilograms() != isKG)
-				MainActivity.SLCalc.changeWeightUnit();
+			if (MainActivity.SLCalc.getWeightUnitKilograms() != isKG){
+				if (MainActivity.isResetPressed()) 
+					MainActivity.setResetPressed(false);
+				else
+					MainActivity.SLCalc.changeWeightUnit();
+			}
+			
+			setWeightValueFromCalc();
 		}
 		
 		/*
