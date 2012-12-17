@@ -106,7 +106,6 @@ public class MainActivity extends FragmentActivity {
     		Intent intent = new Intent(MainActivity.this, MediaCaptureActivity.class);
         	intent.putExtra("MEDIA_TYPE", 1);
         	intent.putExtra("method","yes");
-        	System.out.println("clicked, intent set");
         	startActivity(intent);
     	}
     	
@@ -136,26 +135,21 @@ public class MainActivity extends FragmentActivity {
         return true;
         
     }
-        
-    public void videoCapture(int i){	//Commented out until it gets put in use
-//    	String lift = "SL_VID_";
-//    	Intent intent = new Intent(this, MediaCaptureActivity.class);
-//    	intent.putExtra("MEDIA_TYPE", 2);
-//		ImageButton ib = (ImageButton) view;
-//		if (ib.equals(findViewById(R.id.btn_video0))) {
-//			//lift += exercises[0].getName();
-//		} else if (ib.equals(findViewById(R.id.btn_video1))) {
-//			//lift += exercises[1].getName();
-//		} else if (ib.equals(findViewById(R.id.btn_video2))) {
-//			//lift += exercises[2].getName();
-//		} else {
-//			// oops!
-//			
-//		}
-//		
-//    	intent.putExtra("lift", lift);
-//
-//		this.startActivity(intent);
+    
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // do not fucking use this until getShortName() is implemented in Exercise
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void videoCapture(int i){
+    	Exercise exercise = SLCalc.getBothSessions().get(i);
+    	String lift = "SL_VID_";
+    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+    	intent.putExtra("MEDIA_TYPE", 2);
+    	
+//    	lift += exercise.getShortName();	// commented out pending implementation of getShortName()
+		
+    	intent.putExtra("lift", lift);
+
+		this.startActivity(intent);
     }
 
 

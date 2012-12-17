@@ -23,13 +23,13 @@ public class MediaCaptureActivity extends Activity {
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    	System.out.println("onCreate");
+        setContentView(R.layout.activity_mediacapture);
         
         Intent intent = getIntent();
 
         if(intent.getStringExtra("method").equals("yes")){
 	        int i = intent.getIntExtra("MEDIA_TYPE", 0);
-        	intent.putExtra("method","no");
+        	intent.putExtra("method","no"); // onCreate() runs twice, this prevents it from running the capture request twice
 			captureMedia(intent, i);
         } else {
         	finish();
@@ -38,18 +38,17 @@ public class MediaCaptureActivity extends Activity {
 	}
 	
 	private void captureMedia(Intent intent, int i) {
-    	System.out.println("captureMedia");
 		if (i == MEDIA_TYPE_IMAGE){
 			captureImage();
 		} else if (i == MEDIA_TYPE_VIDEO) {
 			captureVideo(intent);
 		} else {
-			
+			// invalid intent
+			finish();
 		}
 	}
 	
 	private void captureImage() {
-    	System.out.println("captureImage");
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 		fileUri = getMediaFileUri(MEDIA_TYPE_IMAGE, "SL_IMG_");
@@ -87,7 +86,6 @@ public class MediaCaptureActivity extends Activity {
 				// something went wrong
 			}
 		}
-		System.out.println("finish!");
 		finish();
 	}
 
