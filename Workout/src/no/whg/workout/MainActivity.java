@@ -445,11 +445,13 @@ public class MainActivity extends FragmentActivity {
 			// 2 - Rowing
 			// 3 - OHP
 			// 4 - Deadlift
+	        
+	        setWeightString();
 
 			if(isA) {
-				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weightUnit);
-				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + " " + weightUnit);
-				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + " " + weightUnit);				
+				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);
+				tab1_tv_benchPress.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + weightUnit);
+				tab1_tv_rowing.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + weightUnit);				
 				
 				tab1_ll_deadlift.setVisibility(View.GONE);
 				tab1_tv_deadliftTitle.setVisibility(View.GONE);
@@ -462,9 +464,9 @@ public class MainActivity extends FragmentActivity {
 				tab1_b_log.setLayoutParams(p);
 			} else {
 				
-				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + " " + weightUnit);
-				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + " " + weightUnit);
-				tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + " " + weightUnit);	
+				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);
+				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + weightUnit);
+				tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + weightUnit);	
 				
 				tab1_ll_benchpress.setVisibility(View.GONE);
 				tab1_tv_benchPressTitle.setVisibility(View.GONE);
