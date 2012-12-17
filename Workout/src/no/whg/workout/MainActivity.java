@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jjoe64.graphview.BarGraphView;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphViewSeries;
+
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -21,11 +26,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -203,6 +210,8 @@ public class MainActivity extends FragmentActivity {
         public TextView tab3_tv_rowing;
         public TextView tab3_tv_deadlift;
         public TextView tab3_tv_OHP;
+        public GraphView graphView;
+        public GraphViewSeries weightDataSeries;
         
         // LOG WORKOUT RELATED XML STUFF
 		public LinearLayout tab1_ll_squats;
@@ -521,6 +530,7 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
 			tab3_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
 			tab3_tv_OHP 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
+			graphView			= new BarGraphView(getActivity().getApplicationContext(), "Squats graph");
 		}
 		
 		public void refreshTab3(){
@@ -541,6 +551,38 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + weightUnit);
 			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + weightUnit);
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
+			
+			populateGraph();
+		}
+		
+		@SuppressWarnings("deprecation")
+		public void populateGraph(){
+			List weightData;
+			weightData = SLCalc.getBothSessions().get(0).getProgressList();
+			LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.stats_graphView);  
+			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
+			
+			// Inits and resets the weightDataSeries
+			weightDataSeries = new GraphViewSeries(null);
+			
+			// Only populates the graph if the progresslist has data in it
+			if (!weightData.isEmpty()) {
+				tv_noData.setVisibility(View.GONE);
+				for (int i = 0; i <= weightData.size(); i++) {
+					weightDataSeries.appendData(new GraphViewData(i+1, (Double) weightData.get(0)), false);
+				}
+				
+				graphView.addSeries(weightDataSeries);
+				layout.addView(graphView);
+				
+				System.out.println("yes");
+			}
+			else {
+				tv_noData.setVisibility(View.VISIBLE);
+				tv_noData.setText("No data to display");
+			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+			    System.out.println("no");
+			}
 		}
 		
 		//Initializes tab 4

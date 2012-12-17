@@ -201,19 +201,26 @@
 	        
 	    </LinearLayout>
    	    
-        <TextView 
-        	android:id="@+id/stats_graphView"
-        	android:layout_width="fill_parent"
-        	android:layout_height="150dp"
-        	android:layout_below="@id/stats_linearThreeDetailed"
-        	style="@style/style_whiteBoxCapsBold"
-        	android:layout_marginBottom="20dp" />
+   	    <LinearLayout
+   	        android:id="@+id/stats_graphView"
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="wrap_content"
+   	        android:layout_below="@id/stats_linearThreeDetailed" >
+   	        
+   	        <TextView 
+   	            android:layout_width="fill_parent"
+   	            android:layout_height="wrap_content"
+   	            android:id="@+id/stats_tvNoData"
+   	            style="@style/style_whiteBoxCapsRegular" />
+   	        
+   	        
+   	    </LinearLayout>
         
         <!-- This View element makes sure there is some space between the last element and the bottom of the page -->
         <View 
             android:layout_below="@id/stats_graphView"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="10dp" />
 
 	</RelativeLayout>
 </ScrollView>
