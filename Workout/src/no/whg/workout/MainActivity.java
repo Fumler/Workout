@@ -416,7 +416,7 @@ public class MainActivity extends FragmentActivity {
 			
 			tab1_b_log				= (Button) getActivity().findViewById(R.id.log_button);
 			
-	        checkbox 				= (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
+	        tab1_squats_cb1 		= (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
 
 		}
 		
