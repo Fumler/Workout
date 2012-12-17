@@ -55,8 +55,7 @@
                 android:value="MainActivity" />
         </activity>
         <activity
-            android:name=".MediaCaptureActivity"
-        	android:screenOrientation="landscape" >
+            android:name=".MediaCaptureActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
