@@ -107,10 +107,11 @@ public class MediaCaptureActivity extends Activity {
 					"StrongLifts"); // set destination folder
 		}
 		if (!dir.exists()) { // if dir does not exist
-			if (!dir.mkdirs()) { // create dir
+			//if (!dir.mkdirs()) { // create dir
 				// something went horribly wrong
-				return null;
-			}
+//				return null;
+//			}
+			dir.mkdirs();
 		}
 
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")

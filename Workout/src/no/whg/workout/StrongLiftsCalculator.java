@@ -370,6 +370,10 @@ public class StrongLiftsCalculator {
 		else return true;
 	}
 	
+	
+	/*
+	 * 
+	 */
 	public void resetExercisesToDefault()
 	{
 		a_session.clear();
