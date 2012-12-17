@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/guidetab1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical" >
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
     
-    <TextView
-        android:id="@+id/tv_strongLiftsGuide_p1"
-		style="@style/style_guide" />
-    
-</LinearLayout>
+	<LinearLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/guidetab1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="top"
+	    android:orientation="vertical" >
+	    
+	    <TextView
+	        android:id="@+id/tv_strongLiftsGuide_p1"
+			style="@style/style_guide" />
+	    
+	    <TextView
+	        android:id="@+id/tv_strongLiftsGuide_p2"
+			style="@style/style_guide" />
+	    
+	    <TextView
+	        android:id="@+id/tv_strongLiftsGuide_p3"
+			style="@style/style_guide" />
+	    
+	    <TextView
+	        android:id="@+id/tv_strongLiftsGuide_p4"
+			style="@style/style_guide" />
+	    
+	    <TextView
+	        android:id="@+id/tv_strongLiftsGuide_p5"
+			style="@style/style_guide" />
+	    
+	    <TextView
+	        android:id="@+id/tv_strongLiftsGuide_p6"
+			style="@style/style_guide" />
+	    
+	</LinearLayout>
+	
+</ScrollView>
