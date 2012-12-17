@@ -59,14 +59,14 @@ public class StrongLiftsCalculator {
 	public StrongLiftsCalculator()
 	{
 		a_session = new ArrayList<Exercise>();
-		a_session.add(new Exercise(20, "Squat", 		5, 2.5d));
-		a_session.add(new Exercise(20, "Benchpress", 	5, 2.5d));
-		a_session.add(new Exercise(30, "Barbell row", 	5, 2.5d));
+		a_session.add(new Exercise(20, "Squat",			"sqt", 	5, 2.5d));
+		a_session.add(new Exercise(20, "Benchpress", 	"bpr",	5, 2.5d));
+		a_session.add(new Exercise(30, "Barbell row", 	"brw",	5, 2.5d));
 		
 		b_session = new ArrayList<Exercise>();
 		b_session.add(a_session.get(0));
-		b_session.add(new Exercise(20, "Shoulderpress", 5, 2.5d));
-		b_session.add(new Exercise(40, "Deadlift", 		5, 5.0d));
+		b_session.add(new Exercise(20, "Shoulderpress", "spr",	5, 2.5d));
+		b_session.add(new Exercise(40, "Deadlift", 		"dlt",  5, 5.0d));
 		
 		sessionTypeA 			= true;
 		weightUnitKilograms = true;
@@ -368,6 +368,28 @@ public class StrongLiftsCalculator {
 			return false;
 		}
 		else return true;
+	}
+	
+	
+	/*
+	 * 
+	 */
+	public void resetExercisesToDefault()
+	{
+		a_session.clear();
+		b_session.clear();
+		
+		a_session.add(new Exercise(20, "Squat",			"sqt", 	5, 2.5d));
+		a_session.add(new Exercise(20, "Benchpress", 	"bpr",	5, 2.5d));
+		a_session.add(new Exercise(30, "Barbell row", 	"brw",	5, 2.5d));
+		
+		b_session.add(a_session.get(0));
+		b_session.add(new Exercise(20, "Shoulderpress", "spr",	5, 2.5d));
+		b_session.add(new Exercise(40, "Deadlift", 		"dlt",  5, 5.0d));
+		
+		sessionTypeA 			= true;
+		weightUnitKilograms 	= true;
+		numberOfSessionsLogged  = 0;
 	}
 	
 	

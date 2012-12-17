@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Weight measurement string arrays -->
     <string-array name="sa_kgLbs">
         <item name="10">KG</item>
         <item name="20">LBS</item>
@@ -8,5 +9,14 @@
     <string-array name="sa_kgLbsValues">
         <item name="10">10</item>
         <item name="20">20</item>
+    </string-array>
+    
+    <!-- Reset data string arrays -->
+    <string-array name="sa_resetData">
+        <item name="10">Reset data</item>
+    </string-array>
+    
+    <string-array name="sa_resetDataValues">
+        <item name="10">10</item>
     </string-array>
 </resources>

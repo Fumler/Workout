@@ -14,6 +14,7 @@ public class Exercise {
 	
 	private double 			currentWeight;
 	private String 			name;
+	private String			shortName;
 	private int 			numberOfSets;
 	private double 			weightIncrement;
 	private int 			numberOfFails;
@@ -23,12 +24,14 @@ public class Exercise {
 	private boolean 		success;
 	
 	public Exercise(int currentWeight,  String name, 
-					int numberOfSets , 	double weightIncrement) 
+					String shortName, int numberOfSets, 	
+					double weightIncrement) 
 	{
 		this.currentWeight 		= currentWeight;
 		this.name				= name;
 		this.numberOfSets 		= numberOfSets;
 		this.weightIncrement 	= weightIncrement;
+		this.shortName			= shortName;
 		
 		numberOfFails 			= 0;
 		numberOfDeloads 		= 0;
@@ -139,6 +142,9 @@ public class Exercise {
 	//Name of exercise
 	public String getName(){
 		return name;
+	}
+	public String getShortName(){
+		return shortName;
 	}
 	
 }

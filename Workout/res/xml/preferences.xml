@@ -6,12 +6,53 @@
         android:key="settings_unitMeasure" >
         
         <ListPreference 
-            android:id="@+id/settings_kgLbs_id"
             android:title="@string/set_kgLbs"
             android:key="settings_kgLbs"
             android:summary="@string/set_kgLbs_summary"
             android:entries="@array/sa_kgLbs"
             android:entryValues="@array/sa_kgLbsValues" />
+        
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="@string/set_data"
+        android:key="settings_data" >
+        
+        <PreferenceScreen 
+            android:title="@string/set_weightChange" 
+            android:key="settings_weightChange" >
+            
+            <no.whg.workout.SetWeightDialog_1
+                android:title="@string/ex_squats"
+                android:key="settings_squats"
+                android:summary="@string/set_squats_summary" />
+            
+            <no.whg.workout.SetWeightDialog_2
+                android:title="@string/ex_benchPress"
+                android:key="settings_benchPress"
+                android:summary="@string/set_benchPress_summary" />
+            
+            <no.whg.workout.SetWeightDialog_3
+                android:title="@string/ex_rowing"
+                android:key="settings_rowing"
+                android:summary="@string/set_rowing_summary" />
+            
+            <no.whg.workout.SetWeightDialog_4
+                android:title="@string/ex_deadlift"
+                android:key="settings_deadlift"
+                android:summary="@string/set_deadlift_summary" />
+            
+            <no.whg.workout.SetWeightDialog_5
+                android:title="@string/ex_ohp"
+                android:key="settings_ohp"
+                android:summary="@string/set_ohp_summary" />
+            
+        </PreferenceScreen>
+         
+        <no.whg.workout.ResetDataAlertDialog
+            android:title="@string/set_dataReset"
+            android:key="settings_dataReset"
+            android:summary="@string/set_dataReset_summary" />
         
     </PreferenceCategory>
 </PreferenceScreen>
