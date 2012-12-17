@@ -1,6 +1,7 @@
 package no.whg.workout;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.DialogFragment;
@@ -90,6 +91,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
+        getActionBar().setDisplayShowTitleEnabled(false);
         return true;
     }
     
@@ -127,7 +129,7 @@ public class MainActivity extends FragmentActivity {
 	        		startActivity(i);
     			} catch (Exception x) {
     				//TOAST
-    			}
+    			} 
     		}
     	}
     	
@@ -221,11 +223,11 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_deadlift;
         public TextView tab1_tv_OHP;
         
-        public ThreeStateCheckbox tab1_squats_cb1;
-        public ThreeStateCheckbox tab1_squats_cb2;
-        public ThreeStateCheckbox tab1_squats_cb3;
-        public ThreeStateCheckbox tab1_squats_cb4;
-        public ThreeStateCheckbox tab1_squats_cb5;
+        List<ThreeStateCheckbox> tab1_squats = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_benchpress = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_rowing = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_ohp = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_deadlift = new ArrayList<ThreeStateCheckbox>(5);
         
         public Button tab1_b_log;
         public String weightUnit;
@@ -413,8 +415,25 @@ public class MainActivity extends FragmentActivity {
 			
 			tab1_b_log				= (Button) getActivity().findViewById(R.id.log_button);
 			
-	        tab1_squats_cb1 		= (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
 
+			for(int i = 0; i < 5; i++) { // counting from 1, fml..
+				String squatsId = "log_squats_cb"+i;
+				int squatsIdInt = getResources().getIdentifier(squatsId, "id", "no.whg.workout");
+				tab1_squats.add(i, (ThreeStateCheckbox) getActivity().findViewById(squatsIdInt));
+				
+				String benchpressId = "log_benchpress_cb"+i;
+				int benchpressIdInt = getResources().getIdentifier(benchpressId, "id", "no.whg.workout");
+				tab1_benchpress.add(i, (ThreeStateCheckbox) getActivity().findViewById(benchpressIdInt));
+				
+				String rowingId = "log_rowing_cb"+i;
+				int rowingIdInt = getResources().getIdentifier(rowingId, "id", "no.whg.workout");
+				tab1_rowing.add(i,(ThreeStateCheckbox) getActivity().findViewById(rowingIdInt));
+				
+				String ohpId = "log_OHP_cb"+i;
+				int ohpIdInt = getResources().getIdentifier(ohpId, "id", "no.whg.workout");
+				tab1_ohp.add(i,(ThreeStateCheckbox) getActivity().findViewById(ohpIdInt));
+				
+			}
 		}
 		
 		public void refreshTab1() {
@@ -447,29 +466,36 @@ public class MainActivity extends FragmentActivity {
 				tab1_tv_OHPTitle.setVisibility(View.GONE);
 				
 				p.addRule(RelativeLayout.BELOW, R.id.log_linearThree);
-				
-				
+								
 				tab1_b_log.setLayoutParams(p);
 				
-		        tab1_squats_cb1 = (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb1);
-		        tab1_squats_cb1.setOnClickListener(new View.OnClickListener() {
-		        	public void onClick(View v) {
-		        		int state = tab1_squats_cb1.getState();
-		        		
-		        		switch(state) {
-		        		case 0: // do stuff if unchecked
-		        			tab1_squats_cb1.setText("1");
-		        			break;
-		        		case 1: // do stuff if checked
-		        			tab1_squats_cb1.setText("2");
-		        			break;
-		        		case 2: // do stuff if crossed
-		        			tab1_squats_cb1.setText("3");
-		        			break;
-		        			default: break;
-		        		}
-		        	}
-		        });
+				for(int i = 0; i <= 4; i++) {
+			        tab1_squats.get(i).setOnClickListener(new View.OnClickListener() {
+			        	public void onClick(View v) {
+			        		for(int j = 0; j <= 4; j++) {
+				        		int state = tab1_squats.get(j).getState();
+				        		
+				        		switch(state) {
+				        		case 0: // do stuff if unchecked
+				        			tab1_squats.get(j).setBackgroundResource(R.drawable.unchecked);
+				        			break;
+				        		case 1: // do stuff if checked
+				        			tab1_squats.get(j).setBackgroundResource(R.drawable.checked);
+
+				        			break;
+				        		case 2: // do stuff if crossed
+				        			tab1_squats.get(j).setBackgroundResource(R.drawable.crossed);
+
+				        			break;
+				        			default: break;
+				        		}
+			        		}
+
+			        	}
+			        });
+					
+				}
+
 			} else {
 				
 				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);

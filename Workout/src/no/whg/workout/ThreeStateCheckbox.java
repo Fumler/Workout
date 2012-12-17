@@ -10,21 +10,21 @@ public class ThreeStateCheckbox extends Button {
 		super(context);
 		
 		_state = 0;
-		this.setText("1");
+		
 	}
 	
 	public ThreeStateCheckbox(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
 		_state = 0;
-		this.setText("1");
+		
 	}
 	
 	public ThreeStateCheckbox(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		
 		_state = 0;
-		this.setText("1");
+		
 	}
 
 	private int _state;
@@ -93,15 +93,15 @@ public class ThreeStateCheckbox extends Button {
 	{
 		switch(_state) {
 		case 0:
-			this.setText("1");
+			this.setBackgroundResource(R.drawable.unchecked);
 			break;
 		case 1: 
-			this.setText("2");
+			this.setBackgroundResource(R.drawable.checked);
 			break;
 		case 2:
-			this.setText("3");
+			this.setBackgroundResource(R.drawable.crossed);
 		default: 
-			this.setText("N/A");
+			
 			break;	
 		}
 	}
