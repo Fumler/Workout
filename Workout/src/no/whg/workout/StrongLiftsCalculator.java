@@ -142,7 +142,7 @@ public class StrongLiftsCalculator implements Serializable {
 				exercise.setNumberOfFails(0);
 			}
 			
-			else if((exercise.getNumberOfDeloads() 	== 3) 
+			else if((exercise.getNumberOfDeloads() 	== 2) 
 				 && (exercise.getNumberOfSets() 	!= 1))
 			{
 				exercise.adjustNumberOfSets();
