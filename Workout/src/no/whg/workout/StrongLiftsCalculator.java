@@ -45,8 +45,12 @@ import java.util.List;
  *  			- int numberOfSessionsLogged
  */
 
-public class StrongLiftsCalculator {
+public class StrongLiftsCalculator implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int 			numberOfSessionsLogged;
 	private List<Exercise> 	a_session;
 	private List<Exercise> 	b_session;
@@ -66,9 +70,9 @@ public class StrongLiftsCalculator {
 		b_session = new ArrayList<Exercise>();
 		b_session.add(a_session.get(0));
 		b_session.add(new Exercise(20, "Shoulderpress", "spr",	5, 2.5d));
-		b_session.add(new Exercise(40, "Deadlift", 		"dlt",  5, 5.0d));
+		b_session.add(new Exercise(40, "Deadlift", 		"dlt",  1, 5.0d));
 		
-		sessionTypeA 			= true;
+		sessionTypeA 			= false;
 		weightUnitKilograms = true;
 		numberOfSessionsLogged  = 0;	
 		
@@ -162,6 +166,7 @@ public class StrongLiftsCalculator {
 			{
 				updateWeightsForExercise(exercise);
 				exercise.setNumberOfFails(0);
+				exercise.setSuccess(false);
 			}
 			else
 			{

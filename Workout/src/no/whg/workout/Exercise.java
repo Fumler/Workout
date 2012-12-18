@@ -1,5 +1,6 @@
 package no.whg.workout;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,12 @@ import java.util.List;
  *
  */
 
-public class Exercise {
+public class Exercise implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double 			currentWeight;
 	private String 			name;
 	private String			shortName;

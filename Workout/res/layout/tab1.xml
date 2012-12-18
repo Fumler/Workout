@@ -170,51 +170,6 @@
 	    </LinearLayout>
 	    
 	    <!-- DEADLIFT -->
-	    <TextView 
-	        android:id="@+id/log_deadlift"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="@string/ex_deadlift"
-	        android:layout_margin="5dp"
-	        android:layout_below="@id/log_linearThree"
-	        style="@style/style_bigWhiteText"/>
-	    
-	    <LinearLayout 
-	        android:id="@+id/log_linearFour"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@id/log_deadlift"
-	        style="@style/style_whiteBoxRegular"
-	        >
-	        
-	    	<TextView 
-	        	android:id="@+id/log_deadliftDetailed"
-	        	style="@style/style_logDetailed"
-	        />
-	    	
-	    	<LinearLayout
-	    	    android:layout_width="fill_parent"
-	    	    android:layout_height="wrap_content"
-	    	    android:gravity="right"
-	    	    >
-	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb0"
-	        		style="@style/style_cbStyle"/>
-	    		
-	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb1"
-	        		style="@style/style_cbStyle"/>
-	    		
-	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb2"
-	        		style="@style/style_cbStyle"/>
-	    		
-	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb3"
-	        		style="@style/style_cbStyle"/>
-	    		
-	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb4"
-	        		style="@style/style_cbStyle"
-	        		/>
-	        </LinearLayout>
-	        
-	    </LinearLayout>
 	    
 	    <!-- OHP -->
 	    <TextView 
@@ -223,11 +178,11 @@
 	        android:layout_height="wrap_content"
 	        android:text="@string/ex_ohp"
 	        android:layout_margin="5dp"
-	        android:layout_below="@id/log_linearFour"
+	        android:layout_below="@id/log_linearThree"
 	        style="@style/style_bigWhiteText"/>
 	    
 	    <LinearLayout 
-	        android:id="@+id/log_linearFive"
+	        android:id="@+id/log_linearFour"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/log_ohp"
@@ -263,6 +218,53 @@
 	        </LinearLayout>
 	        
 	    </LinearLayout>
+	    
+	    <TextView 
+	        android:id="@+id/log_deadlift"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/ex_deadlift"
+	        android:layout_margin="5dp"
+	        android:layout_below="@id/log_linearFour"
+	        style="@style/style_bigWhiteText"/>
+	    
+	    <LinearLayout 
+	        android:id="@+id/log_linearFive"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/log_deadlift"
+	        style="@style/style_whiteBoxRegular"
+	        >
+	        
+	    	<TextView 
+	        	android:id="@+id/log_deadliftDetailed"
+	        	style="@style/style_logDetailed"
+	        />
+	    	
+	    	<LinearLayout
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content"
+	    	    android:gravity="right"
+	    	    >
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb0"
+	        		style="@style/style_cbStyle"/>
+	    		
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb1"
+	        		style="@style/style_cbStyle"/>
+	    		
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb2"
+	        		style="@style/style_cbStyle"/>
+	    		
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb3"
+	        		style="@style/style_cbStyle"/>
+	    		
+	    		<no.whg.workout.ThreeStateCheckbox android:id="@+id/log_deadlift_cb4"
+	        		style="@style/style_cbStyle"
+	        		/>
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+	    
 	    
 	 	
 	    <Button 

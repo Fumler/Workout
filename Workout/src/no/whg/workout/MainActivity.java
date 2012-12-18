@@ -1,14 +1,21 @@
 package no.whg.workout;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Runnable;
+
 import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.GraphViewSeries.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 
 import android.app.DialogFragment;
@@ -33,6 +40,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -48,7 +56,8 @@ import android.widget.TextView;
 public class MainActivity extends FragmentActivity {
 	public static boolean resetPressed;
 
-	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
+	public static StrongLiftsCalculator SLCalc;
+	String SLCalcFILENAME = "SLCALCOBJECT";
 	
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -81,6 +90,23 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        FileInputStream fis = null;
+        
+		// Checking to see if the file with the object exists.
+		try {
+			fis = getApplicationContext().openFileInput(SLCalcFILENAME);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		// Inits SLCalc based on existence of file
+		if (fis != null) {
+			loadSLCalc(fis);
+		} else{
+			SLCalc = new StrongLiftsCalculator();
+		}
+        
         // Create the adapter that will return a fragment for each of the three primary sections
         // of the app.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -103,7 +129,15 @@ public class MainActivity extends FragmentActivity {
         return true;
     }
     
-    @SuppressWarnings("deprecation")
+    @Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		saveSLCalc();
+	}
+
+	@SuppressWarnings("deprecation")
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	
@@ -149,6 +183,75 @@ public class MainActivity extends FragmentActivity {
         return true;
         
     }
+    
+	// Loading the SLCalc object
+	public void loadSLCalc(FileInputStream fis) {
+		if (fis != null) {
+			ObjectInputStream is = null;
+			try {
+				is = new ObjectInputStream(fis);
+			} catch (StreamCorruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			StrongLiftsCalculator tempSL = null;
+			try {
+				tempSL = (StrongLiftsCalculator) is.readObject();
+			} catch (OptionalDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				is.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			SLCalc = tempSL;
+		}
+	}
+
+	// Saving the SLCalc object
+	public void saveSLCalc() {
+		FileOutputStream fos = null;
+		try {
+			// fos sets up a file that is private, which means only this
+			// application
+			// can access it.
+			fos = getApplicationContext().openFileOutput(SLCalcFILENAME, Context.MODE_PRIVATE);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObjectOutputStream os = null;
+		try {
+			os = new ObjectOutputStream(fos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			os.writeObject(SLCalc);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			os.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     
     public void videoCapture(int i){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
@@ -267,6 +370,11 @@ public class MainActivity extends FragmentActivity {
         
         public Button tab1_b_log;
         public String weightUnit;
+        
+        public List<Exercise> currentSession = SLCalc.getCurrentSession();
+		public List<Exercise> bothSessions = SLCalc.getBothSessions();
+		
+		final boolean[] completed = new boolean[4];
         
         
         
@@ -434,6 +542,7 @@ public class MainActivity extends FragmentActivity {
 		}
 		
 		//Initializes tab 1
+		// BEING WORLD CHAMPIONSHIP OF LAZY CODE ~~
 		public void initTab1() {
 			tab1_tv_squats 			= (TextView) getActivity().findViewById(R.id.log_squatsDetailed);
 			tab1_tv_benchPress 		= (TextView) getActivity().findViewById(R.id.log_benchPressDetailed);
@@ -460,7 +569,7 @@ public class MainActivity extends FragmentActivity {
 				int squatsIdInt = getResources().getIdentifier(squatsId, "id", "no.whg.workout");
 				tab1_squats.add(i, (ThreeStateCheckbox) getActivity().findViewById(squatsIdInt));
 				
-				String benchpressId = "log_benchpress_cb"+i;
+				String benchpressId = "log_benchPress_cb"+i;
 				int benchpressIdInt = getResources().getIdentifier(benchpressId, "id", "no.whg.workout");
 				tab1_benchpress.add(i, (ThreeStateCheckbox) getActivity().findViewById(benchpressIdInt));
 				
@@ -468,15 +577,21 @@ public class MainActivity extends FragmentActivity {
 				int rowingIdInt = getResources().getIdentifier(rowingId, "id", "no.whg.workout");
 				tab1_rowing.add(i,(ThreeStateCheckbox) getActivity().findViewById(rowingIdInt));
 				
-				String ohpId = "log_OHP_cb"+i;
+				String ohpId = "log_ohp_cb"+i;
 				int ohpIdInt = getResources().getIdentifier(ohpId, "id", "no.whg.workout");
 				tab1_ohp.add(i,(ThreeStateCheckbox) getActivity().findViewById(ohpIdInt));
+				
+				String deadliftId = "log_deadlift_cb"+i;
+				int deadliftIdInt = getResources().getIdentifier(deadliftId, "id", "no.whg.workout");
+				tab1_deadlift.add(i, (ThreeStateCheckbox) getActivity().findViewById(deadliftIdInt));
 				
 			}
 		}
 		
 		public void refreshTab1() {
-			List<Exercise> currentSession = SLCalc.getCurrentSession();
+			
+
+
 			boolean isA = SLCalc.getSessionTypeA();
 			@SuppressWarnings("deprecation")
 			RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
@@ -504,58 +619,396 @@ public class MainActivity extends FragmentActivity {
 				tab1_ll_ohp.setVisibility(View.GONE);
 				tab1_tv_OHPTitle.setVisibility(View.GONE);
 				
+				if(bothSessions.get(0).getNumberOfSets() == 1) {
+					
+					tab1_squats.get(1).setVisibility(View.GONE);
+					tab1_squats.get(2).setVisibility(View.GONE);
+					tab1_squats.get(3).setVisibility(View.GONE);
+					tab1_squats.get(4).setVisibility(View.GONE);
+	
+				}
+				
+				if(bothSessions.get(1).getNumberOfSets() == 1) {
+					tab1_deadlift.get(1).setVisibility(View.GONE);
+					tab1_deadlift.get(2).setVisibility(View.GONE);
+					tab1_deadlift.get(3).setVisibility(View.GONE);
+					tab1_deadlift.get(4).setVisibility(View.GONE);
+					
+				}
+				
+				if(bothSessions.get(2).getNumberOfSets() == 1) {
+					tab1_rowing.get(1).setVisibility(View.GONE);
+					tab1_rowing.get(2).setVisibility(View.GONE);
+					tab1_rowing.get(3).setVisibility(View.GONE);
+					tab1_rowing.get(4).setVisibility(View.GONE);
+					
+				}
+				
+				
+				
+				if(bothSessions.get(0).getNumberOfSets() == 3) {
+					tab1_squats.get(3).setVisibility(View.GONE);
+					tab1_squats.get(4).setVisibility(View.GONE);
+				}
+				if(bothSessions.get(1).getNumberOfSets() == 3) {
+					tab1_benchpress.get(3).setVisibility(View.GONE);
+					tab1_benchpress.get(4).setVisibility(View.GONE);
+				}
+				if(bothSessions.get(2).getNumberOfSets() == 3) {
+					tab1_rowing.get(3).setVisibility(View.GONE);
+					tab1_rowing.get(4).setVisibility(View.GONE);
+				}
+				
+				
 				p.addRule(RelativeLayout.BELOW, R.id.log_linearThree);
 								
 				tab1_b_log.setLayoutParams(p);
-				
-				for(int i = 0; i <= 4; i++) {
+
+				for(int i = 0; i < currentSession.get(0).getNumberOfSets(); i++) { 
+					
 			        tab1_squats.get(i).setOnClickListener(new View.OnClickListener() {
 			        	public void onClick(View v) {
-			        		for(int j = 0; j <= 4; j++) {
-				        		int state = tab1_squats.get(j).getState();
+			        		int[] state = new int[5];
+							
+							List<Exercise> currentSession = SLCalc.getCurrentSession();
+
+			        		for(int j = 0; j < currentSession.get(0).getNumberOfSets(); j++) {
+				        		state[j] = tab1_squats.get(j).getState();
 				        		
-				        		switch(state) {
-				        		case 0: // do stuff if unchecked
-				        			tab1_squats.get(j).setBackgroundResource(R.drawable.unchecked);
-				        			break;
-				        		case 1: // do stuff if checked
-				        			tab1_squats.get(j).setBackgroundResource(R.drawable.checked);
-
-				        			break;
-				        		case 2: // do stuff if crossed
-				        			tab1_squats.get(j).setBackgroundResource(R.drawable.crossed);
-
-				        			break;
-				        			default: break;
-				        		}
 			        		}
+			        		if(currentSession.get(0).getNumberOfSets() == 3) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
+									completed[0] = true;
+									System.out.println("SQUATS COMPLETED = TRUE");
+								} else {
+									completed[0] = false;
+									System.out.println("SQUATS COMPLETED = FALSE");
+								}
+							
+							} else if(currentSession.get(0).getNumberOfSets() == 1) {
+								if(state[0] == 1) {
+									completed[0] = true;
+									System.out.println("SQUATS COMPLETED = TRUE");
+								} else {
+									completed[0] = false;
+									System.out.println("SQUATS COMPLETED = FALSE");
+								}
+							} else if(currentSession.get(0).getNumberOfSets() == 5) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1 && state[3] == 1 && state[4] == 1) {
+									completed[0] = true;
+									System.out.println("SQUATS COMPLETED = TRUE");
+								} else {
+									completed[0] = false;
+									System.out.println("SQUATS COMPLETED = FALSE");
+								}
+							}
 
 			        	}
 			        });
+			        
+			        tab1_benchpress.get(i).setOnClickListener(new View.OnClickListener() {
+			        	public void onClick(View v) {
+			        		int[] state = new int[5];
+							
+							List<Exercise> currentSession = SLCalc.getCurrentSession();
+			        		for(int j = 0; j < currentSession.get(0).getNumberOfSets(); j++) {
+				        		state[j] = tab1_benchpress.get(j).getState();
+			        		}
+							if(currentSession.get(1).getNumberOfSets() == 3) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
+									completed[1] = true;
+									System.out.println("BENCHPRESS COMPLETED = TRUE");
+								} else {
+									completed[1] = false;
+									System.out.println("BENCHPRESS COMPLETED = FALSE");
+								}
+							
+							} else if(currentSession.get(1).getNumberOfSets() == 1) {
+								if(state[0] == 1) {
+									completed[1] = true;
+									System.out.println("BENCHPRESS COMPLETED = TRUE");
+								} else {
+									completed[1] = false;
+									System.out.println("BENCHPRESS COMPLETED = FALSE");
+								}
+							} else if(currentSession.get(1).getNumberOfSets() == 5) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1 && state[3] == 1 && state[4] == 1) {
+									completed[1] = true;
+									System.out.println("BENCHPRESS COMPLETED = TRUE");
+								} else {
+									completed[1] = false;
+									System.out.println("BENCHPRESS COMPLETED = FALSE");
+								}
+							}
+			        		}
+
+			        });
+			        
+			        tab1_rowing.get(i).setOnClickListener(new View.OnClickListener() {
+			        	public void onClick(View v) {
+			        		int[] state = new int[5];
+							
+							List<Exercise> currentSession = SLCalc.getCurrentSession();
+			        		for(int j = 0; j < currentSession.get(0).getNumberOfSets(); j++) {
+				        		state[j] = tab1_rowing.get(j).getState();
+			        		}
+			        		if(currentSession.get(2).getNumberOfSets() == 3) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
+									completed[2] = true;
+									System.out.println("ROWING COMPLETED = TRUE");
+								} else {
+									completed[2] = false;
+									System.out.println("ROWING COMPLETED = FALSE");
+								}
+							
+							} else if(currentSession.get(2).getNumberOfSets() == 1) {
+								if(state[0] == 1) {
+									completed[2] = true;
+									System.out.println("ROWING COMPLETED = TRUE");
+								} else {
+									completed[2] = false;
+									System.out.println("ROWING COMPLETED = FALSE");
+								}
+							} else if(currentSession.get(2).getNumberOfSets() == 5) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1 && state[3] == 1 && state[4] == 1) {
+									completed[2] = true;
+									System.out.println("ROWING COMPLETED = TRUE");
+								} else {
+									completed[2] = false;
+									System.out.println("ROWING COMPLETED = FALSE");
+								}
+							}
+			        		}
+
+			        });
+			        
+
 					
 				}
+				
+				// send stuff to slcalc here
 
-			} else {
+			} else  {
+				if(bothSessions.get(0).getNumberOfSets() == 3) {
+					tab1_squats.get(3).setVisibility(View.GONE);
+					tab1_squats.get(4).setVisibility(View.GONE);
+				}
+				
+				if(bothSessions.get(0).getNumberOfSets() == 1) {
+					
+					tab1_squats.get(1).setVisibility(View.GONE);
+					tab1_squats.get(2).setVisibility(View.GONE);
+					tab1_squats.get(3).setVisibility(View.GONE);
+					tab1_squats.get(4).setVisibility(View.GONE);
+	
+				}
+				
+				if(bothSessions.get(3).getNumberOfSets() == 1) {
+					tab1_ohp.get(1).setVisibility(View.GONE);
+					tab1_ohp.get(2).setVisibility(View.GONE);
+					tab1_ohp.get(3).setVisibility(View.GONE);
+					tab1_ohp.get(4).setVisibility(View.GONE);
+					
+				}
+				
+				if(bothSessions.get(4).getNumberOfSets() == 1) {
+					tab1_deadlift.get(1).setVisibility(View.GONE);
+					tab1_deadlift.get(2).setVisibility(View.GONE);
+					tab1_deadlift.get(3).setVisibility(View.GONE);
+					tab1_deadlift.get(4).setVisibility(View.GONE);
+					System.out.println("I AM RUNNING");
+					
+					
+				}
+				
+				if(bothSessions.get(3).getNumberOfSets() == 3) {
+					tab1_ohp.get(3).setVisibility(View.GONE);
+					tab1_ohp.get(4).setVisibility(View.GONE);
+				}
+				if(bothSessions.get(4).getNumberOfSets() == 3) {
+					tab1_deadlift.get(3).setVisibility(View.GONE);
+					tab1_deadlift.get(4).setVisibility(View.GONE);
+				}
 				
 				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);
-				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(5).getCurrentWeight()) + weightUnit);
-				tab1_tv_OHP.setText(String.valueOf(currentSession.get(4).getCurrentWeight()) + weightUnit);	
+				tab1_tv_OHP.setText(String.valueOf(currentSession.get(1).getCurrentWeight()) + weightUnit);	
+				tab1_tv_deadlift.setText(String.valueOf(currentSession.get(2).getCurrentWeight()) + weightUnit);
 				
 				tab1_ll_benchpress.setVisibility(View.GONE);
 				tab1_tv_benchPressTitle.setVisibility(View.GONE);
 				tab1_ll_rowing.setVisibility(View.GONE);
 				tab1_tv_rowingTitle.setVisibility(View.GONE);
 				
+				
+				
 				p.addRule(RelativeLayout.BELOW, R.id.log_linearFive);
 				
 				tab1_b_log.setLayoutParams(p);
-				}
+				
+				System.out.println(currentSession.get(0).getNumberOfSets());
+				
+				for(int i = 0; i < currentSession.get(0).getNumberOfSets(); i++) { 
+			        tab1_squats.get(i).setOnClickListener(new View.OnClickListener() {
+			        	public void onClick(View v) {
+							int[] state = new int[5];
+							
+							List<Exercise> currentSession = SLCalc.getCurrentSession();
 
+							for(int j = 0; j < currentSession.get(0).getNumberOfSets(); j++) {
+								state[j] = tab1_squats.get(j).getState();
+								System.out.println("State " + j + ": " + state[j]);
+							}
+							if(currentSession.get(0).getNumberOfSets() == 3) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
+									completed[0] = true;
+									System.out.println("SQUATS COMPLETED = TRUE");
+								} else {
+									completed[0] = false;
+									System.out.println("SQUATS COMPLETED = FALSE");
+								}
+							
+							} else if(currentSession.get(0).getNumberOfSets() == 1) {
+								if(state[0] == 1) {
+									completed[0] = true;
+									System.out.println("SQUATS COMPLETED = TRUE");
+								} else {
+									completed[0] = false;
+									System.out.println("SQUATS COMPLETED = FALSE");
+								}
+							} else if(currentSession.get(0).getNumberOfSets() == 5) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1 && state[3] == 1 && state[4] == 1) {
+									completed[0] = true;
+									System.out.println("SQUATS COMPLETED = TRUE");
+								} else {
+									completed[0] = false;
+									System.out.println("SQUATS COMPLETED = FALSE");
+								}
+							}
+							
+									
+							
+
+
+			        	}
+			        });
+			        tab1_ohp.get(i).setOnClickListener(new View.OnClickListener() {
+			        	public void onClick(View v) {
+			        		
+							int[] state = new int[5];
+							List<Exercise> currentSession = SLCalc.getCurrentSession();
+			        		for(int j = 0; j < currentSession.get(0).getNumberOfSets(); j++) {
+				        		state[j] = tab1_ohp.get(j).getState();
+
+			        		}
+							if(currentSession.get(1).getNumberOfSets() == 3) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
+									completed[1] = true;
+									System.out.println("OHP COMPLETED = TRUE");
+								} else {
+									completed[1] = false;
+									System.out.println("OHP COMPLETED = FALSE");
+								}
+							
+							} else if(currentSession.get(1).getNumberOfSets() == 1) {
+								if(state[0] == 1) {
+									completed[1] = true;
+									System.out.println("OHP COMPLETED = TRUE");
+								} else {
+									completed[1] = false;
+									System.out.println("OHP COMPLETED = FALSE");
+								}
+							} else if(currentSession.get(1).getNumberOfSets() == 5) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1 && state[3] == 1 && state[4] == 1) {
+									completed[1] = true;
+									System.out.println("OHP COMPLETED = TRUE");
+								} else {
+									completed[1] = false;
+									System.out.println("OHP COMPLETED = FALSE");
+								}
+							}
+
+			        	}
+			        });
+			        
+			        tab1_deadlift.get(i).setOnClickListener(new View.OnClickListener() {
+			        	public void onClick(View v) {
+			        		int[] state = new int[5];
+							List<Exercise> currentSession = SLCalc.getCurrentSession();
+			        		for(int j = 0; j <= 4; j++) {
+				        		state[j] = tab1_deadlift.get(j).getState();
+				        		}
+			        		if(currentSession.get(2).getNumberOfSets() == 3) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
+									completed[2] = true;
+									System.out.println("DEADLIFT COMPLETED = TRUE");
+								} else {
+									completed[2] = false;
+									System.out.println("DEADLIFT COMPLETED = FALSE");
+								}
+							
+							} else if(currentSession.get(2).getNumberOfSets() == 1) {
+								if(state[0] == 1) {
+									completed[2] = true;
+									System.out.println("DEADLIFT COMPLETED = TRUE");
+								} else {
+									completed[2] = false;
+									System.out.println("DEADLIFT COMPLETED = FALSE");
+								}
+							} else if(currentSession.get(2).getNumberOfSets() == 5) {
+								if(state[0] == 1 && state[1] == 1 && state[2] == 1 && state[3] == 1 && state[4] == 1) {
+									completed[2] = true;
+									System.out.println("DEADLIFT COMPLETED = TRUE");
+								} else {
+									completed[2] = false;
+									System.out.println("DEADLIFT COMPLETED = FALSE");
+								}
+							}
+
+
+			        	}
+			        });
+			        
+				}
+				
+
+			}
+			
+
+
+			tab1_b_log.setOnClickListener(new OnClickListener() {
+			    public void onClick(View v)
+			    {
+			    	updateSuccess(completed[0], completed[1], completed[2]);
+					
+			    } 
+			});
 		}
+		
+		public void updateSuccess(boolean completed1, boolean completed2, boolean completed3) { // Sends results to exercise
+			System.out.println("Completed[0]: " + completed[0] + "\n" + "Completed[1]: " + completed[1] + "\n" + "Completed[2]: " + completed[2]);
+
+			if(completed[0]) {
+				
+				currentSession.get(0).setSuccess(completed[0]);
+			}
+			
+			if(completed[1]) {
+				currentSession.get(1).setSuccess(completed[1]);
+
+			}
+			
+			if(completed[2]) {
+				currentSession.get(2).setSuccess(completed[2]);
+
+			}
+			
+			SLCalc.updateSessionWeights(currentSession);
+		}
+		// END WORLD CHAMPIONSHIP OF LAZY CODE ~~
 		
 		//Initializes tab 3
 		public void initTab3(){
-			layout 						= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
+//			layout 						= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
 			tab3_tv_squats 				= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
 			tab3_tv_squats_deloads 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed2);
 			tab3_tv_squats_fails 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed3);
@@ -571,8 +1024,8 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP 				= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
 			tab3_tv_OHP_deloads 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed2);
 			tab3_tv_OHP_fails 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed3);
-			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
-			layout.addView(graphView);
+//			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
+//			layout.addView(graphView);
 		}
 		
 		public void refreshTab3(){
@@ -604,48 +1057,48 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP_deloads.setText("Deloads: " + String.valueOf(exercises.get(3).getNumberOfDeloads()));
 			tab3_tv_OHP_fails.setText("Fails: " + String.valueOf(exercises.get(3).getNumberOfFails()));
 			
-			populateGraph();
+//			populateGraph();
 		}
 		
-		@SuppressWarnings("deprecation")
-		public void populateGraph(){
-			List<Double> weightData;
-			weightData = SLCalc.getBothSessions().get(0).getProgressList(); 
-			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
-			GraphViewData[] graphViewData;
-			
-			// Only populates the graph if the progresslist has data in it
-			if (!weightData.isEmpty()) {
-				
-				tv_noData.setVisibility(View.GONE);
-				graphView.setVisibility(View.VISIBLE);
-
-//				graphViewData = new GraphViewData[weightData.size()];
-				
-				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {  
-					      new GraphViewData(1, 2.0d)  
-					      , new GraphViewData(2, 1.5d)  
-					      , new GraphViewData(3, 2.5d)  
-					      , new GraphViewData(4, 1.0d)  
-					});  
-				
-//				for (int i = 0; i < weightData.size(); i++) {
-//					graphViewData[i] = new GraphViewData(i, (double)weightData.get(i));
-//					System.out.println(i);
-//				}
-				
-				// Inits and resets the weightDataSeries
-//				weightDataSeries = new GraphViewSeries(graphViewData);
-				
-				graphView.addSeries(exampleSeries);
-			} else {
-				tv_noData.setVisibility(View.VISIBLE);
-				graphView.setVisibility(View.GONE);
-				tv_noData.setText("No data to display");
-			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-			}
-		}
-		
+//		@SuppressWarnings("deprecation")
+//		public void populateGraph(){
+//			List<Double> weightData;
+//			weightData = SLCalc.getBothSessions().get(0).getProgressList(); 
+//			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
+//			GraphViewData[] graphViewData;
+//			
+//			// Only populates the graph if the progresslist has data in it
+//			if (!weightData.isEmpty()) {
+//				
+//				tv_noData.setVisibility(View.GONE);
+//				graphView.setVisibility(View.VISIBLE);
+//
+////				graphViewData = new GraphViewData[weightData.size()];
+//				
+//				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {  
+//					      new GraphViewData(1, 2.0d)  
+//					      , new GraphViewData(2, 1.5d)  
+//					      , new GraphViewData(3, 2.5d)  
+//					      , new GraphViewData(4, 1.0d)  
+//					});  
+//				
+////				for (int i = 0; i < weightData.size(); i++) {
+////					graphViewData[i] = new GraphViewData(i, (double)weightData.get(i));
+////					System.out.println(i);
+////				}
+//				
+//				// Inits and resets the weightDataSeries
+////				weightDataSeries = new GraphViewSeries(graphViewData);
+//				
+//				graphView.addSeries(exampleSeries);
+//			} else {
+//				tv_noData.setVisibility(View.VISIBLE);
+//				graphView.setVisibility(View.GONE);
+//				tv_noData.setText("No data to display");
+//			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+//			}
+//		}
+//		
 		//Initializes tab 4
 		public void initTab4(){
 			//get the large image view
