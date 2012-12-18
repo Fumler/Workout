@@ -1018,8 +1018,8 @@ public class MainActivity extends FragmentActivity {
 							
 							refreshTab1();
 							
-							startActivity(new Intent(getActivity(), MainActivity.class));
-							
+							//ViewGroup vg = (ViewGroup) getActivity().findViewById(R.id.tab1);
+							//vg.invalidate();
 						}
 					});
 

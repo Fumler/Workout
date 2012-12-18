@@ -35,6 +35,14 @@
 	        android:layout_below="@id/log_main"
 	        style="@style/style_bigWhiteText"/>
 	    
+	    	<ImageButton
+	    	    android:id="@+id/log_squatsVideo"
+	    	    android:src="@drawable/video"
+	    	    android:layout_toRightOf="@id/log_squats"
+	    	   	android:layout_alignParentRight="true"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"/>
+	    
 	    <LinearLayout 
 	        android:id="@+id/log_linearOne"
 	        android:layout_width="fill_parent"
@@ -47,6 +55,7 @@
 	        	android:id="@+id/log_squatsDetailed"
 	        	style="@style/style_logDetailed"
 	        />
+
 	    	
 	    	<LinearLayout
 	    	    android:layout_width="fill_parent"
@@ -85,6 +94,14 @@
 	        android:layout_below="@id/log_linearOne"
 	        style="@style/style_bigWhiteText"/>
 	    
+	    	<ImageButton
+	    	    android:id="@+id/log_benchpressVideo"
+	    	    android:src="@drawable/video"
+	    	    android:layout_toRightOf="@id/log_benchPress"
+	    	   	android:layout_alignParentRight="true"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"/>
+	    
 	    <LinearLayout 
 	        android:id="@+id/log_linearTwo"
 	        android:layout_width="fill_parent"
@@ -97,6 +114,7 @@
 	        	android:id="@+id/log_benchPressDetailed" 	
 	        	style="@style/style_logDetailed"
 	        />
+
 	    	
 	    	<LinearLayout
 	    	    android:layout_width="fill_parent"
@@ -132,6 +150,14 @@
 	        android:layout_below="@id/log_linearTwo"
 	        style="@style/style_bigWhiteText"/>
 	    
+	    	<ImageButton
+	    	    android:id="@+id/log_rowingVideo"
+	    	    android:src="@drawable/video"
+	    	    android:layout_toRightOf="@id/log_rowing"
+	    	   	android:layout_alignParentRight="true"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"/>
+	    
 	    <LinearLayout 
 	        android:id="@+id/log_linearThree"
 	        android:layout_width="fill_parent"
@@ -144,6 +170,7 @@
 	        	android:id="@+id/log_rowingDetailed"
 	        	style="@style/style_logDetailed"
 	        />
+
 	    	
 	    	<LinearLayout
 	    	    android:layout_width="fill_parent"
@@ -180,6 +207,14 @@
 	        android:layout_margin="5dp"
 	        android:layout_below="@id/log_linearThree"
 	        style="@style/style_bigWhiteText"/>
+	  
+	    	<ImageButton
+	    	    android:id="@+id/log_ohpVideo"
+	    	    android:src="@drawable/video"
+	    	    android:layout_toRightOf="@id/log_ohp"
+	    	   	android:layout_alignParentRight="true"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"/>
 	    
 	    <LinearLayout 
 	        android:id="@+id/log_linearFour"
@@ -194,6 +229,8 @@
 	        	android:id="@+id/log_ohpDetailed"
 	        	style="@style/style_logDetailed"
 	        />
+	    	
+
 	    	
 	    	<LinearLayout
 	    	    android:layout_width="fill_parent"
@@ -228,6 +265,14 @@
 	        android:layout_below="@id/log_linearFour"
 	        style="@style/style_bigWhiteText"/>
 	    
+	    <ImageButton
+	    	android:id="@+id/log_deadliftVideo"
+	    	android:src="@drawable/video"
+	    	android:layout_toRightOf="@id/log_deadlift"
+	    	android:layout_alignParentRight="true"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"/>
+	    
 	    <LinearLayout 
 	        android:id="@+id/log_linearFive"
 	        android:layout_width="fill_parent"
@@ -240,6 +285,7 @@
 	        	android:id="@+id/log_deadliftDetailed"
 	        	style="@style/style_logDetailed"
 	        />
+
 	    	
 	    	<LinearLayout
 	    	    android:layout_width="fill_parent"
