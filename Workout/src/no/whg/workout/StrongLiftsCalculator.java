@@ -45,8 +45,12 @@ import java.util.List;
  *  			- int numberOfSessionsLogged
  */
 
-public class StrongLiftsCalculator {
+public class StrongLiftsCalculator implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int 			numberOfSessionsLogged;
 	private List<Exercise> 	a_session;
 	private List<Exercise> 	b_session;

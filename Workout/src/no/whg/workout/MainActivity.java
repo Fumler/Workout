@@ -1,14 +1,21 @@
 package no.whg.workout;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Runnable;
+
 import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.GraphViewSeries.GraphViewStyle;
 import com.jjoe64.graphview.LineGraphView;
 
 import android.app.DialogFragment;
@@ -48,7 +55,8 @@ import android.widget.TextView;
 public class MainActivity extends FragmentActivity {
 	public static boolean resetPressed;
 
-	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
+	public static StrongLiftsCalculator SLCalc;
+	String SLCalcFILENAME = "SLCALCOBJECT";
 	
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -81,6 +89,23 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        FileInputStream fis = null;
+        
+		// Checking to see if the file with the object exists.
+		try {
+			fis = getApplicationContext().openFileInput(SLCalcFILENAME);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		// Inits SLCalc based on existence of file
+		if (fis != null) {
+			loadSLCalc(fis);
+		} else{
+			SLCalc = new StrongLiftsCalculator();
+		}
+        
         // Create the adapter that will return a fragment for each of the three primary sections
         // of the app.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -103,7 +128,15 @@ public class MainActivity extends FragmentActivity {
         return true;
     }
     
-    @SuppressWarnings("deprecation")
+    @Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		saveSLCalc();
+	}
+
+	@SuppressWarnings("deprecation")
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	
@@ -149,6 +182,75 @@ public class MainActivity extends FragmentActivity {
         return true;
         
     }
+    
+	// Loading the SLCalc object
+	public void loadSLCalc(FileInputStream fis) {
+		if (fis != null) {
+			ObjectInputStream is = null;
+			try {
+				is = new ObjectInputStream(fis);
+			} catch (StreamCorruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			StrongLiftsCalculator tempSL = null;
+			try {
+				tempSL = (StrongLiftsCalculator) is.readObject();
+			} catch (OptionalDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				is.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			SLCalc = tempSL;
+		}
+	}
+
+	// Saving the SLCalc object
+	public void saveSLCalc() {
+		FileOutputStream fos = null;
+		try {
+			// fos sets up a file that is private, which means only this
+			// application
+			// can access it.
+			fos = getApplicationContext().openFileOutput(SLCalcFILENAME, Context.MODE_PRIVATE);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObjectOutputStream os = null;
+		try {
+			os = new ObjectOutputStream(fos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			os.writeObject(SLCalc);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			os.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     
     public void videoCapture(int i){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
@@ -540,7 +642,7 @@ public class MainActivity extends FragmentActivity {
 		
 		//Initializes tab 3
 		public void initTab3(){
-			layout 						= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
+//			layout 						= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
 			tab3_tv_squats 				= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
 			tab3_tv_squats_deloads 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed2);
 			tab3_tv_squats_fails 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed3);
@@ -556,8 +658,8 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP 				= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
 			tab3_tv_OHP_deloads 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed2);
 			tab3_tv_OHP_fails 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed3);
-			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
-			layout.addView(graphView);
+//			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
+//			layout.addView(graphView);
 		}
 		
 		public void refreshTab3(){
@@ -589,48 +691,48 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP_deloads.setText("Deloads: " + String.valueOf(exercises.get(3).getNumberOfDeloads()));
 			tab3_tv_OHP_fails.setText("Fails: " + String.valueOf(exercises.get(3).getNumberOfFails()));
 			
-			populateGraph();
+//			populateGraph();
 		}
 		
-		@SuppressWarnings("deprecation")
-		public void populateGraph(){
-			List<Double> weightData;
-			weightData = SLCalc.getBothSessions().get(0).getProgressList(); 
-			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
-			GraphViewData[] graphViewData;
-			
-			// Only populates the graph if the progresslist has data in it
-			if (!weightData.isEmpty()) {
-				
-				tv_noData.setVisibility(View.GONE);
-				graphView.setVisibility(View.VISIBLE);
-
-//				graphViewData = new GraphViewData[weightData.size()];
-				
-				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {  
-					      new GraphViewData(1, 2.0d)  
-					      , new GraphViewData(2, 1.5d)  
-					      , new GraphViewData(3, 2.5d)  
-					      , new GraphViewData(4, 1.0d)  
-					});  
-				
-//				for (int i = 0; i < weightData.size(); i++) {
-//					graphViewData[i] = new GraphViewData(i, (double)weightData.get(i));
-//					System.out.println(i);
-//				}
-				
-				// Inits and resets the weightDataSeries
-//				weightDataSeries = new GraphViewSeries(graphViewData);
-				
-				graphView.addSeries(exampleSeries);
-			} else {
-				tv_noData.setVisibility(View.VISIBLE);
-				graphView.setVisibility(View.GONE);
-				tv_noData.setText("No data to display");
-			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-			}
-		}
-		
+//		@SuppressWarnings("deprecation")
+//		public void populateGraph(){
+//			List<Double> weightData;
+//			weightData = SLCalc.getBothSessions().get(0).getProgressList(); 
+//			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
+//			GraphViewData[] graphViewData;
+//			
+//			// Only populates the graph if the progresslist has data in it
+//			if (!weightData.isEmpty()) {
+//				
+//				tv_noData.setVisibility(View.GONE);
+//				graphView.setVisibility(View.VISIBLE);
+//
+////				graphViewData = new GraphViewData[weightData.size()];
+//				
+//				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {  
+//					      new GraphViewData(1, 2.0d)  
+//					      , new GraphViewData(2, 1.5d)  
+//					      , new GraphViewData(3, 2.5d)  
+//					      , new GraphViewData(4, 1.0d)  
+//					});  
+//				
+////				for (int i = 0; i < weightData.size(); i++) {
+////					graphViewData[i] = new GraphViewData(i, (double)weightData.get(i));
+////					System.out.println(i);
+////				}
+//				
+//				// Inits and resets the weightDataSeries
+////				weightDataSeries = new GraphViewSeries(graphViewData);
+//				
+//				graphView.addSeries(exampleSeries);
+//			} else {
+//				tv_noData.setVisibility(View.VISIBLE);
+//				graphView.setVisibility(View.GONE);
+//				tv_noData.setText("No data to display");
+//			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+//			}
+//		}
+//		
 		//Initializes tab 4
 		public void initTab4(){
 			//get the large image view
