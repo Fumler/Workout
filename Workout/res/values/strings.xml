@@ -42,9 +42,10 @@
     <string name="front_tv_deadlift_sets">sets</string>
 
     <!-- LOG WORKOUT ACTIVITY -->
-    <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
+    <string name="tv_log_start">Hello! To start logging, use the checkboxes for the exercises, e.g. if you finished your squats for the day, make sure all five are checked before you press finish.</string>
     <string name="alert_note">Notice</string>
     <string name="alert_sure">Are you sure you wish to log this workout?</string>
+    <string name="log_workout_button">Finish logging</string>
     
     <!-- SETTINGS ACTIVITY -->
     <string name="set_main">Settings</string>
@@ -64,6 +65,11 @@
     <string name="set_weight">Weight</string>
     <string name="set_sets">Sets</string>
     <string name="set_weightIncrements">Change weight increments</string>
+    <string name="set_weightIncrementSquats">Change weight increments for the squat exercise</string>
+    <string name="set_weightIncrementBenchpress">Change weight increments for the bench press exercise</string>
+    <string name="set_weightIncrementRowing">Change weight increments for the rowing exercise</string>
+    <string name="set_weightIncrementDeadlift">Change weight increments for the deadlift exercise</string>
+    <string name="set_weightIncrementOhp">Change weight increments for the ohp exercise</string>
 
     <!-- SETTINGS WEIGHT BUTTONS -->
     <string name="set_kg_btn">KG</string>

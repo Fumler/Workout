@@ -12,6 +12,7 @@ import no.whg.workout.SetWeightDialog_2;
 import no.whg.workout.SetWeightDialog_3;
 import no.whg.workout.SetWeightDialog_4;
 import no.whg.workout.SetWeightDialog_5;
+import no.whg.workout.ChangeWeightIncrementDialog_1;
 import no.whg.workout.ResetDataAlertDialog;
 
 /*
@@ -74,6 +75,8 @@ public class SettingsActivity extends Activity {
     	public SetWeightDialog_4			dialog_deadlift;
     	public SetWeightDialog_5			dialog_ohp;
     	
+    	public ChangeWeightIncrementDialog_1 	dialog_incrementSquats;
+    	
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -83,12 +86,6 @@ public class SettingsActivity extends Activity {
             
             weight 		= (ListPreference) findPreference("settings_kgLbs");
             alertDialog = (ResetDataAlertDialog) findPreference("settings_data_id");
-
-            dialog_squats 		= (SetWeightDialog_1) findPreference("settings_squats");
-            dialog_benchPress 	= (SetWeightDialog_2) findPreference("settings_benchPress");
-            dialog_rowing 		= (SetWeightDialog_3) findPreference("settings_rowing");
-            dialog_deadlift 	= (SetWeightDialog_4) findPreference("settings_deadlift");
-            dialog_ohp 			= (SetWeightDialog_5) findPreference("settings_ohp");
             
             setWeightValueFromCalc();
         }

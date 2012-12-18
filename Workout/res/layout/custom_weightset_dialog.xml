@@ -59,8 +59,13 @@
    	    <NumberPicker
 	        android:id="@+id/set_weight_np4"
 	        android:layout_width="20dp"
-	        android:layout_height="80dp"
-	        android:layout_marginRight="50dp" />
+	        android:layout_height="80dp" />
+   	    
+   	    <NumberPicker 
+   	        android:id="@+id/set_weight_np5"
+   	        android:layout_width="20dp"
+   	        android:layout_height="80dp"
+   	        android:layout_marginRight="50dp" />
 	    
 	    <NumberPicker
 	        android:id="@+id/set_sets_np"

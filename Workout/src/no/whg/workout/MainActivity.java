@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,10 +44,10 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphViewSeries;
@@ -258,10 +259,10 @@ public class MainActivity extends FragmentActivity {
 	 * @param i	The parameter indicates what exercise this was called by
 	 * @see MediaCaptureActivity
 	 */
-    public void videoCapture(int i){
+    public static void videoCapture(int i, Context c){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
     	String lift = "SL_VID_";
-    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+    	Intent intent = new Intent(c,MediaCaptureActivity.class);
     	intent.putExtra("MEDIA_TYPE", 2);
     	intent.putExtra("method","yes");
     	
@@ -269,7 +270,7 @@ public class MainActivity extends FragmentActivity {
 		
     	intent.putExtra("lift", lift);
 
-		this.startActivity(intent);
+		c.startActivity(intent);
     }
     
     /* *
@@ -278,10 +279,10 @@ public class MainActivity extends FragmentActivity {
 	 * @param i	The parameter indicates what exercise to view
 	 * @see MediaCaptureActivity
 	 */
-    public void videoPlay(int i){
+    public static void videoPlay(int i, Context c){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
     	String lift;
-    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+    	Intent intent = new Intent(c, MediaCaptureActivity.class);
     	intent.putExtra("MEDIA_TYPE", 3);
     	intent.putExtra("method","yes");
     	
@@ -289,7 +290,7 @@ public class MainActivity extends FragmentActivity {
 		
     	intent.putExtra("lift", lift);
 
-		this.startActivity(intent);
+		c.startActivity(intent);
     }
 
 
@@ -353,6 +354,12 @@ public class MainActivity extends FragmentActivity {
         public LineGraphView graphView;
         public GraphViewSeries weightDataSeries;
         public LinearLayout layout;
+        public ImageButton tab3_btn_video;
+        public Button btn_squats;
+        public Button btn_benchpress;
+        public Button btn_rowing;
+        public Button btn_deadlift;
+        public Button btn_ohp;
         
         // LOG WORKOUT RELATED XML STUFF
 		public LinearLayout tab1_ll_squats;
@@ -400,6 +407,12 @@ public class MainActivity extends FragmentActivity {
         
         public Button tab1_b_log;
         public String weightUnit;
+        
+        public ImageButton tab1_b_squats;
+        public ImageButton tab1_b_benchpress;
+        public ImageButton tab1_b_rowing;
+        public ImageButton tab1_b_deadlift;
+        public ImageButton tab1_b_ohp;
         
         public List<Exercise> currentSession = SLCalc.getCurrentSession();
 		public List<Exercise> bothSessions = SLCalc.getBothSessions();
@@ -516,6 +529,7 @@ public class MainActivity extends FragmentActivity {
 			switch(position) {
 			case 0:
 				// Tab 1 - Log Workout
+				refreshTab1();
 				break;
 			case 1:
 				initTab2();
@@ -600,6 +614,12 @@ public class MainActivity extends FragmentActivity {
 			tab1_tv_deadliftTitle	= (TextView) getActivity().findViewById(R.id.log_deadlift);
 			tab1_tv_OHPTitle		= (TextView) getActivity().findViewById(R.id.log_ohp);
 			
+			tab1_b_squats			= (ImageButton) getActivity().findViewById(R.id.log_squatsVideo);
+			tab1_b_benchpress		= (ImageButton) getActivity().findViewById(R.id.log_benchpressVideo);
+			tab1_b_rowing			= (ImageButton) getActivity().findViewById(R.id.log_rowingVideo);
+			tab1_b_deadlift			= (ImageButton) getActivity().findViewById(R.id.log_deadliftVideo);
+			tab1_b_ohp				= (ImageButton) getActivity().findViewById(R.id.log_ohpVideo);
+			
 			tab1_b_log				= (Button) getActivity().findViewById(R.id.log_button);
 			
 
@@ -657,8 +677,12 @@ public class MainActivity extends FragmentActivity {
 				
 				tab1_ll_deadlift.setVisibility(View.GONE);
 				tab1_tv_deadliftTitle.setVisibility(View.GONE);
+				tab1_b_deadlift.setVisibility(View.GONE);
 				tab1_ll_ohp.setVisibility(View.GONE);
 				tab1_tv_OHPTitle.setVisibility(View.GONE);
+				tab1_b_ohp.setVisibility(View.GONE);
+				
+
 				
 				if(bothSessions.get(0).getNumberOfSets() == 1) {
 					
@@ -699,6 +723,8 @@ public class MainActivity extends FragmentActivity {
 					tab1_rowing.get(3).setVisibility(View.GONE);
 					tab1_rowing.get(4).setVisibility(View.GONE);
 				}
+				
+
 				
 				
 				p.addRule(RelativeLayout.BELOW, R.id.log_linearThree);
@@ -877,9 +903,10 @@ public class MainActivity extends FragmentActivity {
 				
 				tab1_ll_benchpress.setVisibility(View.GONE);
 				tab1_tv_benchPressTitle.setVisibility(View.GONE);
+				tab1_b_benchpress.setVisibility(View.GONE);
 				tab1_ll_rowing.setVisibility(View.GONE);
 				tab1_tv_rowingTitle.setVisibility(View.GONE);
-				
+				tab1_b_rowing.setVisibility(View.GONE);
 				
 				
 				p.addRule(RelativeLayout.BELOW, R.id.log_linearFive);
@@ -1015,6 +1042,8 @@ public class MainActivity extends FragmentActivity {
 			}
 			
 
+			
+
 
 			tab1_b_log.setOnClickListener(new OnClickListener() {
 			    public void onClick(View v)
@@ -1022,6 +1051,42 @@ public class MainActivity extends FragmentActivity {
 			    	updateSuccess(completed[0], completed[1], completed[2]);
 					
 			    } 
+			});
+			
+			tab1_b_squats.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Context c = getActivity();
+					videoCapture(0, c);
+					
+				}
+			});
+			
+			tab1_b_benchpress.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Context c = getActivity();
+					videoCapture(1, c);
+				}
+			});
+			
+			tab1_b_rowing.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Context c = getActivity();
+					videoCapture(2, c);
+				}
+			});
+			
+			tab1_b_deadlift.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Context c = getActivity();
+					videoCapture(3, c);
+				}
+			});
+			
+			tab1_b_ohp.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Context c = getActivity();
+					videoCapture(4, c);
+				}
 			});
 		}
 		
@@ -1172,8 +1237,10 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP 				= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
 			tab3_tv_OHP_deloads 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed2);
 			tab3_tv_OHP_fails 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed3);
+			tab3_btn_video				= (ImageButton) getActivity().findViewById(R.id.stats_videoBtn);
 //			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
 //			layout.addView(graphView);
+			
 		}
 		
 		public void refreshTab3(){
@@ -1204,6 +1271,77 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
 			tab3_tv_OHP_deloads.setText("Deloads: " + String.valueOf(exercises.get(3).getNumberOfDeloads()));
 			tab3_tv_OHP_fails.setText("Fails: " + String.valueOf(exercises.get(3).getNumberOfFails()));
+						
+			tab3_btn_video.setOnClickListener(new OnClickListener() {
+				
+				public void onClick(View v) {
+					final Dialog dialog = new Dialog(getActivity());
+					dialog.setContentView(R.layout.custom_video_list);
+					dialog.setTitle("Videos");
+					
+					btn_squats 					= (Button) dialog.findViewById(R.id.list_squatBtn);
+					btn_benchpress 				= (Button) dialog.findViewById(R.id.list_benchpressBtn);
+					btn_rowing					= (Button) dialog.findViewById(R.id.list_rowingBtn);
+					btn_deadlift				= (Button) dialog.findViewById(R.id.list_deadliftBtn);
+					btn_ohp						= (Button) dialog.findViewById(R.id.list_ohpBtn);
+					
+					btn_squats.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+								// TODO Auto-generated method stub
+								Context c = getActivity();
+								videoPlay(0, c);
+							}
+					});
+					
+					btn_squats.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(0, c);
+						}
+					});
+					
+					btn_benchpress.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(1, c);
+						}
+					});
+					
+					btn_rowing.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(2, c);
+						}
+					});
+					
+					btn_deadlift.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(3, c);
+						}
+					});
+					
+					btn_ohp.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(4, c);
+						}
+					});
+					
+					dialog.show();
+				}
+			});
 			
 //			populateGraph();
 		}

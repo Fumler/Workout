@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <Button 
+        android:id="@+id/list_squatBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ex_squats"
+        android:layout_marginTop="10dp" />
+        
+	<Button 
+        android:id="@+id/list_benchpressBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ex_benchPress" />
+        
+	<Button 
+        android:id="@+id/list_rowingBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ex_rowing" />
+        
+	<Button 
+        android:id="@+id/list_deadliftBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ex_deadlift" />
+        
+	<Button 
+        android:id="@+id/list_ohpBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ex_ohp"
+        android:layout_marginBottom="10dp" />
+
+</LinearLayout>
