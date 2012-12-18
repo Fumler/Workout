@@ -11,15 +11,11 @@ import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Runnable;
 
-import com.jjoe64.graphview.BarGraphView;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.LineGraphView;
-
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -35,7 +31,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +46,11 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
 
 public class MainActivity extends FragmentActivity {
 	public static boolean resetPressed;
@@ -575,7 +574,9 @@ public class MainActivity extends FragmentActivity {
 		
 		public void refreshTab1() {
 			
-
+			completed[0] = false;
+			completed[1] = false;
+			completed[2] = false;
 
 			boolean isA = SLCalc.getSessionTypeA();
 			@SuppressWarnings("deprecation")
@@ -972,22 +973,53 @@ public class MainActivity extends FragmentActivity {
 		public void updateSuccess(boolean completed1, boolean completed2, boolean completed3) { // Sends results to exercise
 			System.out.println("Completed[0]: " + completed[0] + "\n" + "Completed[1]: " + completed[1] + "\n" + "Completed[2]: " + completed[2]);
 
-			if(completed[0]) {
-				
-				currentSession.get(0).setSuccess(completed[0]);
-			}
+			String title = getResources().getString(R.string.alert_note);
+			String confirm = getResources().getString(android.R.string.ok);
+			String cancel = getResources().getString(android.R.string.cancel);
+			String youSure = getResources().getString(R.string.alert_sure);
 			
-			if(completed[1]) {
-				currentSession.get(1).setSuccess(completed[1]);
+			final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+			alertDialog.setTitle(title);
+			alertDialog.setMessage(youSure);
+			alertDialog.setPositiveButton(confirm,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							if(completed[0]) {
+								
+								currentSession.get(0).setSuccess(completed[0]);
+							}
+							
+							if(completed[1]) {
+								currentSession.get(1).setSuccess(completed[1]);
 
-			}
-			
-			if(completed[2]) {
-				currentSession.get(2).setSuccess(completed[2]);
+							}
+							
+							if(completed[2]) {
+								currentSession.get(2).setSuccess(completed[2]);
 
-			}
+							}
+							
+							SLCalc.updateSessionWeights(currentSession);
+							
+							refreshTab1();
+							
+							startActivity(new Intent(getActivity(), MainActivity.class));
+							
+						}
+					});
+
+			alertDialog.setNegativeButton(cancel,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});
+
+			alertDialog.setIcon(R.drawable.ic_launcher);
+			alertDialog.show();
+
 			
-			SLCalc.updateSessionWeights(currentSession);
+			
 		}
 		// END WORLD CHAMPIONSHIP OF LAZY CODE ~~
 		
