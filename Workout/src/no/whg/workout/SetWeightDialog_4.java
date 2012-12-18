@@ -40,8 +40,8 @@ public class SetWeightDialog_4 extends DialogPreference {
 			else if (np_6_value == 3)
 				np_6_value = 5;
 			
-			MainActivity.SLCalc.getBothSessions().get(0).setCurrentWeight(convertMultiIntToSingle());
-			MainActivity.SLCalc.getBothSessions().get(0).setNumberOfSets(np_6_value);
+			MainActivity.SLCalc.getBothSessions().get(4).setCurrentWeight(convertMultiIntToSingle());
+			MainActivity.SLCalc.getBothSessions().get(4).setNumberOfSets(np_6_value);
 			break;
 		}
 		
@@ -137,8 +137,6 @@ public class SetWeightDialog_4 extends DialogPreference {
 		newInt = original;
 		newInt = newInt % 0.1;
 		newInt = newInt * 100;
-		
-		System.out.println((int)newInt);
 		
 		if ((int)newInt > 5)
 			np_5.setValue(0);

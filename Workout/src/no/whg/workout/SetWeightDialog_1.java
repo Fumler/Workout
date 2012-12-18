@@ -138,8 +138,6 @@ public class SetWeightDialog_1 extends DialogPreference {
 		newInt = newInt % 0.1;
 		newInt = newInt * 100;
 		
-		System.out.println((int)newInt);
-		
 		if ((int)newInt > 5)
 			np_5.setValue(0);
 		else
