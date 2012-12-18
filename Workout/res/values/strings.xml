@@ -30,9 +30,10 @@
     <string name="tv_first">Looking good! \nToday\'s session is:</string>
 
     <!-- LOG WORKOUT ACTIVITY -->
-    <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
+    <string name="tv_log_start">Hello! To start logging, use the checkboxes for the exercises, e.g. if you finished your squats for the day, make sure all five are checked before you press finish.</string>
     <string name="alert_note">Notice</string>
     <string name="alert_sure">Are you sure you wish to log this workout?</string>
+    <string name="log_workout_button">Finish logging</string>
     
     <!-- SETTINGS ACTIVITY -->
     <string name="set_main">Settings</string>
