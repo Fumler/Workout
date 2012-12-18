@@ -15,6 +15,7 @@ public class MediaCaptureActivity extends Activity {
 	private static final int VIDEO_REQUEST_CODE = 200;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public static final int MEDIA_TYPE_VIDEO = 2;
+	public static final int MEDIA_TYPE_PLAY = 3;
 	private Uri fileUri;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,26 @@ public class MediaCaptureActivity extends Activity {
 
         if(intent.getStringExtra("method").equals("yes")){
 	        int i = intent.getIntExtra("MEDIA_TYPE", 0);
-        	intent.putExtra("method","no"); // onCreate() runs twice, this prevents it from running the capture request twice
-			captureMedia(intent, i);
+	        // onCreate() runs twice, this prevents it from running the intent's request twice
+        	intent.putExtra("method","no");
+        	
+        	if (i == MEDIA_TYPE_PLAY){
+        		System.out.println("i == MEDIA_TYPE_PLAY");
+        		String lift = intent.getStringExtra("lift");
+        		Uri liftUri = videoExists(lift);
+        		if (liftUri != null){
+	        		Intent watch = new Intent(Intent.ACTION_VIEW);
+	        		//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        		watch.setDataAndType(liftUri, "video/*");
+	        		startActivity(watch);
+	        		finish();
+        		} else {
+        			//no such video
+        			finish();
+        		}
+        	} else {
+        		captureMedia(intent, i);
+        	}
         } else {
         	finish();
         }
@@ -122,5 +141,17 @@ public class MediaCaptureActivity extends Activity {
 			return null; // something went wrong
 		}
 		return mediaFile;
+	}
+	
+	private Uri videoExists(String text){
+		File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), "StrongLifts/"); //set destination folder
+		File[] vids = dir.listFiles();
+		String vid = "SL_VID_" + text + ".mp4";
+		for (int i = 0; i < vids.length; i++){
+			if (vids[i].getName().equals(vid)){
+				return Uri.fromFile(vids[i]);
+			}
+		}
+		return null;
 	}
 }

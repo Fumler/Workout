@@ -257,8 +257,23 @@ public class MainActivity extends FragmentActivity {
     	String lift = "SL_VID_";
     	Intent intent = new Intent(this, MediaCaptureActivity.class);
     	intent.putExtra("MEDIA_TYPE", 2);
+    	intent.putExtra("method","yes");
     	
     	lift += exercise.getShortName();
+		
+    	intent.putExtra("lift", lift);
+
+		this.startActivity(intent);
+    }
+    
+    public void videoPlay(int i){
+    	Exercise exercise = SLCalc.getBothSessions().get(i);
+    	String lift;
+    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+    	intent.putExtra("MEDIA_TYPE", 3);
+    	intent.putExtra("method","yes");
+    	
+    	lift = exercise.getShortName();
 		
     	intent.putExtra("lift", lift);
 

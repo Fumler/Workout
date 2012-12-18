@@ -14,7 +14,7 @@
 	    
 	    <item android:id="@+id/menu_music"
 	        android:title="@string/str_menu_music"
-	        android:icon="@drawable/ic_action_play"
+	        android:icon="@drawable/ic_music"
 	        android:orderInCategory="200"
 	        android:showAsAction="ifRoom|withText" />
 	    
@@ -24,10 +24,5 @@
 	        android:orderInCategory="300"
 	        android:showAsAction="ifRoom|withText" />
     </group>
-    
-    <item android:id="@+id/menu_guide"
-        android:title="@string/str_menu_guide"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
     
 </menu>

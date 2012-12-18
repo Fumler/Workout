@@ -115,10 +115,6 @@ public class GuideActivity extends FragmentActivity {
     		startActivity(new Intent(this, SettingsActivity.class));
     	}
     	
-    	if(item.getItemId() == R.id.menu_guide) {
-    		startActivity(new Intent(this, GuideActivity.class));
-    	}
-    	
     	if (item.getItemId() == R.id.menu_camera){
     		Intent intent = new Intent(GuideActivity.this, MediaCaptureActivity.class);
         	intent.putExtra("MEDIA_TYPE", 1);
