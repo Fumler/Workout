@@ -207,10 +207,20 @@ public class MainActivity extends FragmentActivity {
         
         // STATS RELATED TEXTVIEWS
         public TextView tab3_tv_squats;
+        public TextView tab3_tv_squats_deloads;
+        public TextView tab3_tv_squats_fails;
         public TextView tab3_tv_benchPress;
+        public TextView tab3_tv_benchPress_deloads;
+        public TextView tab3_tv_benchPress_fails;
         public TextView tab3_tv_rowing;
+        public TextView tab3_tv_rowing_deloads;
+        public TextView tab3_tv_rowing_fails;
         public TextView tab3_tv_deadlift;
+        public TextView tab3_tv_deadlift_deloads;
+        public TextView tab3_tv_deadlift_fails;
         public TextView tab3_tv_OHP;
+        public TextView tab3_tv_OHP_deloads;
+        public TextView tab3_tv_OHP_fails;
         public LineGraphView graphView;
         public GraphViewSeries weightDataSeries;
         public LinearLayout layout;
@@ -530,13 +540,23 @@ public class MainActivity extends FragmentActivity {
 		
 		//Initializes tab 3
 		public void initTab3(){
-			layout 				= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
-			tab3_tv_squats 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
-			tab3_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
-			tab3_tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
-			tab3_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
-			tab3_tv_OHP 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
-			graphView			= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
+			layout 						= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
+			tab3_tv_squats 				= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
+			tab3_tv_squats_deloads 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed2);
+			tab3_tv_squats_fails 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed3);
+			tab3_tv_benchPress 			= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
+			tab3_tv_benchPress_deloads 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed2);
+			tab3_tv_benchPress_fails 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed3);
+			tab3_tv_rowing 				= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
+			tab3_tv_rowing_deloads 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed2);
+			tab3_tv_rowing_fails 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed3);
+			tab3_tv_deadlift 			= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
+			tab3_tv_deadlift_deloads 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed2);
+			tab3_tv_deadlift_fails 		= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed3);
+			tab3_tv_OHP 				= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
+			tab3_tv_OHP_deloads 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed2);
+			tab3_tv_OHP_fails 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed3);
+			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
 			layout.addView(graphView);
 		}
 		
@@ -554,10 +574,20 @@ public class MainActivity extends FragmentActivity {
 			// 4 - Deadlift
 
 			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + weightUnit);
+			tab3_tv_squats_deloads.setText("Deloads: " + String.valueOf(exercises.get(0).getNumberOfDeloads()));
+			tab3_tv_squats_fails.setText("Fails: " + String.valueOf(exercises.get(0).getNumberOfFails()));
 			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + weightUnit);
+			tab3_tv_benchPress_deloads.setText("Deloads: " + String.valueOf(exercises.get(1).getNumberOfDeloads()));
+			tab3_tv_benchPress_fails.setText("Fails: " + String.valueOf(exercises.get(1).getNumberOfFails()));
 			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + weightUnit);
+			tab3_tv_rowing_deloads.setText("Deloads: " + String.valueOf(exercises.get(2).getNumberOfDeloads()));
+			tab3_tv_rowing_fails.setText("Fails: " + String.valueOf(exercises.get(2).getNumberOfFails()));
 			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + weightUnit);
+			tab3_tv_deadlift_deloads.setText("Deloads: " + String.valueOf(exercises.get(4).getNumberOfDeloads()));
+			tab3_tv_deadlift_fails.setText("Fails: " + String.valueOf(exercises.get(4).getNumberOfFails()));
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
+			tab3_tv_OHP_deloads.setText("Deloads: " + String.valueOf(exercises.get(3).getNumberOfDeloads()));
+			tab3_tv_OHP_fails.setText("Fails: " + String.valueOf(exercises.get(3).getNumberOfFails()));
 			
 			populateGraph();
 		}
