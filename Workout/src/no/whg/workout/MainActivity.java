@@ -926,27 +926,6 @@ public class MainActivity extends FragmentActivity {
 			        		for(int j = 0; j < currentSession.get(0).getNumberOfSets(); j++) {
 				        		state[j] = tab1_ohp.get(j).getState();
 
-		}
-		
-		// Initializes tab 2
-		public void initTab2() {
-			tab2_tv_aOrB				= (TextView) getActivity().findViewById(R.id.tab2_tv1_aOrB);
-//			tab2_tv_exerciseOneWeight	= (TextView) getActivity().findViewById(R.id.tab2_tv2_details);
-		}
-		
-		public void refreshTab2() {
-			List<Exercise> 	exercises;
-			exercises = SLCalc.getBothSessions();
-			
-			String aOrB;
-			if (SLCalc.getSessionTypeA())
-				aOrB = "A";
-			else
-				aOrB = "B";
-			
-			tab2_tv_aOrB.setText(aOrB);
-			
-//			tab2_tv_exerciseOneWeight.setText(String.valueOf(exercises.get(0).getCurrentWeight()));
 			        		}
 							if(currentSession.get(1).getNumberOfSets() == 3) {
 								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
@@ -1065,8 +1044,8 @@ public class MainActivity extends FragmentActivity {
 							
 							refreshTab1();
 							
-							startActivity(new Intent(getActivity(), MainActivity.class));
-							
+							//ViewGroup vg = (ViewGroup) getActivity().findViewById(R.id.tab1);
+							//vg.invalidate();
 						}
 					});
 
@@ -1084,7 +1063,30 @@ public class MainActivity extends FragmentActivity {
 			
 		}
 		// END WORLD CHAMPIONSHIP OF LAZY CODE ~~
+			
+
 		
+		// Initializes tab 2
+		public void initTab2() {
+			tab2_tv_aOrB				= (TextView) getActivity().findViewById(R.id.tab2_tv1_aOrB);
+//			tab2_tv_exerciseOneWeight	= (TextView) getActivity().findViewById(R.id.tab2_tv2_details);
+		}
+		
+		public void refreshTab2() {
+			List<Exercise> 	exercises;
+			exercises = SLCalc.getBothSessions();
+			
+			String aOrB;
+			if (SLCalc.getSessionTypeA())
+				aOrB = "A";
+			else
+				aOrB = "B";
+			
+			tab2_tv_aOrB.setText(aOrB);
+			
+//			tab2_tv_exerciseOneWeight.setText(String.valueOf(exercises.get(0).getCurrentWeight()));
+		}        		
+			
 		//Initializes tab 3
 		public void initTab3(){
 //			layout 						= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
