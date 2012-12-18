@@ -24,17 +24,33 @@
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical" >
 	 	
-	    <TextView
-	    	android:id="@+id/stats_main"
+	    <LinearLayout 
+	        android:id="@+id/stats_linearMain"
 	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="@string/tv_statsMessage"
-	        style="@style/style_whiteBoxCapsRegular" />	
+	        android:layout_height="wrap_content" >
+	        
+       	    <TextView
+		    	android:id="@+id/stats_main"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.8"
+		        android:text="@string/tv_statsMessage"
+		        style="@style/style_whiteBoxRegular" />
+       	    
+       	    <ImageButton
+       	        android:id="@+id/stats_videoBtn"
+       	        android:layout_width="0dp"
+       	        android:layout_height="wrap_content"
+       	        android:layout_weight="0.2"
+       	        android:src="@drawable/video"
+       	        android:layout_gravity="center_vertical" />
+	    </LinearLayout>
+	
 	    <LinearLayout 
 	        android:id="@+id/stats_linearOne"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@id/stats_main"> 
+	        android:layout_below="@id/stats_linearMain"> 
 	        
     	    <TextView
 		        android:id="@+id/stats_squats"

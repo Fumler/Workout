@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -278,10 +279,10 @@ public class MainActivity extends FragmentActivity {
 	 * @param i	The parameter indicates what exercise to view
 	 * @see MediaCaptureActivity
 	 */
-    public void videoPlay(int i){
+    public static void videoPlay(int i, Context c){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
     	String lift;
-    	Intent intent = new Intent(this, MediaCaptureActivity.class);
+    	Intent intent = new Intent(c, MediaCaptureActivity.class);
     	intent.putExtra("MEDIA_TYPE", 3);
     	intent.putExtra("method","yes");
     	
@@ -289,7 +290,7 @@ public class MainActivity extends FragmentActivity {
 		
     	intent.putExtra("lift", lift);
 
-		this.startActivity(intent);
+		c.startActivity(intent);
     }
 
 
@@ -311,6 +312,11 @@ public class MainActivity extends FragmentActivity {
             fragment.setArguments(args);
             return fragment;
         }
+        
+        @Override
+        public int getItemPosition(Object object) {
+    	   return POSITION_NONE;
+    	}
 
         @Override
         public int getCount() {
@@ -353,6 +359,12 @@ public class MainActivity extends FragmentActivity {
         public LineGraphView graphView;
         public GraphViewSeries weightDataSeries;
         public LinearLayout layout;
+        public ImageButton tab3_btn_video;
+        public Button btn_squats;
+        public Button btn_benchpress;
+        public Button btn_rowing;
+        public Button btn_deadlift;
+        public Button btn_ohp;
         
         // LOG WORKOUT RELATED XML STUFF
 		public LinearLayout tab1_ll_squats;
@@ -374,8 +386,23 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_OHP;
         
         // HOME PAGE VIEWS
-        public TextView tab2_tv_aOrB;
-        public TextView tab2_tv_exerciseOneWeight;
+        //public TextView tab2_tv_aOrB;
+        //public TextView tab2_tv_exerciseOneWeight;
+        public RelativeLayout tab2_squats_rl;
+        public TextView tab2_squats_sets;
+        public TextView tab2_squats_weight;
+        public RelativeLayout tab2_bench_rl;
+        public TextView tab2_bench_sets;
+        public TextView tab2_bench_weight;
+        public RelativeLayout tab2_deadlift_rl;
+        public TextView tab2_deadlift_sets;
+        public TextView tab2_deadlift_weight;
+        public RelativeLayout tab2_ohp_rl;
+        public TextView tab2_ohp_sets;
+        public TextView tab2_ohp_weight;
+        public RelativeLayout tab2_rowing_rl;
+        public TextView tab2_rowing_sets;
+        public TextView tab2_rowing_weight;
         
         List<ThreeStateCheckbox> tab1_squats = new ArrayList<ThreeStateCheckbox>(5);
         List<ThreeStateCheckbox> tab1_benchpress = new ArrayList<ThreeStateCheckbox>(5);
@@ -445,7 +472,6 @@ public class MainActivity extends FragmentActivity {
         	case 1:
         		// Tab 2 - Home
         		initTab2();
-        		refreshTab2();
         		break;
         	case 2:
         		// Tab 3 - Stats
@@ -511,7 +537,7 @@ public class MainActivity extends FragmentActivity {
 				refreshTab1();
 				break;
 			case 1:
-				refreshTab2();
+				initTab2();
 				break;
 			case 2:
 				// Tab 3 - Stats
@@ -1028,7 +1054,7 @@ public class MainActivity extends FragmentActivity {
 			    public void onClick(View v)
 			    {
 			    	updateSuccess(completed[0], completed[1], completed[2]);
-					
+
 			    } 
 			});
 			
@@ -1116,7 +1142,6 @@ public class MainActivity extends FragmentActivity {
 
 			alertDialog.setIcon(R.drawable.ic_launcher);
 			alertDialog.show();
-
 			
 			
 		}
@@ -1126,24 +1151,77 @@ public class MainActivity extends FragmentActivity {
 		
 		// Initializes tab 2
 		public void initTab2() {
-			tab2_tv_aOrB				= (TextView) getActivity().findViewById(R.id.tab2_tv1_aOrB);
-//			tab2_tv_exerciseOneWeight	= (TextView) getActivity().findViewById(R.id.tab2_tv2_details);
-		}
-		
-		public void refreshTab2() {
-			List<Exercise> 	exercises;
-			exercises = SLCalc.getBothSessions();
-			
-			String aOrB;
-			if (SLCalc.getSessionTypeA())
-				aOrB = "A";
-			else
-				aOrB = "B";
-			
-			tab2_tv_aOrB.setText(aOrB);
-			
-//			tab2_tv_exerciseOneWeight.setText(String.valueOf(exercises.get(0).getCurrentWeight()));
-		}        		
+			String w;
+			if (SLCalc.getWeightUnitKilograms()){
+				w = " KG";
+			} else {
+				w = " lbs";
+			}
+			if (SLCalc.getSessionTypeA()) {
+				List<Exercise> e = SLCalc.getSessionByName("A");
+
+				tab2_deadlift_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_deadlift);
+				tab2_ohp_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_ohp);
+				tab2_deadlift_rl.setVisibility(View.GONE);
+				tab2_ohp_rl.setVisibility(View.GONE);
+				
+				tab2_squats_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_squats);
+				tab2_squats_sets = (TextView) getActivity().findViewById(R.id.front_tv_workout_squats_sets);
+				tab2_squats_weight = (TextView) getActivity().findViewById(R.id.front_tv_workout_squats_weight);
+				tab2_bench_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_rowing);
+				tab2_bench_sets = (TextView) getActivity().findViewById(R.id.front_tv_workout_bench_sets);
+				tab2_bench_weight = (TextView) getActivity().findViewById(R.id.front_tv_workout_bench_weight);
+				tab2_rowing_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_rowing);
+				tab2_rowing_sets = (TextView) getActivity().findViewById(R.id.front_tv_workout_rowing_sets);
+				tab2_rowing_weight = (TextView) getActivity().findViewById(R.id.front_tv_workout_rowing_weight);
+				
+				System.out.println("0: " + e.get(0).getName());
+				System.out.println("1: " + e.get(1).getName());
+				System.out.println("2: " + e.get(2).getName());
+				
+				tab2_squats_sets.setText(String.valueOf(e.get(0).getNumberOfSets()));
+				tab2_squats_weight.setText(String.valueOf(e.get(0).getCurrentWeight()) + w);
+				tab2_bench_sets.setText(String.valueOf(e.get(1).getNumberOfSets()));
+				tab2_bench_weight.setText(String.valueOf(e.get(1).getCurrentWeight()) + w);
+				tab2_rowing_sets.setText(String.valueOf(e.get(2).getNumberOfSets()));
+				tab2_rowing_weight.setText(String.valueOf(e.get(2).getCurrentWeight()) + w);
+				tab2_squats_rl.setVisibility(View.VISIBLE);
+				tab2_bench_rl.setVisibility(View.VISIBLE);
+				tab2_rowing_rl.setVisibility(View.VISIBLE);
+			} else {
+				List<Exercise> e = SLCalc.getSessionByName("B");
+				
+				tab2_bench_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_bench);
+				tab2_rowing_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_rowing);
+				tab2_bench_rl.setVisibility(View.GONE);
+				tab2_rowing_rl.setVisibility(View.GONE);
+				
+				tab2_squats_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_squats);
+				tab2_squats_sets = (TextView) getActivity().findViewById(R.id.front_tv_workout_squats_sets);
+				tab2_squats_weight = (TextView) getActivity().findViewById(R.id.front_tv_workout_squats_weight);
+				tab2_deadlift_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_deadlift);
+				tab2_deadlift_sets = (TextView) getActivity().findViewById(R.id.front_tv_workout_deadlift_sets);
+				tab2_deadlift_weight = (TextView) getActivity().findViewById(R.id.front_tv_workout_deadlift_weight);
+				tab2_ohp_rl = (RelativeLayout) getActivity().findViewById(R.id.tab2_ohp);
+				tab2_ohp_sets = (TextView) getActivity().findViewById(R.id.front_tv_workout_ohp_sets);
+				tab2_ohp_weight = (TextView) getActivity().findViewById(R.id.front_tv_workout_ohp_weight);
+
+
+				System.out.println("0: " + e.get(0).getName());
+				System.out.println("1: " + e.get(1).getName());
+				System.out.println("2: " + e.get(2).getName());
+				
+				tab2_squats_sets.setText(String.valueOf(e.get(0).getNumberOfSets()));
+				tab2_squats_weight.setText(String.valueOf(e.get(0).getCurrentWeight()) + w);
+				tab2_ohp_sets.setText(String.valueOf(e.get(1).getNumberOfSets()));
+				tab2_ohp_weight.setText(String.valueOf(e.get(1).getCurrentWeight()) + w);
+				tab2_deadlift_sets.setText(String.valueOf(e.get(2).getNumberOfSets()));
+				tab2_deadlift_weight.setText(String.valueOf(e.get(2).getCurrentWeight()) + w);
+				tab2_squats_rl.setVisibility(View.VISIBLE);
+				tab2_deadlift_rl.setVisibility(View.VISIBLE);
+				tab2_ohp_rl.setVisibility(View.VISIBLE);
+			}
+		}       		
 			
 		//Initializes tab 3
 		public void initTab3(){
@@ -1163,8 +1241,10 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP 				= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
 			tab3_tv_OHP_deloads 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed2);
 			tab3_tv_OHP_fails 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed3);
+			tab3_btn_video				= (ImageButton) getActivity().findViewById(R.id.stats_videoBtn);
 //			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
 //			layout.addView(graphView);
+			
 		}
 		
 		public void refreshTab3(){
@@ -1195,6 +1275,77 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
 			tab3_tv_OHP_deloads.setText("Deloads: " + String.valueOf(exercises.get(3).getNumberOfDeloads()));
 			tab3_tv_OHP_fails.setText("Fails: " + String.valueOf(exercises.get(3).getNumberOfFails()));
+						
+			tab3_btn_video.setOnClickListener(new OnClickListener() {
+				
+				public void onClick(View v) {
+					final Dialog dialog = new Dialog(getActivity());
+					dialog.setContentView(R.layout.custom_video_list);
+					dialog.setTitle("Videos");
+					
+					btn_squats 					= (Button) dialog.findViewById(R.id.list_squatBtn);
+					btn_benchpress 				= (Button) dialog.findViewById(R.id.list_benchpressBtn);
+					btn_rowing					= (Button) dialog.findViewById(R.id.list_rowingBtn);
+					btn_deadlift				= (Button) dialog.findViewById(R.id.list_deadliftBtn);
+					btn_ohp						= (Button) dialog.findViewById(R.id.list_ohpBtn);
+					
+					btn_squats.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+								// TODO Auto-generated method stub
+								Context c = getActivity();
+								videoPlay(0, c);
+							}
+					});
+					
+					btn_squats.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(0, c);
+						}
+					});
+					
+					btn_benchpress.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(1, c);
+						}
+					});
+					
+					btn_rowing.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(2, c);
+						}
+					});
+					
+					btn_deadlift.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(3, c);
+						}
+					});
+					
+					btn_ohp.setOnClickListener(new OnClickListener() {
+						
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Context c = getActivity();
+							videoPlay(4, c);
+						}
+					});
+					
+					dialog.show();
+				}
+			});
 			
 //			populateGraph();
 		}

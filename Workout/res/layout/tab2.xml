@@ -1,38 +1,431 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tab2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
- 
-    <LinearLayout 
-        android:id="@+id/tab2_mainLinear"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        
+    	<!-- TOP -->
+        <TextView
+	        android:id="@+id/front_header"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/tv_welcomeMessage"
+	        style="@style/style_bigWhiteText"
+	        android:layout_marginTop="15dp"
+	        android:textSize="26sp"
+	        android:textAllCaps="true"
+	        android:gravity="center"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginBottom="5dp"
+	        android:padding="5dp"/>
         
         <TextView
-	        android:id="@+id/tab2_tv1"
-	        android:layout_width="0dp"
-	        android:layout_height="120dp"
-	        android:layout_weight="0.7"
+	        android:id="@+id/front_filler"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/tv_first"
 	        style="@style/style_whiteBoxRegular"
-	        android:gravity="center_vertical|center_horizontal"
-	    	android:textSize="20sp"
-	    	android:text="@string/tv_first"
-	    	android:layout_marginRight="0dp" />
-    
-	    <TextView 
-	        android:id="@+id/tab2_tv1_aOrB"
-	        android:layout_width="0dp"
-	        android:layout_height="130dp"
-	        android:layout_weight="0.3"
-	        style="@style/style_whiteBoxRegular"
-	        android:gravity="center_vertical|center_horizontal"
-	        android:textSize="30sp"
-	        android:layout_marginLeft="0dp" />
+	        android:layout_marginTop="15dp"
+	        android:textSize="13sp"
+	        android:textAllCaps="false"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginBottom="5dp"
+	        android:padding="5dp"/>
         
-    </LinearLayout>
+        <!-- WORKOUT DISPLAY -->
+        <LinearLayout 
+            android:id="@+id/tab2_workout"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:orientation="vertical"
+	        style="@style/style_whiteBoxRegular" >
+            
+            <!-- WORKOUT HEADER -->
+            <TextView
+		        android:id="@+id/front_workout_header"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/front_tv_next"
+		        style="@style/style_bigWhiteText"
+		        android:layout_marginTop="5dp"
+		        android:textSize="24sp"
+		        android:textAllCaps="true"
+		        android:gravity="center"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_marginBottom="5dp"
+		        android:padding="5dp" />
+            
+            <!-- WORKOUT LAYOUTS -->
+            <!-- Squats -->
+            <RelativeLayout
+                android:id="@+id/tab2_squats"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        style="@style/style_whiteBoxRegular" >
+	            
+	            <!-- Exercise name -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_squats"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/guide_title_section2"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentLeft="true" />
+	            
+            	<!-- Exercise weight -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_squats_weight"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_squats_weight"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentRight="true" />
+	            
+            	<!-- Exercise x -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_squats_x"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_x"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_squats_weight" />
+	            
+            	<!-- Exercise sets -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_squats_sets"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_squats_sets"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_squats_x" />
+            
+            </RelativeLayout>
+            
+            <!-- Bench press -->
+            <RelativeLayout
+                android:id="@+id/tab2_bench"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        style="@style/style_whiteBoxRegular" >
+	            
+	            <!-- Exercise name -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_bench"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/guide_title_section3"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentLeft="true" />
+	            
+            	<!-- Exercise weight -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_bench_weight"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_bench_weight"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentRight="true" />
+	            
+            	<!-- Exercise x -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_bench_x"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_x"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_bench_weight" />
+	            
+            	<!-- Exercise sets -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_bench_sets"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_bench_sets"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_bench_x" />
+            
+            </RelativeLayout>
+            
+            <!-- Overhead press -->
+            <RelativeLayout
+                android:id="@+id/tab2_ohp"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        style="@style/style_whiteBoxRegular" >
+	            
+	            <!-- Exercise name -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_ohp"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/guide_title_section5"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentLeft="true" />
+	            
+            	<!-- Exercise weight -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_ohp_weight"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_ohp_weight"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentRight="true" />
+	            
+            	<!-- Exercise x -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_ohp_x"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_x"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_ohp_weight" />
+	            
+            	<!-- Exercise sets -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_ohp_sets"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_bench_sets"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_ohp_x" />
+            
+            </RelativeLayout>
+            
+            <!-- Deadlift -->
+            <RelativeLayout
+                android:id="@+id/tab2_deadlift"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        style="@style/style_whiteBoxRegular" >
+	            
+	            <!-- Exercise name -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_deadlift"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/guide_title_section4"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentLeft="true" />
+	            
+            	<!-- Exercise weight -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_deadlift_weight"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_deadlift_weight"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentRight="true" />
+	            
+            	<!-- Exercise x -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_deadlift_x"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_x"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_deadlift_weight" />
+	            
+            	<!-- Exercise sets -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_deadlift_sets"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_bench_sets"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_deadlift_x" />
+            
+            </RelativeLayout>
+            
+            
+            <!-- Rowing -->
+            <RelativeLayout
+                android:id="@+id/tab2_rowing"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        style="@style/style_whiteBoxRegular" >
+	            
+	            <!-- Exercise name -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_rowing"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/guide_title_section6"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentLeft="true" />
+	            
+            	<!-- Exercise weight -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_rowing_weight"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_rowing_weight"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_alignParentRight="true" />
+	            
+            	<!-- Exercise x -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_rowing_x"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_x"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_rowing_weight" />
+	            
+            	<!-- Exercise sets -->
+	            <TextView
+			        android:id="@+id/front_tv_workout_rowing_sets"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/front_tv_bench_sets"
+			        style="@style/style_bigWhiteText"
+			        android:layout_marginTop="5dp"
+			        android:textSize="18sp"
+			        android:textAllCaps="true"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:layout_marginBottom="5dp"
+			        android:padding="5dp"
+			        android:layout_toLeftOf="@id/front_tv_workout_rowing_x" />
+            
+            </RelativeLayout>
+            
+        </LinearLayout>
     
-    
-</RelativeLayout>
+</LinearLayout>
