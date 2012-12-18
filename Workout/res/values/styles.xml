@@ -78,6 +78,16 @@
         <item name="android:background">@drawable/unchecked</item>
         <item name="android:layout_margin">5dp</item>    
     </style>
+
+    <style name="style_videoButton">
+        <item name="android:src">@drawable/video</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_height">64px</item>
+        <item name="android:layout_width">64px</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
     
     
 </resources>
