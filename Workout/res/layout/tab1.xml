@@ -13,7 +13,7 @@
 	        android:id="@+id/log_main"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/tv_welcomeMessage"
+	        android:text="@string/tv_log_start"
 	        style="@style/style_bigWhiteText"
 	        android:layout_marginTop="15dp"
 	        android:textSize="13sp"
@@ -300,13 +300,15 @@
 	 	
 	    <Button 
 	        android:id="@+id/log_button"
-	        android:background="@drawable/button_custom_normal"
+	        android:background="#333"
 	        android:layout_below="@id/log_linearFive"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginRight="10dp"
-	        
+	        android:layout_marginTop="15dp"
+	        android:text="@string/log_workout_button"
+	        style="@style/style_bigWhiteText"
 	        />
 	    
 
