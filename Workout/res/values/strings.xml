@@ -53,6 +53,11 @@
     <string name="set_weight">Weight</string>
     <string name="set_sets">Sets</string>
     <string name="set_weightIncrements">Change weight increments</string>
+    <string name="set_weightIncrementSquats">Change weight increments for the squat exercise</string>
+    <string name="set_weightIncrementBenchpress">Change weight increments for the bench press exercise</string>
+    <string name="set_weightIncrementRowing">Change weight increments for the rowing exercise</string>
+    <string name="set_weightIncrementDeadlift">Change weight increments for the deadlift exercise</string>
+    <string name="set_weightIncrementOhp">Change weight increments for the ohp exercise</string>
 
     <!-- SETTINGS WEIGHT BUTTONS -->
     <string name="set_kg_btn">KG</string>

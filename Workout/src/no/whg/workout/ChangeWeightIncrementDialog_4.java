@@ -10,12 +10,12 @@ import android.view.View;
 import android.widget.NumberPicker;
 import no.whg.workout.MainActivity;
 
-public class ChangeWeightIncrementDialog_1 extends DialogPreference {
+public class ChangeWeightIncrementDialog_4 extends DialogPreference {
 
 	public NumberPicker np_1;
 	double currentIncrement = 0;
 	
-	public ChangeWeightIncrementDialog_1(Context context, AttributeSet attrs) {
+	public ChangeWeightIncrementDialog_4(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
 		
@@ -38,7 +38,7 @@ public class ChangeWeightIncrementDialog_1 extends DialogPreference {
 			else
 				currentIncrement = 5.0;
 			
-			MainActivity.SLCalc.getBothSessions().get(0).setWeightIncrement(currentIncrement);
+			MainActivity.SLCalc.getBothSessions().get(4).setWeightIncrement(currentIncrement);
 			break;
 		}
 	}
@@ -69,7 +69,7 @@ public class ChangeWeightIncrementDialog_1 extends DialogPreference {
 		
 		np_1.setDisplayedValues(values);
 		
-		currentIncrement = exercises.get(0).getWeightIncrement();
+		currentIncrement = exercises.get(4).getWeightIncrement();
 		
 		if (currentIncrement == 2.5)
 			np_1.setValue(0);

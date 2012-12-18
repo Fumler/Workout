@@ -508,6 +508,7 @@ public class MainActivity extends FragmentActivity {
 			switch(position) {
 			case 0:
 				// Tab 1 - Log Workout
+				refreshTab1();
 				break;
 			case 1:
 				refreshTab2();

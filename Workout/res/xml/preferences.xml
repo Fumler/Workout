@@ -53,6 +53,30 @@
             android:title="@string/set_weightIncrements"
             android:key="settings_weightIncrements" >
             
+            <no.whg.workout.ChangeWeightIncrementDialog_1
+                android:title="@string/ex_squats"
+                android:key="settings_incrementSquats"
+                android:summary="@string/set_weightIncrementSquats" />
+            
+            <no.whg.workout.ChangeWeightIncrementDialog_2
+                android:title="@string/ex_benchPress"
+                android:key="settings_incrementBenchPress"
+                android:summary="@string/set_weightIncrementBenchpress" />
+                        
+            <no.whg.workout.ChangeWeightIncrementDialog_3
+                android:title="@string/ex_rowing"
+                android:key="settings_incrementRowing"
+                android:summary="@string/set_weightIncrementRowing" />
+                                    
+            <no.whg.workout.ChangeWeightIncrementDialog_4
+                android:title="@string/ex_deadlift"
+                android:key="settings_incrementDeadlift"
+                android:summary="@string/set_weightIncrementDeadlift" />
+                                                
+            <no.whg.workout.ChangeWeightIncrementDialog_5
+                android:title="@string/ex_ohp"
+                android:key="settings_incrementOhp"
+                android:summary="@string/set_weightIncrementOhp" />
             
         </PreferenceScreen>
          
