@@ -26,8 +26,20 @@
     <string name="str_menu_camera">Camera</string>
     
     <!-- MAIN ACTIVITY -->
-    <string name="tv_welcomeMessage">Welcome to Strongbird! This app will help you keep track of your stronglifts workout.</string>
-    <string name="tv_first">Looking good! \nToday\'s session is:</string>
+    <string name="tv_welcomeMessage">Welcome to Strongbird!</string>
+    <string name="tv_first">Looking good! This app will help you keep track of your stronglifts workout.</string>
+    <string name="front_tv_next">Your next session is:</string>
+    <string name="front_tv_x">x</string>
+    <string name="front_tv_squats_weight">weight</string>
+    <string name="front_tv_squats_sets">sets</string>
+    <string name="front_tv_bench_weight">weight</string>
+    <string name="front_tv_bench_sets">sets</string>
+    <string name="front_tv_ohp_weight">weight</string>
+    <string name="front_tv_ohp_sets">sets</string>
+    <string name="front_tv_rowing_weight">weight</string>
+    <string name="front_tv_rowing_sets">sets</string>
+    <string name="front_tv_deadlift_weight">weight</string>
+    <string name="front_tv_deadlift_sets">sets</string>
 
     <!-- LOG WORKOUT ACTIVITY -->
     <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
