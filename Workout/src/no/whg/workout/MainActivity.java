@@ -253,6 +253,12 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
     
+	/* *
+	 * Starts the MediaCaptureActivity with an intent. Used to record an exercise.
+	 * 
+	 * @param i	The parameter indicates what exercise this was called by
+	 * @see MediaCaptureActivity
+	 */
     public void videoCapture(int i){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
     	String lift = "SL_VID_";
@@ -267,6 +273,12 @@ public class MainActivity extends FragmentActivity {
 		this.startActivity(intent);
     }
     
+    /* *
+	 * Starts the MediaCaptureActivity with an intent. USed to view a recorded exercise.
+	 * 
+	 * @param i	The parameter indicates what exercise to view
+	 * @see MediaCaptureActivity
+	 */
     public void videoPlay(int i){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
     	String lift;
@@ -435,7 +447,12 @@ public class MainActivity extends FragmentActivity {
         		initTab4();
         		
         		currentPic = 0;
-                //set long click listener for each gallery thumbnail item
+
+        		/* *
+        		 * Sets up a LongClickListener for replacing gallery pictures.
+        		 * 
+        		 * @return true	Returns true upon completion.
+        		 */
           		picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
           			//handle long clicks
           			public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
@@ -450,8 +467,11 @@ public class MainActivity extends FragmentActivity {
           				return true;
           			}
           		});
-
-          		//set the click listener for each item in the thumbnail gallery
+          		
+          		/* *
+        		 * Sets up a ClickListener for choosing gallery pictures.
+        		 * 
+        		 */
           		picGallery.setOnItemClickListener(new OnItemClickListener() {
           			//handle clicks
           			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -1125,9 +1145,9 @@ public class MainActivity extends FragmentActivity {
 		}
     }
     
-    /**
+    /* *
 	 * Base Adapter subclass creates Gallery view
-	 * - provides method for adding new images from user selection
+	 * - provides methods for adding new images from user selection
 	 * - provides method to return bitmaps from array
 	 *
 	 */
@@ -1214,7 +1234,7 @@ public class MainActivity extends FragmentActivity {
 			imageBitmaps[currentPic] = newPic;
 		}
 
-		//helper method to add a bitmap to the gallery programmatically
+		//helper method to add a bitmap to the gallery programatically
 		public void addPic (Bitmap newPic, int i)
 		{
 			//set at requested index
@@ -1245,6 +1265,11 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
 	
+
+	/* *
+	 * Updates the content of the gallery
+	 * 
+	 */
 	protected void updateGallery(){
 		File dir = new File(
 				Environment
@@ -1279,8 +1304,8 @@ public class MainActivity extends FragmentActivity {
 	}
 	
 	/**
-	 * Handle returning from gallery or file manager image selection
-	 * - import the image bitmap
+	 * Handles returning from gallery or file manager image selection and imports the image bitmap.
+	 * 
 	 */
 	@SuppressWarnings("deprecation")
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1325,6 +1350,11 @@ public class MainActivity extends FragmentActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
+
+		/* *
+		 * Invalidates the current view, so it will get redrawn (not working).
+		 * 
+		 */
 	public void invalidator(){
 //		picView = (ImageView) findViewById(R.id.tab4_picture);
 //  		picGallery = (Gallery) findViewById(R.id.tab4_gallery);
@@ -1332,10 +1362,16 @@ public class MainActivity extends FragmentActivity {
 //  		picGallery.invalidate();
 //		ViewGroup vg = (ViewGroup) findViewById(R.id.tab4);
 //		vg.invalidate();
-		System.out.println("invalidate");
-		//invalid = true;
 	}
 	
+
+	/* *
+	 * Decodes a bitmap from a location
+	 * 
+	 * @param imgPath	The location of the picture that is to be decoded.
+	 * @return BitmapFactory.decodeFile(imgPath, bmpOptions)	Returns a decoded bitmap from imgPath.
+	 * @see 
+	 */
 	public static Bitmap decodeSampledBitmapFromPath(String imgPath) {
 		//set the width and height we want to use as maximum display
 		int targetWidth = 600;
