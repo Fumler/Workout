@@ -81,5 +81,5 @@
     <string name="dialog_help0">This is where you log your workout. This message needs to be changed</string>
     <string name="dialog_help1">This is the homepage. This message needs to be changed</string>
     <string name="dialog_help2">This is where you view statistics. This message needs to be changed</string>
-    <string name="dialog_help3">This is the gallery. This message needs to be changed</string>
+    <string name="dialog_help3">This is the gallery. Here you can see the progress pictures you have taken. Press a thumbnail to display the picture, or long-press it to add an image from your own collection.</string>
 </resources>
