@@ -312,6 +312,11 @@ public class MainActivity extends FragmentActivity {
             fragment.setArguments(args);
             return fragment;
         }
+        
+        @Override
+        public int getItemPosition(Object object) {
+    	   return POSITION_NONE;
+    	}
 
         @Override
         public int getCount() {
@@ -1049,7 +1054,7 @@ public class MainActivity extends FragmentActivity {
 			    public void onClick(View v)
 			    {
 			    	updateSuccess(completed[0], completed[1], completed[2]);
-					
+
 			    } 
 			});
 			
@@ -1137,7 +1142,6 @@ public class MainActivity extends FragmentActivity {
 
 			alertDialog.setIcon(R.drawable.ic_launcher);
 			alertDialog.show();
-
 			
 			
 		}
