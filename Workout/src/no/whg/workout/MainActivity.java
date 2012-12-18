@@ -1,8 +1,22 @@
 package no.whg.workout;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Runnable;
+
+import com.jjoe64.graphview.BarGraphView;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -21,6 +35,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +56,8 @@ import android.widget.TextView;
 public class MainActivity extends FragmentActivity {
 	public static boolean resetPressed;
 
-	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
+	public static StrongLiftsCalculator SLCalc;
+	String SLCalcFILENAME = "SLCALCOBJECT";
 	
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the
@@ -69,11 +85,28 @@ public class MainActivity extends FragmentActivity {
 	//image view for larger display
 	private static ImageView picView;
 	
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        FileInputStream fis = null;
+        
+		// Checking to see if the file with the object exists.
+		try {
+			fis = getApplicationContext().openFileInput(SLCalcFILENAME);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		// Inits SLCalc based on existence of file
+		if (fis != null) {
+			loadSLCalc(fis);
+		} else{
+			SLCalc = new StrongLiftsCalculator();
+		}
+        
         // Create the adapter that will return a fragment for each of the three primary sections
         // of the app.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -83,10 +116,10 @@ public class MainActivity extends FragmentActivity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(1);
-        
         imgAdapt = new PicAdapter(getApplicationContext());
+        updateGallery();
         
-
+        
     }
     
     @Override
@@ -96,7 +129,15 @@ public class MainActivity extends FragmentActivity {
         return true;
     }
     
-    @SuppressWarnings("deprecation")
+    @Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		saveSLCalc();
+	}
+
+	@SuppressWarnings("deprecation")
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	
@@ -112,8 +153,8 @@ public class MainActivity extends FragmentActivity {
     		Intent intent = new Intent(MainActivity.this, MediaCaptureActivity.class);
         	intent.putExtra("MEDIA_TYPE", 1);
         	intent.putExtra("method","yes");
-        	imgAdapt.setRunning(false);	// lets the gallery know that images have to be reloaded
         	startActivity(intent);
+        	updateGallery();
     	}
     	
     	if(item.getItemId() == R.id.menu_music) {	//THIS DOES NOT WANT TO WORK ON 4.0
@@ -142,6 +183,75 @@ public class MainActivity extends FragmentActivity {
         return true;
         
     }
+    
+	// Loading the SLCalc object
+	public void loadSLCalc(FileInputStream fis) {
+		if (fis != null) {
+			ObjectInputStream is = null;
+			try {
+				is = new ObjectInputStream(fis);
+			} catch (StreamCorruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			StrongLiftsCalculator tempSL = null;
+			try {
+				tempSL = (StrongLiftsCalculator) is.readObject();
+			} catch (OptionalDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				is.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			SLCalc = tempSL;
+		}
+	}
+
+	// Saving the SLCalc object
+	public void saveSLCalc() {
+		FileOutputStream fos = null;
+		try {
+			// fos sets up a file that is private, which means only this
+			// application
+			// can access it.
+			fos = getApplicationContext().openFileOutput(SLCalcFILENAME, Context.MODE_PRIVATE);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObjectOutputStream os = null;
+		try {
+			os = new ObjectOutputStream(fos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			os.writeObject(SLCalc);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			os.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     
     public void videoCapture(int i){
     	Exercise exercise = SLCalc.getBothSessions().get(i);
@@ -200,10 +310,23 @@ public class MainActivity extends FragmentActivity {
         
         // STATS RELATED TEXTVIEWS
         public TextView tab3_tv_squats;
+        public TextView tab3_tv_squats_deloads;
+        public TextView tab3_tv_squats_fails;
         public TextView tab3_tv_benchPress;
+        public TextView tab3_tv_benchPress_deloads;
+        public TextView tab3_tv_benchPress_fails;
         public TextView tab3_tv_rowing;
+        public TextView tab3_tv_rowing_deloads;
+        public TextView tab3_tv_rowing_fails;
         public TextView tab3_tv_deadlift;
+        public TextView tab3_tv_deadlift_deloads;
+        public TextView tab3_tv_deadlift_fails;
         public TextView tab3_tv_OHP;
+        public TextView tab3_tv_OHP_deloads;
+        public TextView tab3_tv_OHP_fails;
+        public LineGraphView graphView;
+        public GraphViewSeries weightDataSeries;
+        public LinearLayout layout;
         
         // LOG WORKOUT RELATED XML STUFF
 		public LinearLayout tab1_ll_squats;
@@ -267,7 +390,6 @@ public class MainActivity extends FragmentActivity {
         	View view = inflater.inflate(tabLayout, container, false);
 
             return view;
-            //return textView;
         }
 
 		@Override
@@ -296,7 +418,8 @@ public class MainActivity extends FragmentActivity {
         	case 3:
         		// Tab 4 - Gallery
         		initTab4();
-
+        		
+        		currentPic = 0;
                 //set long click listener for each gallery thumbnail item
           		picGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
           			//handle long clicks
@@ -307,7 +430,7 @@ public class MainActivity extends FragmentActivity {
           				Intent pickIntent = new Intent();
           				pickIntent.setType("image/*");
           				pickIntent.setAction(Intent.ACTION_GET_CONTENT);
-          				//we will handle the returned data in onActivityResult
+          				//handle the returned data in onActivityResult
           				startActivityForResult(Intent.createChooser(pickIntent, "Select Picture"), PICKER);
           				return true;
           			}
@@ -327,6 +450,7 @@ public class MainActivity extends FragmentActivity {
     	        break;
         	}
 		}
+		
 		@Override
 		public void onResume() {
 			// TODO Auto-generated method stub
@@ -348,6 +472,8 @@ public class MainActivity extends FragmentActivity {
 				break;
 			case 3:
 				// Tab 4 - Gallery
+				initTab4();
+				//refreshGallery();
 				break;
 			}
 		}
@@ -867,11 +993,24 @@ public class MainActivity extends FragmentActivity {
 		
 		//Initializes tab 3
 		public void initTab3(){
-			tab3_tv_squats 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
-			tab3_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
-			tab3_tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
-			tab3_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
-			tab3_tv_OHP 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
+//			layout 						= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
+			tab3_tv_squats 				= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
+			tab3_tv_squats_deloads 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed2);
+			tab3_tv_squats_fails 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed3);
+			tab3_tv_benchPress 			= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
+			tab3_tv_benchPress_deloads 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed2);
+			tab3_tv_benchPress_fails 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed3);
+			tab3_tv_rowing 				= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
+			tab3_tv_rowing_deloads 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed2);
+			tab3_tv_rowing_fails 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed3);
+			tab3_tv_deadlift 			= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
+			tab3_tv_deadlift_deloads 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed2);
+			tab3_tv_deadlift_fails 		= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed3);
+			tab3_tv_OHP 				= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
+			tab3_tv_OHP_deloads 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed2);
+			tab3_tv_OHP_fails 			= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed3);
+//			graphView					= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
+//			layout.addView(graphView);
 		}
 		
 		public void refreshTab3(){
@@ -888,12 +1027,63 @@ public class MainActivity extends FragmentActivity {
 			// 4 - Deadlift
 
 			tab3_tv_squats.setText(String.valueOf(exercises.get(0).getCurrentWeight()) + weightUnit);
+			tab3_tv_squats_deloads.setText("Deloads: " + String.valueOf(exercises.get(0).getNumberOfDeloads()));
+			tab3_tv_squats_fails.setText("Fails: " + String.valueOf(exercises.get(0).getNumberOfFails()));
 			tab3_tv_benchPress.setText(String.valueOf(exercises.get(1).getCurrentWeight()) + weightUnit);
+			tab3_tv_benchPress_deloads.setText("Deloads: " + String.valueOf(exercises.get(1).getNumberOfDeloads()));
+			tab3_tv_benchPress_fails.setText("Fails: " + String.valueOf(exercises.get(1).getNumberOfFails()));
 			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + weightUnit);
+			tab3_tv_rowing_deloads.setText("Deloads: " + String.valueOf(exercises.get(2).getNumberOfDeloads()));
+			tab3_tv_rowing_fails.setText("Fails: " + String.valueOf(exercises.get(2).getNumberOfFails()));
 			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + weightUnit);
+			tab3_tv_deadlift_deloads.setText("Deloads: " + String.valueOf(exercises.get(4).getNumberOfDeloads()));
+			tab3_tv_deadlift_fails.setText("Fails: " + String.valueOf(exercises.get(4).getNumberOfFails()));
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
+			tab3_tv_OHP_deloads.setText("Deloads: " + String.valueOf(exercises.get(3).getNumberOfDeloads()));
+			tab3_tv_OHP_fails.setText("Fails: " + String.valueOf(exercises.get(3).getNumberOfFails()));
+			
+//			populateGraph();
 		}
 		
+//		@SuppressWarnings("deprecation")
+//		public void populateGraph(){
+//			List<Double> weightData;
+//			weightData = SLCalc.getBothSessions().get(0).getProgressList(); 
+//			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
+//			GraphViewData[] graphViewData;
+//			
+//			// Only populates the graph if the progresslist has data in it
+//			if (!weightData.isEmpty()) {
+//				
+//				tv_noData.setVisibility(View.GONE);
+//				graphView.setVisibility(View.VISIBLE);
+//
+////				graphViewData = new GraphViewData[weightData.size()];
+//				
+//				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {  
+//					      new GraphViewData(1, 2.0d)  
+//					      , new GraphViewData(2, 1.5d)  
+//					      , new GraphViewData(3, 2.5d)  
+//					      , new GraphViewData(4, 1.0d)  
+//					});  
+//				
+////				for (int i = 0; i < weightData.size(); i++) {
+////					graphViewData[i] = new GraphViewData(i, (double)weightData.get(i));
+////					System.out.println(i);
+////				}
+//				
+//				// Inits and resets the weightDataSeries
+////				weightDataSeries = new GraphViewSeries(graphViewData);
+//				
+//				graphView.addSeries(exampleSeries);
+//			} else {
+//				tv_noData.setVisibility(View.VISIBLE);
+//				graphView.setVisibility(View.GONE);
+//				tv_noData.setText("No data to display");
+//			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+//			}
+//		}
+//		
 		//Initializes tab 4
 		public void initTab4(){
 			//get the large image view
@@ -902,8 +1092,14 @@ public class MainActivity extends FragmentActivity {
       		picGallery = (Gallery) getActivity().findViewById(R.id.tab4_gallery);
       		//set the imgadapter for picgallery
             picGallery.setAdapter(imgAdapt);
-            //initialize the gallery
-	        initGallery();
+            //redraw the gallery thumbnails to reflect the new addition
+			picGallery.setAdapter(imgAdapt);
+			//display the newly selected image at larger size
+			Matrix matrix = new Matrix();
+			matrix.setRotate(90);
+			Bitmap pic = imgAdapt.getPic(currentPic);
+			picView.setImageBitmap(Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, false));
+			picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		}
 		
 		public void setWeightString(){
@@ -924,7 +1120,6 @@ public class MainActivity extends FragmentActivity {
 
 		//use the default gallery background image
 		int defaultItemBackground;
-		boolean running = false;
 		//gallery context
 		private Context galleryContext;
 
@@ -939,9 +1134,12 @@ public class MainActivity extends FragmentActivity {
 			galleryContext = getApplicationContext();
 				
 			//create bitmap array
-			imageBitmaps  = new Bitmap[10];
+			imageBitmaps = new Bitmap[10];
 			//decode the placeholder image
 			placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+			Matrix matrix = new Matrix();
+			matrix.setRotate(-90);
+			placeholder = Bitmap.createBitmap(placeholder, 0, 0, placeholder.getWidth(), placeholder.getHeight(), matrix, false);
 
 			//set placeholder as all thumbnail images in the gallery initially
 			for(int i=0; i<imageBitmaps.length; i++)
@@ -979,9 +1177,11 @@ public class MainActivity extends FragmentActivity {
 			//create the view
 			ImageView imageView = new ImageView(galleryContext);
 			//specify the bitmap at this position in the array
-			imageView.setImageBitmap(imageBitmaps[position]);
+			Matrix matrix = new Matrix();
+			matrix.setRotate(90);
+			imageView.setImageBitmap(Bitmap.createBitmap(imageBitmaps[position], 0, 0, imageBitmaps[position].getWidth(), imageBitmaps[position].getHeight(), matrix, false));
 			//set layout options
-			imageView.setLayoutParams(new Gallery.LayoutParams(300, 200));
+			imageView.setLayoutParams(new Gallery.LayoutParams(230, 300));
 			//scale type within view area
 			imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 			//set default gallery item background
@@ -1005,6 +1205,16 @@ public class MainActivity extends FragmentActivity {
 			//set at requested index
 			imageBitmaps[i] = newPic;
 		}
+		
+		public void addNewPic (Bitmap newPic)
+		{
+			//set at requested index
+			//Bitmap[] tempBitmaps = imageBitmaps;
+			for (int i = imageBitmaps.length - 1; i > 1; i--){
+				imageBitmaps[i] = imageBitmaps[i-1];
+			}
+			imageBitmaps[0] = newPic;
+		}
 
 		//return bitmap at specified position for larger display
 		public Bitmap getPic(int pos)
@@ -1018,114 +1228,41 @@ public class MainActivity extends FragmentActivity {
 			for(int i=0; i<imageBitmaps.length; i++)
 				imageBitmaps[i].recycle();
 		}
-		
-		public boolean getRunning(){
-			return running;
-		}
-		
-		public void setRunning(boolean r){
-			running = r;
-		}
 	}
 	
-	/**
-	 * Load up images at startup
-	 * - import the image bitmap
-	 */
-	protected static void initGallery(){
-		if (!imgAdapt.getRunning()){
-			imgAdapt.setRunning(true);
-			File dir = new File(
-					Environment
-							.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-							"StrongLifts"); // set destination folder
-			
-			//reset stored array in imgAdapt to prevent rampant growth of heap
-			//imgAdapt.resetBitmapArray();
-			
-			if (dir.exists()) {
-	
-				//declare the bitmap
-				Bitmap pic = null;
-				//declare the path string
-				String imgPath = "";
-				File[] files = dir.listFiles();
-				//int counter = 0;
-				//for (File file : dir.listFiles()){
-				for (int i = 0; i < 10; i++){
-					//the returned picture URI
-					Uri pickedUri = Uri.fromFile(files[files.length - i - 1]);
-					
-					imgPath = pickedUri.getPath();
-					
-					if(pickedUri!=null) {
-	
-						//set the width and height we want to use as maximum display
-						int targetWidth = 600;
-						int targetHeight = 400;
-	
-						//sample the incoming image to save on memory resources
-	
-						//create bitmap options to calculate and use sample size
-						BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-	
-						//first decode image dimensions only - not the image bitmap itself
-						bmpOptions.inJustDecodeBounds = true;
-						BitmapFactory.decodeFile(imgPath, bmpOptions);
-	
-						//work out what the sample size should be
-	
-						//image width and height before sampling
-						int currHeight = bmpOptions.outHeight;
-						int currWidth = bmpOptions.outWidth;
-	
-						//variable to store new sample size
-						int sampleSize = 1;
-	
-						//calculate the sample size if the existing size is larger than target size
-						if (currHeight>targetHeight || currWidth>targetWidth) 
-						{
-							//use either width or height
-							if (currWidth>currHeight)
-								sampleSize = Math.round((float)currHeight/(float)targetHeight);
-							else 
-								sampleSize = Math.round((float)currWidth/(float)targetWidth);
+	protected void updateGallery(){
+		File dir = new File(
+				Environment
+						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+						"StrongLifts"); // set destination folder
+		
+		if (dir.exists()) {
+			File[] files = dir.listFiles();
+			for (int i = 0; i < 10; i++){
+				//the returned picture URI
+				Uri imgUri = Uri.fromFile(files[files.length - i - 1]);
+				if(imgUri!=null) {
+					String imgPath = imgUri.getPath();
+				    class MyThread implements Runnable {
+						String imgPath;
+						int pos;
+						public MyThread (String s, int pos) {
+							this.imgPath = s;
+							this.pos = pos;
 						}
-						//use the new sample size
-						bmpOptions.inSampleSize = sampleSize;
-	
-						//now decode the bitmap using sample options
-						bmpOptions.inJustDecodeBounds = false;
-						
-						//get the file as a bitmap
-						pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-						
-						
-	
-						//pass bitmap to ImageAdapter to add to array
-						imgAdapt.addPic(pic, i);
+						public void run (){
+							Bitmap bitmap = decodeSampledBitmapFromPath(imgPath);
+							imgAdapt.addPic(bitmap, pos);
+							invalidator();
+						}
 					}
-					//counter++;
-					//if (counter >= 10)
-					//		break;
+					Runnable r = new MyThread(imgPath, i);
+					new Thread(r).start();
 				}
-	
-				
-			} else {
-				// error message
 			}
-			
 		}
-		//redraw the gallery thumbnails to reflect the new addition
-		picGallery.setAdapter(imgAdapt);
-		//display the newly selected image at larger size
-		Matrix matrix = new Matrix();
-		matrix.setRotate(90);
-		//pic = Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, false);
-		picView.setImageBitmap(Bitmap.createBitmap(imgAdapt.getPic(currentPic), 0, 0, imgAdapt.getPic(currentPic).getWidth(), imgAdapt.getPic(currentPic).getHeight(), matrix, false));
-		picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	}
-
+	
 	/**
 	 * Handle returning from gallery or file manager image selection
 	 * - import the image bitmap
@@ -1134,93 +1271,97 @@ public class MainActivity extends FragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
 		if (resultCode == RESULT_OK) {
+			//the returned picture URI
+			Uri imgUri = data.getData();
 			
-			//check if we are returning from picture selection
-			//if (requestCode == PICKER) {
-				//the returned picture URI
-				Uri pickedUri = data.getData();
+			//declare the path string
+			String imgPath = "";
 
-				//declare the bitmap
-				Bitmap pic = null;
-				//declare the path string
-				String imgPath = "";
-
-				//retrieve the string using media data
-				String[] medData = { MediaStore.Images.Media.DATA };
-				//query the data
-				Cursor picCursor = managedQuery(pickedUri, medData, null, null, null);
-				if(picCursor!=null)
-				{
-					//get the path string
-					int index = picCursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-					picCursor.moveToFirst();
-					imgPath = picCursor.getString(index);
+			//retrieve the string using media data
+			String[] medData = { MediaStore.Images.Media.DATA };
+			//query the data
+			Cursor picCursor = managedQuery(imgUri, medData, null, null, null);
+			if(picCursor!=null)
+			{
+				//get the path string
+				int index = picCursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+				picCursor.moveToFirst();
+				imgPath = picCursor.getString(index);
+			}
+			else
+				imgPath = imgUri.getPath();
+			
+			View vg = (View)findViewById (R.id.tab4);
+			class MyThread implements Runnable {
+				String imgPath;
+				public MyThread (String imgPath) {
+					this.imgPath = imgPath;
 				}
-				else
-					imgPath = pickedUri.getPath();
-
-				//if and else handle both choosing from gallery and from file manager
-
-				//if we have a new URI attempt to decode the image bitmap
-				if(pickedUri!=null) {
-
-					//set the width and height we want to use as maximum display
-					int targetWidth = 600;
-					int targetHeight = 400;
-
-					//sample the incoming image to save on memory resources
-
-					//create bitmap options to calculate and use sample size
-					BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-
-					//first decode image dimensions only - not the image bitmap itself
-					bmpOptions.inJustDecodeBounds = true;
-					BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-					//work out what the sample size should be
-
-					//image width and height before sampling
-					int currHeight = bmpOptions.outHeight;
-					int currWidth = bmpOptions.outWidth;
-
-					//variable to store new sample size
-					int sampleSize = 1;
-
-					//calculate the sample size if the existing size is larger than target size
-					if (currHeight>targetHeight || currWidth>targetWidth) 
-					{
-						//use either width or height
-						if (currWidth>currHeight)
-							sampleSize = Math.round((float)currHeight/(float)targetHeight);
-						else 
-							sampleSize = Math.round((float)currWidth/(float)targetWidth);
-					}
-					//use the new sample size
-					bmpOptions.inSampleSize = sampleSize;
-
-					//now decode the bitmap using sample options
-					bmpOptions.inJustDecodeBounds = false;
-
-					//get the file as a bitmap
-					pic = BitmapFactory.decodeFile(imgPath, bmpOptions);
-
-					//pass bitmap to ImageAdapter to add to array
-					imgAdapt.addPic(pic);
-					//redraw the gallery thumbnails to reflect the new addition
-					picGallery.setAdapter(imgAdapt);
-
-					//display the newly selected image at larger size
-					Matrix matrix = new Matrix();
-					matrix.setRotate(90);
-					picView.setImageBitmap(Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, false));
-					//scale options
-					picView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+				public void run (){
+					Bitmap bitmap = decodeSampledBitmapFromPath(imgPath);
+					imgAdapt.addPic(bitmap, currentPic);
+					invalidator();
 				}
-			//}
+			}
+			Runnable r = new MyThread(imgPath);
+			new Thread(r).start();
+			vg.invalidate();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
+	public void invalidator(){
+//		picView = (ImageView) findViewById(R.id.tab4_picture);
+//  		picGallery = (Gallery) findViewById(R.id.tab4_gallery);
+//  		picView.invalidate();
+//  		picGallery.invalidate();
+//		ViewGroup vg = (ViewGroup) findViewById(R.id.tab4);
+//		vg.invalidate();
+		System.out.println("invalidate");
+		//invalid = true;
+	}
+	
+	public static Bitmap decodeSampledBitmapFromPath(String imgPath) {
+		//set the width and height we want to use as maximum display
+		int targetWidth = 600;
+		int targetHeight = 400;
+
+		//sample the incoming image to save on memory resources
+
+		//create bitmap options to calculate and use sample size
+		BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
+
+		//first decode image dimensions only - not the image bitmap itself
+		bmpOptions.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(imgPath, bmpOptions);
+
+		//work out what the sample size should be
+
+		//image width and height before sampling
+		int currHeight = bmpOptions.outHeight;
+		int currWidth = bmpOptions.outWidth;
+
+		//variable to store new sample size
+		int sampleSize = 1;
+
+		//calculate the sample size if the existing size is larger than target size
+		if (currHeight>targetHeight || currWidth>targetWidth) 
+		{
+			//use either width or height
+			if (currWidth>currHeight)
+				sampleSize = Math.round((float)currHeight/(float)targetHeight);
+			else 
+				sampleSize = Math.round((float)currWidth/(float)targetWidth);
+		}
+		//use the new sample size
+		bmpOptions.inSampleSize = sampleSize;
+
+		//now decode the bitmap using sample options
+		bmpOptions.inJustDecodeBounds = false;
+		
+		//get the file as a bitmap
+		return BitmapFactory.decodeFile(imgPath, bmpOptions);
+	}
 
 	public static boolean isResetPressed() {
 		return resetPressed;

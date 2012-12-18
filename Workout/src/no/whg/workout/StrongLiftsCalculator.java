@@ -45,8 +45,12 @@ import java.util.List;
  *  			- int numberOfSessionsLogged
  */
 
-public class StrongLiftsCalculator {
+public class StrongLiftsCalculator implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int 			numberOfSessionsLogged;
 	private List<Exercise> 	a_session;
 	private List<Exercise> 	b_session;
@@ -71,6 +75,13 @@ public class StrongLiftsCalculator {
 		sessionTypeA 			= false;
 		weightUnitKilograms = true;
 		numberOfSessionsLogged  = 0;	
+		
+		// REEEEMOOOOOOVVEEEEE!!!!
+		for(int i = 0; i < 5; i++)
+		{
+			a_session.get(0).updateProgress();
+		}
+			
 	}
 	
 	/*

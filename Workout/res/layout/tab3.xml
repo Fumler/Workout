@@ -59,7 +59,7 @@
 	    </LinearLayout>
 	    
 	    <LinearLayout 
-	        android:id="@+id/stats_linearOneDetailed"
+	        android:id="@+id/stats_linearOneDetailed1"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/stats_linearOne" >
@@ -67,23 +67,79 @@
 	        <TextView 
 	            android:id="@+id/stats_squatsDetailed"
 	            android:layout_width="0dp"
-	            android:layout_height="80dp"
+	            android:layout_height="50dp"
 	            android:layout_weight="0.5"
 	            android:textSize="30dp"
-	            android:gravity="center_horizontal"
+	            android:gravity="center_horizontal|center_vertical"
 	            style="@style/style_whiteBoxCapsBold"
 	            android:layout_marginRight="5dp"
-	            android:layout_marginTop="0dp" />
+	            android:layout_marginTop="0dp"
+	            android:layout_marginBottom="0dp" />
 	        
    	        <TextView 
 	            android:id="@+id/stats_benchPressDetailed"
 	            android:layout_width="0dp"
-	            android:layout_height="80dp"
+	            android:layout_height="50dp"
 	            android:layout_weight="0.5"
 	            android:textSize="30dp"
-	            android:gravity="center_horizontal"
+	            android:gravity="center_horizontal|center_vertical"
 	            style="@style/style_whiteBoxCapsBold"
 	            android:layout_marginLeft="5dp"
+	            android:layout_marginTop="0dp"
+	            android:layout_marginBottom="0dp" />
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout
+	        android:id="@+id/stats_linearOneDetailed2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/stats_linearOneDetailed1" >
+   	        
+	        <TextView 
+	            android:id="@+id/stats_squatsDetailed2"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginRight="0dp"
+	            android:layout_marginTop="0dp" />
+	        
+   	        <TextView 
+	            android:id="@+id/stats_squatsDetailed3"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginLeft="0dp"
+	            android:layout_marginRight="5dp"
+	            android:layout_marginTop="0dp" />
+   	        
+   	        <TextView 
+	            android:id="@+id/stats_benchPressDetailed2"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginRight="0dp"
+	            android:layout_marginLeft="5dp"
+	            android:layout_marginTop="0dp" />
+	        
+   	        <TextView 
+	            android:id="@+id/stats_benchPressDetailed3"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginLeft="0dp"
 	            android:layout_marginTop="0dp" />
 	        
 	    </LinearLayout>
@@ -92,7 +148,7 @@
 	        android:id="@+id/stats_linearTwo"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@id/stats_linearOneDetailed">
+	        android:layout_below="@id/stats_linearOneDetailed2">
 		    
 		    <TextView 
 		        android:id="@+id/stats_rowing"
@@ -116,7 +172,7 @@
 		</LinearLayout>
 	    
    	    <LinearLayout 
-	        android:id="@+id/stats_linearTwoDetailed"
+	        android:id="@+id/stats_linearTwoDetailed1"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/stats_linearTwo" >
@@ -124,23 +180,79 @@
 	        <TextView 
 	            android:id="@+id/stats_rowingDetailed"
 	            android:layout_width="0dp"
-	            android:layout_height="80dp"
+	            android:layout_height="50dp"
 	            android:layout_weight="0.5"
 	            android:textSize="30dp"
 	            android:gravity="center_horizontal"
 	            style="@style/style_whiteBoxCapsBold"
 	            android:layout_marginRight="5dp"
-	            android:layout_marginTop="0dp"  />
+	            android:layout_marginTop="0dp"
+	            android:layout_marginBottom="0dp" />
 	        
    	        <TextView 
 	            android:id="@+id/stats_deadliftDetailed"
 	            android:layout_width="0dp"
-	            android:layout_height="80dp"
+	            android:layout_height="50dp"
 	            android:layout_weight="0.5"
 	            android:textSize="30dp"
 	            android:gravity="center_horizontal"
 	            style="@style/style_whiteBoxCapsBold"
 	            android:layout_marginLeft="5dp"
+	            android:layout_marginTop="0dp"
+	            android:layout_marginBottom="0dp" />
+	        
+	    </LinearLayout>
+   	    
+  	    <LinearLayout
+	        android:id="@+id/stats_linearTwoDetailed2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/stats_linearTwoDetailed1" >
+   	        
+	        <TextView 
+	            android:id="@+id/stats_rowingDetailed2"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginRight="0dp"
+	            android:layout_marginTop="0dp" />
+	        
+   	        <TextView 
+	            android:id="@+id/stats_rowingDetailed3"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginLeft="0dp"
+	            android:layout_marginRight="5dp"
+	            android:layout_marginTop="0dp" />
+   	        
+   	        <TextView 
+	            android:id="@+id/stats_deadliftDetailed2"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginRight="0dp"
+	            android:layout_marginLeft="5dp"
+	            android:layout_marginTop="0dp" />
+	        
+   	        <TextView 
+	            android:id="@+id/stats_deadliftDetailed3"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginLeft="0dp"
 	            android:layout_marginTop="0dp" />
 	        
 	    </LinearLayout>
@@ -149,7 +261,7 @@
 	        android:id="@+id/stats_linearThree"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@id/stats_linearTwoDetailed">
+	        android:layout_below="@id/stats_linearTwoDetailed2">
    	    
 		    <TextView 
 		        android:id="@+id/stats_ohp"
@@ -172,7 +284,7 @@
 	  	</LinearLayout>
    	     
    	    <LinearLayout 
-	        android:id="@+id/stats_linearThreeDetailed"
+	        android:id="@+id/stats_linearThreeDetailed1"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/stats_linearThree" >
@@ -180,40 +292,72 @@
 	        <TextView 
 	            android:id="@+id/stats_ohpDetailed"
 	            android:layout_width="0dp"
-	            android:layout_height="80dp"
+	            android:layout_height="50dp"
 	            android:layout_weight="0.5"
 	            android:textSize="30dp"
 	            android:gravity="center_horizontal"
 	            style="@style/style_whiteBoxCapsBold"
 	            android:layout_marginRight="5dp"
-	            android:layout_marginTop="0dp"  />
+	            android:layout_marginTop="0dp"
+	            android:layout_marginBottom="0dp"  />
 	        
 	        <!-- This textview is here to keep the width of the textview to the left of it correct -->
    	        <TextView 
 	            android:layout_width="0dp"
-	            android:layout_height="80dp"
+	            android:layout_height="50dp"
 	            android:layout_weight="0.5"
 	            android:textSize="30dp"
 	            android:gravity="center_horizontal"
 	            style="@style/style_emptyBoxRegular"
 	            android:layout_marginLeft="5dp"
+	            android:layout_marginTop="0dp"
+	            android:layout_marginBottom="0dp" />
+	        
+	    </LinearLayout>
+	    
+   	    <LinearLayout
+	        android:id="@+id/stats_linearThreeDetailed2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/stats_linearThreeDetailed1" >
+   	        
+	        <TextView 
+	            android:id="@+id/stats_ohpDetailed2"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginRight="0dp"
+	            android:layout_marginTop="0dp" />
+	        
+   	        <TextView 
+	            android:id="@+id/stats_ohpDetailed3"
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.25"
+	            android:textSize="13dp"
+	            android:gravity="center_horizontal"
+	            style="@style/style_whiteBoxRegular"
+	            android:layout_marginLeft="0dp"
+	            android:layout_marginRight="10dp"
+	            android:layout_marginTop="0dp" />
+	        
+   	        <TextView 
+	            android:layout_width="0dp"
+	            android:layout_height="30dp"
+	            android:layout_weight="0.5"
+	            android:layout_marginLeft="10dp"
 	            android:layout_marginTop="0dp" />
 	        
 	    </LinearLayout>
-   	    
-        <TextView 
-        	android:id="@+id/stats_graphView"
-        	android:layout_width="fill_parent"
-        	android:layout_height="150dp"
-        	android:layout_below="@id/stats_linearThreeDetailed"
-        	style="@style/style_whiteBoxCapsBold"
-        	android:layout_marginBottom="20dp" />
         
         <!-- This View element makes sure there is some space between the last element and the bottom of the page -->
         <View 
-            android:layout_below="@id/stats_graphView"
+            android:layout_below="@id/stats_linearThreeDetailed2"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="10dp" />
 
 	</RelativeLayout>
 </ScrollView>

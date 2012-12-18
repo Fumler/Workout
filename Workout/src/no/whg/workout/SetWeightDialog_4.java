@@ -30,7 +30,8 @@ public class SetWeightDialog_4 extends DialogPreference {
 	public void onClick(DialogInterface dialog, int which) {
 		switch (which) {
 		case DialogInterface.BUTTON_POSITIVE:
-			// TAKE INFO FROM NUMBERPICKERS AND PUT THEM IN CALC
+			MainActivity.SLCalc.getBothSessions().get(3).setCurrentWeight(convertMultiIntToSingle());
+			MainActivity.SLCalc.getBothSessions().get(3).setNumberOfSets(np_5.getValue());
 			break;
 		}
 		
@@ -98,20 +99,39 @@ public class SetWeightDialog_4 extends DialogPreference {
 		
 		newInt = newInt % 1000;
 		newInt = newInt / 100;
-		np_2.setValue((int)newInt);
+		np_1.setValue((int)newInt);
+		System.out.println(newInt);
 		
 		newInt = original;
 		newInt = newInt % 100;
 		newInt = newInt / 10;
 		np_2.setValue((int)newInt);
+		System.out.println(newInt);
 		
 		newInt = original;
 		newInt = newInt % 10;
 		np_3.setValue((int)newInt);
+		System.out.println(newInt);
 		
 		newInt = original;
 		newInt = newInt % 1;
-		newInt = newInt * 10;
+		newInt = newInt / 10;
 		np_4.setValue((int)newInt);
+		System.out.println(newInt);
+	}
+	
+	public double convertMultiIntToSingle(){
+		double finishedMerge = 0.0d;
+		
+		finishedMerge += ((double)(np_4.getValue()) / 10);
+		System.out.println(finishedMerge);
+		finishedMerge += (np_3.getValue());
+		System.out.println(finishedMerge);
+		finishedMerge += (np_2.getValue() * 10);
+		System.out.println(finishedMerge);
+		finishedMerge += (np_1.getValue() * 100);
+		System.out.println(finishedMerge);
+		
+		return finishedMerge;
 	}
 }
