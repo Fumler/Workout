@@ -346,6 +346,10 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_deadlift;
         public TextView tab1_tv_OHP;
         
+        // HOME PAGE VIEWS
+        public TextView tab2_tv_aOrB;
+        public TextView tab2_tv_exerciseOneWeight;
+        
         List<ThreeStateCheckbox> tab1_squats = new ArrayList<ThreeStateCheckbox>(5);
         List<ThreeStateCheckbox> tab1_benchpress = new ArrayList<ThreeStateCheckbox>(5);
         List<ThreeStateCheckbox> tab1_rowing = new ArrayList<ThreeStateCheckbox>(5);
@@ -402,6 +406,8 @@ public class MainActivity extends FragmentActivity {
         		break;
         	case 1:
         		// Tab 2 - Home
+        		initTab2();
+        		refreshTab2();
         		break;
         	case 2:
         		// Tab 3 - Stats
@@ -458,7 +464,7 @@ public class MainActivity extends FragmentActivity {
 				// Tab 1 - Log Workout
 				break;
 			case 1:
-				// Tab 2 - Home
+				refreshTab2();
 				break;
 			case 2:
 				// Tab 3 - Stats
@@ -638,6 +644,27 @@ public class MainActivity extends FragmentActivity {
 				tab1_b_log.setLayoutParams(p);
 				}
 
+		}
+		
+		// Initializes tab 2
+		public void initTab2() {
+			tab2_tv_aOrB				= (TextView) getActivity().findViewById(R.id.tab2_tv1_aOrB);
+//			tab2_tv_exerciseOneWeight	= (TextView) getActivity().findViewById(R.id.tab2_tv2_details);
+		}
+		
+		public void refreshTab2() {
+			List<Exercise> 	exercises;
+			exercises = SLCalc.getBothSessions();
+			
+			String aOrB;
+			if (SLCalc.getSessionTypeA())
+				aOrB = "A";
+			else
+				aOrB = "B";
+			
+			tab2_tv_aOrB.setText(aOrB);
+			
+//			tab2_tv_exerciseOneWeight.setText(String.valueOf(exercises.get(0).getCurrentWeight()));
 		}
 		
 		//Initializes tab 3

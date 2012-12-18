@@ -27,6 +27,7 @@
     
     <!-- MAIN ACTIVITY -->
     <string name="tv_welcomeMessage">Welcome to Strongbird! This app will help you keep track of your stronglifts workout.</string>
+    <string name="tv_first">Looking good! \nToday\'s session is:</string>
 
     <!-- LOG WORKOUT ACTIVITY -->
     <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
@@ -48,6 +49,7 @@
     <string name="set_ohp_summary">Change weight and number of sets for the overhead press exercise</string>
     <string name="set_weight">Weight</string>
     <string name="set_sets">Sets</string>
+    <string name="set_weightIncrements">Change weight increments</string>
 
     <!-- SETTINGS WEIGHT BUTTONS -->
     <string name="set_kg_btn">KG</string>

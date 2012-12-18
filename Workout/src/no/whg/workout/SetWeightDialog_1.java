@@ -17,6 +17,7 @@ public class SetWeightDialog_1 extends DialogPreference {
 	public NumberPicker np_3;
 	public NumberPicker np_4;
 	public NumberPicker np_5;
+	public NumberPicker np_6;
 	
 	public SetWeightDialog_1(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -31,7 +32,7 @@ public class SetWeightDialog_1 extends DialogPreference {
 		switch (which) {
 		case DialogInterface.BUTTON_POSITIVE:
 			MainActivity.SLCalc.getBothSessions().get(0).setCurrentWeight(convertMultiIntToSingle());
-			MainActivity.SLCalc.getBothSessions().get(0).setNumberOfSets(np_5.getValue());
+			MainActivity.SLCalc.getBothSessions().get(0).setNumberOfSets(np_6.getValue());
 			break;
 		}
 		
@@ -48,7 +49,7 @@ public class SetWeightDialog_1 extends DialogPreference {
 		np_2 = (NumberPicker) root.findViewById(R.id.set_weight_np2);
 		np_3 = (NumberPicker) root.findViewById(R.id.set_weight_np3);
 		np_4 = (NumberPicker) root.findViewById(R.id.set_weight_np4);
-		np_5 = (NumberPicker) root.findViewById(R.id.set_sets_np);
+		np_6 = (NumberPicker) root.findViewById(R.id.set_sets_np);
 		
 		createDefaultNumberPickers();
 		
@@ -73,23 +74,23 @@ public class SetWeightDialog_1 extends DialogPreference {
 		np_3.setMinValue(0);
 		np_4.setMaxValue(9);
 		np_4.setMinValue(0);
-		np_5.setMaxValue(3);
-		np_5.setMinValue(1);
+		np_6.setMaxValue(3);
+		np_6.setMinValue(1);
 		
-		np_5.setDisplayedValues(values);
+		np_6.setDisplayedValues(values);
 		
 		currentWeight = exercises.get(0).getCurrentWeight();
 		convertSingleIntToMulti(currentWeight);
 		
 		switch ((int)exercises.get(0).getNumberOfSets()) {
 		case 1:
-			np_5.setValue(1);
+			np_6.setValue(1);
 			break;
 		case 3:
-			np_5.setValue(3);
+			np_6.setValue(3);
 			break;
 		case 5:
-			np_5.setValue(5);
+			np_6.setValue(5);
 			break;
 		}
 	}
