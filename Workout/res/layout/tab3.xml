@@ -28,7 +28,7 @@
 	    	android:id="@+id/stats_main"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/tv_welcomeMessage"
+	        android:text="@string/tv_statsMessage"
 	        style="@style/style_whiteBoxCapsRegular" />	
 	    <LinearLayout 
 	        android:id="@+id/stats_linearOne"
