@@ -141,11 +141,6 @@ public class GuideActivity extends FragmentActivity {
     		}
     	}
     	
-    	if(item.getItemId() == R.id.menu_help) {
-    		DialogFragment dialog = new HelpDialog(mViewPager.getCurrentItem());
-    		dialog.show(getFragmentManager(), "Æ");
-    	}
-    	
     	if(item.getItemId() == android.R.id.home) {
 			Intent intent = new Intent(this, MainActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
