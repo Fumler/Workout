@@ -17,7 +17,9 @@
 	</string>
 	<string name="guide_tv_bench">
 		<![CDATA[
-			<p><b>What\'s The Bench Press?</b> Lie on an upright support bench or a bench inside a Power Rack. Unrack the weight & lower it to your chest. Press it back up until your arms are locked. You\'ve done a Bench Press.
+			<b>What\'s The Bench Press?</b> 
+			<br>			
+			<p>Lie on an upright support bench or a bench inside a Power Rack. Unrack the weight & lower it to your chest. Press it back up until your arms are locked. You\'ve done a Bench Press.
 			</p>
 			<a href = "http://stronglifts.com/how-to-bench-press-with-proper-technique-avoid-shoulder-injuries/">Read more about proper form at StrongLifts.com</a>
 			<br>
@@ -27,7 +29,9 @@
 	</string>
 	<string name="guide_tv_deadlift">
 		<![CDATA[
-			<p><b>What is deadlift?</b> Stand with the bar above the center of your feet - your stance should be a bit more narrow than shoulder-width to give your arms room. 
+			<b>What is deadlift?</b> 
+			<br>
+			<p>Stand with the bar above the center of your feet - your stance should be a bit more narrow than shoulder-width to give your arms room. 
 			Grab the bar overhand so your arms are vertical to the floor - if your hamstrings are tight, do squat 2 stands to boost your hip flexibility.
 			Bend trough your knees until your shins hit the bar.
 			Lift your chest but don\'t squeeze your shoulder-blades like on squats.
@@ -42,9 +46,9 @@
 	</string>
 	<string name="guide_tv_ohp">
 		<![CDATA[
-			<p><b>What\'s the Overhead Press?</b>
+			<b>What\'s the Overhead Press?</b>
 			<br>
-			Press the bar from your front shoulders overhead until your elbows are locked. Your knees and hips must remain locked through the whole movement otherwise you\'re doing Push Preses. Stance should be shoulder-width apart (heels together is Military Press, which is harder).
+			<p>Press the bar from your front shoulders overhead until your elbows are locked. Your knees and hips must remain locked through the whole movement otherwise you\'re doing Push Preses. Stance should be shoulder-width apart (heels together is Military Press, which is harder).
 			</p>
 			<a href = "http://stronglifts.com/how-to-overhead-press-with-correct-technique/">Read more about proper form at StrongLifts.com</a>
 			
@@ -52,7 +56,9 @@
 	</string>
 	<string name="guide_tv_rowing">
 		<![CDATA[
-			<p><b>What\'s Barbell Rows?</b> The best way to do them is to start with the bar on the floor every single rep. Your middle back will have slight bend to it. You pull the bar off the floor quickly with the arms, and by a powerful arch of your middle back. You finish by touching the bar to your upper stomach or middle stomach. At no time is there any movement of the hips or knees, no hip extension at all, all that bends is the middle back and the shoulders and elbows.
+			<b>What\'s Barbell Rows?</b> 
+			<br>
+			<p>The best way to do them is to start with the bar on the floor every single rep. Your middle back will have slight bend to it. You pull the bar off the floor quickly with the arms, and by a powerful arch of your middle back. You finish by touching the bar to your upper stomach or middle stomach. At no time is there any movement of the hips or knees, no hip extension at all, all that bends is the middle back and the shoulders and elbows.
 			</p>
 			<a href = "http://stronglifts.com/how-to-master-barbell-row-technique/">Read more about proper form at StrongLifts.com</a>
 		]]>
