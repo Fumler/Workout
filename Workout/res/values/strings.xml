@@ -30,6 +30,8 @@
 
     <!-- LOG WORKOUT ACTIVITY -->
     <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
+    <string name="alert_note">Notice</string>
+    <string name="alert_sure">Are you sure you wish to log this workout?</string>
     
     <!-- SETTINGS ACTIVITY -->
     <string name="set_main">Settings</string>
