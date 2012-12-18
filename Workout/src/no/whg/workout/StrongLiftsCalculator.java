@@ -71,6 +71,13 @@ public class StrongLiftsCalculator {
 		sessionTypeA 			= true;
 		weightUnitKilograms = true;
 		numberOfSessionsLogged  = 0;	
+		
+		// REEEEMOOOOOOVVEEEEE!!!!
+		for(int i = 0; i < 5; i++)
+		{
+			a_session.get(0).updateProgress();
+		}
+			
 	}
 	
 	/*

@@ -4,13 +4,25 @@
     <!-- GUIDE ACTIVITY -->
 	<string name="guide_tv_squats">
 		<![CDATA[
-			<p><b>What Are Squats?</b> Bend through your knees with the bar on your back until your hips come lower than parallel. Once your hip joint is lower than your knee joint you Squat up again. Here\'s a free video where I show and explain proper form on Squats:</p>
+			<b>What Are Squats?</b> 
+			<br>
+			<p>Bend through your knees with the bar on your back until your hips come lower than parallel. Once your hip joint is lower than your knee joint you Squat up again.
+			</p>
+			<a href = "http://stronglifts.com/how-to-squat-with-proper-technique-fix-common-problems/">Read more about proper form at StrongLifts.com</a>
+			<br>
+			<br>
+			<a href = "http://www.youtube.com/watch?feature=player_embedded&v=VnV7vEi7Sz8">Mehdi showing proper form - Youtube</a>
+			
 		]]>
 	</string>
 	<string name="guide_tv_bench">
 		<![CDATA[
 			<p><b>What\'s The Bench Press?</b> Lie on an upright support bench or a bench inside a Power Rack. Unrack the weight & lower it to your chest. Press it back up until your arms are locked. You\'ve done a Bench Press.
-			Here\'s a free video. Watch it..</p>
+			</p>
+			<a href = "http://stronglifts.com/how-to-bench-press-with-proper-technique-avoid-shoulder-injuries/">Read more about proper form at StrongLifts.com</a>
+			<br>
+			<br>
+			<a href = "http://www.youtube.com/watch?feature=player_embedded&v=uwygcGdazeM">Mehdi showing proper form - Youtube</a>
 		]]>
 	</string>
 	<string name="guide_tv_deadlift">
@@ -20,74 +32,72 @@
 			Bend trough your knees until your shins hit the bar.
 			Lift your chest but don\'t squeeze your shoulder-blades like on squats.
 			Pull - keep the bar close to your body, roll it over your knees and thighs until your hips and knees are locked. Do not lean back at the top.
-			Here\'s a free video. Watch it.
 			</p>
+			<a href = "http://stronglifts.com/how-to-deadlift-with-proper-technique/">Read more about proper form at StrongLifts.com</a>
+			<br>
+			<br>
+			<a href = "http://www.youtube.com/watch?feature=player_embedded&v=WP8lEbeY4LM">Mehdi showing proper form - Youtube</a>
+			
 		]]>
 	</string>
 	<string name="guide_tv_ohp">
 		<![CDATA[
-			<p><b>What\'s the Overhead Press?</b> Press the bar from your front shoulders overhead until your elbows are locked. Your knees and hips must remain locked through the whole movement otherwise you\'re doing Push Preses. Stance should be shoulder-width apart (heels together is Military Press, which is harder).
-			Here\'s a free video. Watch it.
+			<p><b>What\'s the Overhead Press?</b>
+			<br>
+			Press the bar from your front shoulders overhead until your elbows are locked. Your knees and hips must remain locked through the whole movement otherwise you\'re doing Push Preses. Stance should be shoulder-width apart (heels together is Military Press, which is harder).
 			</p>
+			<a href = "http://stronglifts.com/how-to-overhead-press-with-correct-technique/">Read more about proper form at StrongLifts.com</a>
+			
 		]]>
 	</string>
 	<string name="guide_tv_rowing">
 		<![CDATA[
 			<p><b>What\'s Barbell Rows?</b> The best way to do them is to start with the bar on the floor every single rep. Your middle back will have slight bend to it. You pull the bar off the floor quickly with the arms, and by a powerful arch of your middle back. You finish by touching the bar to your upper stomach or middle stomach. At no time is there any movement of the hips or knees, no hip extension at all, all that bends is the middle back and the shoulders and elbows.
-			Here\'s a free video. Watch it.
 			</p>
+			<a href = "http://stronglifts.com/how-to-master-barbell-row-technique/">Read more about proper form at StrongLifts.com</a>
 		]]>
 	</string>
 	<string name="guide_tv_p1">
 		<![CDATA[
-			<p>The biggest muscle building mistake you can make is doing routines from muscle magazines. Most of those guys don\'t train naturally, are genetically gifted and never started training that way. Doing their routines won\'t make you build muscle fast. The average person needs a different approach. One that builds muscle fast and prevents physical & mental overtraining from doing too much, too soon. Here\'s how to build muscle: the definitive guide to building muscle.
-			</p>
+			<i>The biggest muscle building mistake you can make is doing routines from muscle magazines. Most of those guys don\'t train naturally, are genetically gifted and never started training that way. Doing their routines won\'t make you build muscle fast. The average person needs a different approach. One that builds muscle fast and prevents physical & mental overtraining from doing too much, too soon. Here\'s how to build muscle: the definitive guide to building muscle.
+			<br>
+			<b>- Mehdi Hadim: StrongLifts.com</b></i>
 		]]>
 	</string>
 	<string name="guide_tv_p2">
 		<![CDATA[
-			<p>
 			<b>1. Get Stronger.</b> More strength is more muscle. Get into strength training. I recommend weight training because it allows you to start light and add weight endlessly. Body-weight exercises work too. Start with an empty bar. Learn proper technique. Add weight each workout to keep pushing your body out of comfort zone.
-			</p>
 		]]>
 	</string>
 	<string name="guide_tv_p3">
 		<![CDATA[
-			<p>
 			<b>2. Use Free Weights.</b> You can lift the heaviest weights using barbells. More weight is more stress, thus more muscle. Dumbbells are great for assistance exercises, but not for your main lifts. Stay away from machines.
 			<br /><br />
-			- Safe. Machines force you into fixed, unnatural movement patterns which can cause injuries. Free weights replicate natural motions.<br />
-			- Efficient. Free weights force you to control and balance the weight. This builds more muscle than machines, which balance the weight for you.<br />
-			- Functional. Strength built on machines doesn\'t transfer to free weights or real life. No machine balances the weight for you in real life.<br />
-			- Versatile. You can do hundreds of exercises with just 1 barbell. Saves a lot of money and space, especially if you want to build a home gym.<br />
-			</p>
+			- Safe: Machines force you into fixed, unnatural movement patterns which can cause injuries. Free weights replicate natural motions.<br />
+			- Efficient: Free weights force you to control and balance the weight. This builds more muscle than machines, which balance the weight for you.<br />
+			- Functional: Strength built on machines doesn\'t transfer to free weights or real life. No machine balances the weight for you in real life.<br />
+			- Versatile: You can do hundreds of exercises with just 1 barbell. Saves a lot of money and space, especially if you want to build a home gym.<br />
 		]]>
 	</string>
 	<string name="guide_tv_p4">
 		<![CDATA[
-			<p>
 			<b>3. Do Compound Exercises.</b> Isolation exercises are ok once you\'ve built base strength and muscle mass. But if you\'re starting to build muscle, exercises that hit several muscles at the same time are better.
 			<br /><br />
 			- No endless Biceps Curls -> Pull-ups, Chin-ups & Barbell Rows<br />
 			- Also no Triceps Kickbacks -> Bench Press, Overhead Press, Dips<br />
-			- And definitely no Leg Extensions -> Squats & Deadlifts<br />
-			</p> 
+			- And definitely no Leg Extensions -> Squats & Deadlifts<br /> 
 		]]>
 	</string>
 	<string name="guide_tv_p5">
 		<![CDATA[
-			<p>
 			<b>4. Train Your Legs.</b> Squats work your whole body, they\'re the most important exercise. You\'ll look totally different once you can Squat 300lbs. That\'s a free weight Squat with hips coming lower than knees.
 			All your muscles tense when doing Squats & Deadlifts. They work your body as 1 piece and let you lift heavy weights. Don\'t lose time with Biceps Curls. When you can Squat & Deadlift heavy weights, you\'ll have bigger arms.
-			</p>
 	    ]]>
 	</string>
 	<string name="guide_tv_p6">
 		<![CDATA[
-			<p>
 			<b>5. Do Full Body Workouts.</b> Don\'t do those muscle magazine workouts. Body part splits with isolation exercises is fine once you\'ve built a foundation. That\'s once you can Squat 300lbs.
 			You can\'t Squat that much or never did Squats? Check <a href=\"http://stronglifts.com/stronglifts-5x5-beginner-strength-training-program/\">StrongLifts 5x5</a>. It takes 3 workouts per week of about 1hour each and includes compound exercises like Squats, Deadlifts, Bench Press, Barbell Rows, Overhead Press, Pull-ups, Dips, etc.
-			</p>
 		]]>
 	</string>
 </resources>

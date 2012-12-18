@@ -1,8 +1,14 @@
 package no.whg.workout;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.Runnable;
+import com.jjoe64.graphview.BarGraphView;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphViewSeries;
+
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +26,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -37,6 +45,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
+	public static boolean resetPressed;
+
 	public static StrongLiftsCalculator SLCalc = new StrongLiftsCalculator();
 	
     /**
@@ -88,6 +98,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
+        getActionBar().setDisplayShowTitleEnabled(false);
         return true;
     }
     
@@ -125,7 +136,7 @@ public class MainActivity extends FragmentActivity {
 	        		startActivity(i);
     			} catch (Exception x) {
     				//TOAST
-    			}
+    			} 
     		}
     	}
     	
@@ -199,6 +210,8 @@ public class MainActivity extends FragmentActivity {
         public TextView tab3_tv_rowing;
         public TextView tab3_tv_deadlift;
         public TextView tab3_tv_OHP;
+        public GraphView graphView;
+        public GraphViewSeries weightDataSeries;
         
         // LOG WORKOUT RELATED XML STUFF
 		public LinearLayout tab1_ll_squats;
@@ -219,11 +232,11 @@ public class MainActivity extends FragmentActivity {
         public TextView tab1_tv_deadlift;
         public TextView tab1_tv_OHP;
         
-        public ThreeStateCheckbox tab1_squats_cb1;
-        public ThreeStateCheckbox tab1_squats_cb2;
-        public ThreeStateCheckbox tab1_squats_cb3;
-        public ThreeStateCheckbox tab1_squats_cb4;
-        public ThreeStateCheckbox tab1_squats_cb5;
+        List<ThreeStateCheckbox> tab1_squats = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_benchpress = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_rowing = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_ohp = new ArrayList<ThreeStateCheckbox>(5);
+        List<ThreeStateCheckbox> tab1_deadlift = new ArrayList<ThreeStateCheckbox>(5);
         
         public Button tab1_b_log;
         public String weightUnit;
@@ -414,8 +427,25 @@ public class MainActivity extends FragmentActivity {
 			
 			tab1_b_log				= (Button) getActivity().findViewById(R.id.log_button);
 			
-	        tab1_squats_cb1 		= (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb3);
 
+			for(int i = 0; i < 5; i++) { // counting from 1, fml..
+				String squatsId = "log_squats_cb"+i;
+				int squatsIdInt = getResources().getIdentifier(squatsId, "id", "no.whg.workout");
+				tab1_squats.add(i, (ThreeStateCheckbox) getActivity().findViewById(squatsIdInt));
+				
+				String benchpressId = "log_benchpress_cb"+i;
+				int benchpressIdInt = getResources().getIdentifier(benchpressId, "id", "no.whg.workout");
+				tab1_benchpress.add(i, (ThreeStateCheckbox) getActivity().findViewById(benchpressIdInt));
+				
+				String rowingId = "log_rowing_cb"+i;
+				int rowingIdInt = getResources().getIdentifier(rowingId, "id", "no.whg.workout");
+				tab1_rowing.add(i,(ThreeStateCheckbox) getActivity().findViewById(rowingIdInt));
+				
+				String ohpId = "log_OHP_cb"+i;
+				int ohpIdInt = getResources().getIdentifier(ohpId, "id", "no.whg.workout");
+				tab1_ohp.add(i,(ThreeStateCheckbox) getActivity().findViewById(ohpIdInt));
+				
+			}
 		}
 		
 		public void refreshTab1() {
@@ -448,29 +478,36 @@ public class MainActivity extends FragmentActivity {
 				tab1_tv_OHPTitle.setVisibility(View.GONE);
 				
 				p.addRule(RelativeLayout.BELOW, R.id.log_linearThree);
-				
-				
+								
 				tab1_b_log.setLayoutParams(p);
 				
-		        tab1_squats_cb1 = (ThreeStateCheckbox) getActivity().findViewById(R.id.log_squats_cb1);
-		        tab1_squats_cb1.setOnClickListener(new View.OnClickListener() {
-		        	public void onClick(View v) {
-		        		int state = tab1_squats_cb1.getState();
-		        		
-		        		switch(state) {
-		        		case 0: // do stuff if unchecked
-		        			tab1_squats_cb1.setText("1");
-		        			break;
-		        		case 1: // do stuff if checked
-		        			tab1_squats_cb1.setText("2");
-		        			break;
-		        		case 2: // do stuff if crossed
-		        			tab1_squats_cb1.setText("3");
-		        			break;
-		        			default: break;
-		        		}
-		        	}
-		        });
+				for(int i = 0; i <= 4; i++) {
+			        tab1_squats.get(i).setOnClickListener(new View.OnClickListener() {
+			        	public void onClick(View v) {
+			        		for(int j = 0; j <= 4; j++) {
+				        		int state = tab1_squats.get(j).getState();
+				        		
+				        		switch(state) {
+				        		case 0: // do stuff if unchecked
+				        			tab1_squats.get(j).setBackgroundResource(R.drawable.unchecked);
+				        			break;
+				        		case 1: // do stuff if checked
+				        			tab1_squats.get(j).setBackgroundResource(R.drawable.checked);
+
+				        			break;
+				        		case 2: // do stuff if crossed
+				        			tab1_squats.get(j).setBackgroundResource(R.drawable.crossed);
+
+				        			break;
+				        			default: break;
+				        		}
+			        		}
+
+			        	}
+			        });
+					
+				}
+
 			} else {
 				
 				tab1_tv_squats.setText(String.valueOf(currentSession.get(0).getCurrentWeight()) + weightUnit);
@@ -496,6 +533,7 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
 			tab3_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
 			tab3_tv_OHP 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
+			graphView			= new BarGraphView(getActivity().getApplicationContext(), "Squats graph");
 		}
 		
 		public void refreshTab3(){
@@ -516,6 +554,38 @@ public class MainActivity extends FragmentActivity {
 			tab3_tv_rowing.setText(String.valueOf(exercises.get(2).getCurrentWeight()) + weightUnit);
 			tab3_tv_deadlift.setText(String.valueOf(exercises.get(4).getCurrentWeight()) + weightUnit);
 			tab3_tv_OHP.setText(String.valueOf(exercises.get(3).getCurrentWeight()) + weightUnit);
+			
+			populateGraph();
+		}
+		
+		@SuppressWarnings("deprecation")
+		public void populateGraph(){
+			List weightData;
+			weightData = SLCalc.getBothSessions().get(0).getProgressList();
+			LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.stats_graphView);  
+			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
+			
+			// Inits and resets the weightDataSeries
+			weightDataSeries = new GraphViewSeries(null);
+			
+			// Only populates the graph if the progresslist has data in it
+			if (!weightData.isEmpty()) {
+				tv_noData.setVisibility(View.GONE);
+				for (int i = 0; i <= weightData.size(); i++) {
+					weightDataSeries.appendData(new GraphViewData(i+1, (Double) weightData.get(0)), false);
+				}
+				
+				graphView.addSeries(weightDataSeries);
+				layout.addView(graphView);
+				
+				System.out.println("yes");
+			}
+			else {
+				tv_noData.setVisibility(View.VISIBLE);
+				tv_noData.setText("No data to display");
+			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+			    System.out.println("no");
+			}
 		}
 		
 		//Initializes tab 4
@@ -795,5 +865,13 @@ public class MainActivity extends FragmentActivity {
 		
 		//get the file as a bitmap
 		return BitmapFactory.decodeFile(imgPath, bmpOptions);
+	}
+
+	public static boolean isResetPressed() {
+		return resetPressed;
+	}
+
+	public static void setResetPressed(boolean resetPressed) {
+		MainActivity.resetPressed = resetPressed;
 	}
 }

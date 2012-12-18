@@ -7,6 +7,11 @@ import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 import no.whg.workout.MainActivity;
+import no.whg.workout.SetWeightDialog_1;
+import no.whg.workout.SetWeightDialog_2;
+import no.whg.workout.SetWeightDialog_3;
+import no.whg.workout.SetWeightDialog_4;
+import no.whg.workout.SetWeightDialog_5;
 import no.whg.workout.ResetDataAlertDialog;
 
 /*
@@ -59,19 +64,31 @@ public class SettingsActivity extends Activity {
      * Setting up and managing the PreferenceFragment
      */
     public static class SettingsFragment extends PreferenceFragment{
-    	ListPreference 			weight;
-    	ResetDataAlertDialog 	alertDialog;
-    	boolean 				isKG;
+    	public ListPreference 			weight;
+    	public ResetDataAlertDialog 	alertDialog;
+    	public boolean 					isKG;
+    	
+    	public SetWeightDialog_1			dialog_squats;
+    	public SetWeightDialog_2			dialog_benchPress;
+    	public SetWeightDialog_3			dialog_rowing;
+    	public SetWeightDialog_4			dialog_deadlift;
+    	public SetWeightDialog_5			dialog_ohp;
     	
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
+            
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.preferences);
             
-            weight = (ListPreference) findPreference("settings_kgLbs");
+            weight 		= (ListPreference) findPreference("settings_kgLbs");
             alertDialog = (ResetDataAlertDialog) findPreference("settings_data_id");
+
+            dialog_squats 		= (SetWeightDialog_1) findPreference("settings_squats");
+            dialog_benchPress 	= (SetWeightDialog_2) findPreference("settings_benchPress");
+            dialog_rowing 		= (SetWeightDialog_3) findPreference("settings_rowing");
+            dialog_deadlift 	= (SetWeightDialog_4) findPreference("settings_deadlift");
+            dialog_ohp 			= (SetWeightDialog_5) findPreference("settings_ohp");
             
             setWeightValueFromCalc();
         }
@@ -82,10 +99,10 @@ public class SettingsActivity extends Activity {
          */
 		@Override
 		public void onResume() {
+			setWeightValueFromCalc();
+			
 			// TODO Auto-generated method stub
 			super.onResume();
-			
-			setWeightValueFromCalc();
 		}
 
 		/*
@@ -102,8 +119,14 @@ public class SettingsActivity extends Activity {
 			else if (weight.getValue().equals("20"))
 				isKG = false;
 			
-			if (MainActivity.SLCalc.getWeightUnitKilograms() != isKG)
-				MainActivity.SLCalc.changeWeightUnit();
+			if (MainActivity.SLCalc.getWeightUnitKilograms() != isKG){
+				if (MainActivity.isResetPressed()) 
+					MainActivity.setResetPressed(false);
+				else
+					MainActivity.SLCalc.changeWeightUnit();
+			}
+			
+			setWeightValueFromCalc();
 		}
 		
 		/*

@@ -1,5 +1,6 @@
 package no.whg.workout;
 
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,12 +10,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,8 +50,8 @@ public class GuideActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_guide);
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_guide);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         // Create the adapter that will return a fragment for each of the three primary sections
         // of the app.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -76,11 +79,36 @@ public class GuideActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_guide, menu);
+        getActionBar().setDisplayShowTitleEnabled(false);
         return true;
     }
 
     
-    @Override
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//    	
+//    	if(item.getItemId() == R.id.menu_settings) {
+//    		startActivity(new Intent(this, SettingsActivity.class));
+//    	}
+//    	
+//    	if(item.getItemId() == R.id.menu_guide) {
+//    		startActivity(new Intent(this, GuideActivity.class));
+//    	}
+//    	
+//    	if(item.getItemId() == R.id.menu_music) {
+//    		// start the music player
+//    	}
+//    	
+//    	if(item.getItemId() == android.R.id.home) {
+//    		Intent intent = new Intent(this, MainActivity.class);
+//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+//    	}
+//        return true;
+//    }
+    
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	
     	if(item.getItemId() == R.id.menu_settings) {
@@ -91,16 +119,45 @@ public class GuideActivity extends FragmentActivity {
     		startActivity(new Intent(this, GuideActivity.class));
     	}
     	
-    	if(item.getItemId() == R.id.menu_music) {
-    		// start the music player
+    	if (item.getItemId() == R.id.menu_camera){
+    		Intent intent = new Intent(GuideActivity.this, MediaCaptureActivity.class);
+        	intent.putExtra("MEDIA_TYPE", 1);
+        	intent.putExtra("method","yes");
+        	//MainActivity.imgAdapt.setRunning(false);	// lets the gallery know that images have to be reloaded
+        	startActivity(intent);
+    	}
+    	
+    	if(item.getItemId() == R.id.menu_music) {	//THIS DOES NOT WANT TO WORK ON 4.0
+    		try {
+    			Intent i = new Intent(Intent.ACTION_MAIN);
+        		i.addCategory(Intent.CATEGORY_APP_MUSIC);
+        		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        		startActivity(i);
+    		} catch (Exception e){
+    			try {
+	        		Intent i = new Intent(Intent.ACTION_VIEW);
+	        		i.setAction(MediaStore.INTENT_ACTION_MUSIC_PLAYER);
+	        		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        		startActivity(i);
+    			} catch (Exception x) {
+    				//TOAST
+    			}
+    		}
+    	}
+    	
+    	if(item.getItemId() == R.id.menu_help) {
+    		DialogFragment dialog = new HelpDialog(mViewPager.getCurrentItem());
+    		dialog.show(getFragmentManager(), "Æ");
     	}
     	
     	if(item.getItemId() == android.R.id.home) {
-    		Intent intent = new Intent(this, MainActivity.class);
+			Intent intent = new Intent(this, MainActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
     	}
+    	
         return true;
+        
     }
 
     static void displayVideo(){
@@ -218,19 +275,19 @@ public class GuideActivity extends FragmentActivity {
         		initTab1();
         		break;
         	case 1:
-        		//initTab2();
+        		initTab2();
         		break;
         	case 2:
-        		//initTab3();
+        		initTab3();
         		break;
         	case 3:
-//        		initTab4();
+        		initTab4();
         		break;
         	case 4:
-//        		initTab5();
+        		initTab5();
         		break;
         	case 5:
-//        		initTab6();
+        		initTab6();
         		break;
         		
         	}
@@ -242,7 +299,64 @@ public class GuideActivity extends FragmentActivity {
         {
         	tv_strongLiftsGuide_p1 = (TextView) getActivity().findViewById(R.id.tv_strongLiftsGuide_p1);
         	tv_strongLiftsGuide_p1.setText(Html.fromHtml(getString(R.string.guide_tv_p1)));
+        	
+        	tv_strongLiftsGuide_p2 = (TextView) getActivity().findViewById(R.id.tv_strongLiftsGuide_p2);
+        	tv_strongLiftsGuide_p2.setText(Html.fromHtml(getString(R.string.guide_tv_p2)));
+        	
+        	tv_strongLiftsGuide_p3 = (TextView) getActivity().findViewById(R.id.tv_strongLiftsGuide_p3);
+        	tv_strongLiftsGuide_p3.setText(Html.fromHtml(getString(R.string.guide_tv_p3)));
+        	
+        	tv_strongLiftsGuide_p4 = (TextView) getActivity().findViewById(R.id.tv_strongLiftsGuide_p4);
+        	tv_strongLiftsGuide_p4.setText(Html.fromHtml(getString(R.string.guide_tv_p4)));
+        	
+        	tv_strongLiftsGuide_p5 = (TextView) getActivity().findViewById(R.id.tv_strongLiftsGuide_p5);
+        	tv_strongLiftsGuide_p5.setText(Html.fromHtml(getString(R.string.guide_tv_p5)));
+        	
+        	tv_strongLiftsGuide_p6 = (TextView) getActivity().findViewById(R.id.tv_strongLiftsGuide_p6);
+        	tv_strongLiftsGuide_p6.setText(Html.fromHtml(getString(R.string.guide_tv_p6)));
+        	
+        	tv_strongLiftsGuide_p6.setMovementMethod(LinkMovementMethod.getInstance());
         }
+		
+		private void initTab2()
+		{
+			tv_squatsGuide = (TextView) getActivity().findViewById(R.id.tv_squatsGuide);
+			tv_squatsGuide.setText(Html.fromHtml(getString(R.string.guide_tv_squats)));
+			
+			tv_squatsGuide.setMovementMethod(LinkMovementMethod.getInstance());
+		}
+		
+		private void initTab3()
+		{
+			tv_benchPressGuide = (TextView) getActivity().findViewById(R.id.tv_benchPressGuide);
+			tv_benchPressGuide.setText(Html.fromHtml(getString(R.string.guide_tv_bench)));
+			
+			tv_benchPressGuide.setMovementMethod(LinkMovementMethod.getInstance());
+		}
+		
+		private void initTab4()
+		{
+			tv_deadLiftGuide = (TextView) getActivity().findViewById(R.id.tv_deadliftGuide);
+			tv_deadLiftGuide.setText(Html.fromHtml(getString(R.string.guide_tv_deadlift)));
+			
+			tv_deadLiftGuide.setMovementMethod(LinkMovementMethod.getInstance());
+		}
+		
+		private void initTab5()
+		{
+			tv_ohpGuide = (TextView) getActivity().findViewById(R.id.tv_ohpGuide);
+			tv_ohpGuide.setText(Html.fromHtml(getString(R.string.guide_tv_ohp)));
+			
+			tv_ohpGuide.setMovementMethod(LinkMovementMethod.getInstance());
+		}
+		
+		private void initTab6()
+		{
+			tv_rowingGuide = (TextView) getActivity().findViewById(R.id.tv_rowingGuide);
+			tv_rowingGuide.setText(Html.fromHtml(getString(R.string.guide_tv_rowing)));
+			
+			tv_rowingGuide.setMovementMethod(LinkMovementMethod.getInstance());
+		}
         
         @Override
 		public void onResume() {
@@ -272,41 +386,41 @@ public class GuideActivity extends FragmentActivity {
 		}
     }
     
-    protected static void initVideo(View view, int tab, Context c){
-    	//Uri uri = Uri.parse("http://hum.re/getfit/squat.mp4");
-    	if (networkAvailable(c)){
-			// Select the videoview from the xml
-	    	switch (tab){
-		    case 1:
-				video = (VideoView) view.findViewById(R.id.vi_guidetab2);
-				break;
-		    case 2:
-				video = (VideoView) view.findViewById(R.id.vi_guidetab3);
-				break;
-		    case 3:
-				video = (VideoView) view.findViewById(R.id.vi_guidetab4);
-				break;
-		    case 4:
-				video = (VideoView) view.findViewById(R.id.vi_guidetab5);
-				break;
-		    case 5:
-				video = (VideoView) view.findViewById(R.id.vi_guidetab6);
-				break;
-		    }
-	    	Uri uri = Uri.parse(videos[tab - 1]);
-			video.setVideoURI(uri);
-	
-			// Shows a progressdialog until the video is fully loaded to reduce interface lag
-			//  and to make it less confusing for the user
-			pd = ProgressDialog.show(c, "Video", "Loading...");
-	
-			mc = new MediaController(c);
-			mc.setMediaPlayer(video);
-			video.setMediaController(mc);
-    	} else {
-    		// no fucking network
-    	}
-    }
+//    protected static void initVideo(View view, int tab, Context c){
+//    	//Uri uri = Uri.parse("http://hum.re/getfit/squat.mp4");
+//    	if (networkAvailable(c)){
+//			// Select the videoview from the xml
+//	    	switch (tab){
+//		    case 1:
+//				video = (VideoView) view.findViewById(R.id.vi_guidetab2);
+//				break;
+//		    case 2:
+//				video = (VideoView) view.findViewById(R.id.vi_guidetab3);
+//				break;
+//		    case 3:
+//				video = (VideoView) view.findViewById(R.id.vi_guidetab4);
+//				break;
+//		    case 4:
+//				video = (VideoView) view.findViewById(R.id.vi_guidetab5);
+//				break;
+//		    case 5:
+//				video = (VideoView) view.findViewById(R.id.vi_guidetab6);
+//				break;
+//		    }
+//	    	Uri uri = Uri.parse(videos[tab - 1]);
+//			video.setVideoURI(uri);
+//	
+//			// Shows a progressdialog until the video is fully loaded to reduce interface lag
+//			//  and to make it less confusing for the user
+//			pd = ProgressDialog.show(c, "Video", "Loading...");
+//	
+//			mc = new MediaController(c);
+//			mc.setMediaPlayer(video);
+//			video.setMediaController(mc);
+//    	} else {
+//    		// no fucking network
+//    	}
+//    }
     
     protected static boolean networkAvailable(Context c) {
     	final ConnectivityManager conMgr = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);

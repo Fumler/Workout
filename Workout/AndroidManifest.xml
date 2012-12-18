@@ -16,11 +16,10 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Splash"
-            android:label="@string/title_splash"
-        	android:screenOrientation="portrait" >
+            android:label="@string/title_splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,8 +38,7 @@
         <activity
             android:name=".GuideActivity"
             android:label="@string/title_activity_guide"
-            android:icon="@drawable/topbaricon"
-        	android:screenOrientation="portrait" >
+            android:icon="@drawable/topbaricon" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
