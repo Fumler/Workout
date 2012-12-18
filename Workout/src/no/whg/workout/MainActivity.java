@@ -8,6 +8,8 @@ import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.GraphViewSeries.GraphViewStyle;
+import com.jjoe64.graphview.LineGraphView;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -32,7 +34,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -210,8 +211,9 @@ public class MainActivity extends FragmentActivity {
         public TextView tab3_tv_rowing;
         public TextView tab3_tv_deadlift;
         public TextView tab3_tv_OHP;
-        public GraphView graphView;
+        public LineGraphView graphView;
         public GraphViewSeries weightDataSeries;
+        public LinearLayout layout;
         
         // LOG WORKOUT RELATED XML STUFF
 		public LinearLayout tab1_ll_squats;
@@ -525,12 +527,14 @@ public class MainActivity extends FragmentActivity {
 		
 		//Initializes tab 3
 		public void initTab3(){
+			layout 				= (LinearLayout) getActivity().findViewById(R.id.stats_graphViewLayout); 
 			tab3_tv_squats 		= (TextView) getActivity().findViewById(R.id.stats_squatsDetailed);
 			tab3_tv_benchPress 	= (TextView) getActivity().findViewById(R.id.stats_benchPressDetailed);
 			tab3_tv_rowing 		= (TextView) getActivity().findViewById(R.id.stats_rowingDetailed);
 			tab3_tv_deadlift 	= (TextView) getActivity().findViewById(R.id.stats_deadliftDetailed);
 			tab3_tv_OHP 		= (TextView) getActivity().findViewById(R.id.stats_ohpDetailed);
-			graphView			= new BarGraphView(getActivity().getApplicationContext(), "Squats graph");
+			graphView			= new LineGraphView(getActivity().getApplicationContext(), "Squats graph");
+			layout.addView(graphView);
 		}
 		
 		public void refreshTab3(){
@@ -557,31 +561,40 @@ public class MainActivity extends FragmentActivity {
 		
 		@SuppressWarnings("deprecation")
 		public void populateGraph(){
-			List weightData;
-			weightData = SLCalc.getBothSessions().get(0).getProgressList();
-			LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.stats_graphView);  
+			List<Double> weightData;
+			weightData = SLCalc.getBothSessions().get(0).getProgressList(); 
 			TextView tv_noData = (TextView) getActivity().findViewById(R.id.stats_tvNoData);
-			
-			// Inits and resets the weightDataSeries
-			weightDataSeries = new GraphViewSeries(null);
+			GraphViewData[] graphViewData;
 			
 			// Only populates the graph if the progresslist has data in it
 			if (!weightData.isEmpty()) {
+				
 				tv_noData.setVisibility(View.GONE);
-				for (int i = 0; i <= weightData.size(); i++) {
-					weightDataSeries.appendData(new GraphViewData(i+1, (Double) weightData.get(0)), false);
-				}
+				graphView.setVisibility(View.VISIBLE);
+
+//				graphViewData = new GraphViewData[weightData.size()];
 				
-				graphView.addSeries(weightDataSeries);
-				layout.addView(graphView);
+				GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {  
+					      new GraphViewData(1, 2.0d)  
+					      , new GraphViewData(2, 1.5d)  
+					      , new GraphViewData(3, 2.5d)  
+					      , new GraphViewData(4, 1.0d)  
+					});  
 				
-				System.out.println("yes");
-			}
-			else {
+//				for (int i = 0; i < weightData.size(); i++) {
+//					graphViewData[i] = new GraphViewData(i, (double)weightData.get(i));
+//					System.out.println(i);
+//				}
+				
+				// Inits and resets the weightDataSeries
+//				weightDataSeries = new GraphViewSeries(graphViewData);
+				
+				graphView.addSeries(exampleSeries);
+			} else {
 				tv_noData.setVisibility(View.VISIBLE);
+				graphView.setVisibility(View.GONE);
 				tv_noData.setText("No data to display");
 			    tv_noData.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-			    System.out.println("no");
 			}
 		}
 		
