@@ -48,6 +48,13 @@
                 android:summary="@string/set_ohp_summary" />
             
         </PreferenceScreen>
+        
+        <PreferenceScreen 
+            android:title="@string/set_weightIncrements"
+            android:key="settings_weightIncrements" >
+            
+            
+        </PreferenceScreen>
          
         <no.whg.workout.ResetDataAlertDialog
             android:title="@string/set_dataReset"

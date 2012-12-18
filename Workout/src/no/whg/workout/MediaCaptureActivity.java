@@ -52,6 +52,15 @@ public class MediaCaptureActivity extends Activity {
 	    
 	}
 	
+
+	/* *
+	 * Determines the type of media to capture, and redirects to the correct one. Runs finish() if it fails.
+	 * 
+	 * @param intent The intent received from the function that created the activity.
+	 * @param i	The media type.
+	 * @see MainActivity#videoCapture
+	 * @see Mainactivity#onOptionsItemSelected
+	 */
 	private void captureMedia(Intent intent, int i) {
 		if (i == MEDIA_TYPE_IMAGE){
 			captureImage();
@@ -63,6 +72,11 @@ public class MediaCaptureActivity extends Activity {
 		}
 	}
 	
+
+	/* *
+	 * Starts Camera for result, sending a request code defining how to handle the result
+	 * 
+	 */
 	private void captureImage() {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -72,6 +86,11 @@ public class MediaCaptureActivity extends Activity {
 		startActivityForResult(intent, IMAGE_REQUEST_CODE);
 	}
 	
+
+	/* *
+	 * Starts Camera for result, sending a request code defining how to handle the result
+	 * 
+	 */
 	private void captureVideo(Intent i) {
 		String lift = i.getStringExtra("lift");
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
@@ -83,6 +102,11 @@ public class MediaCaptureActivity extends Activity {
 		startActivityForResult(intent, VIDEO_REQUEST_CODE);
 	}
 	
+
+	/* *
+	 * This does nothing except call finish().
+	 * 
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == IMAGE_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
@@ -103,11 +127,27 @@ public class MediaCaptureActivity extends Activity {
 		}
 		finish();
 	}
+	
 
+	/* *
+	 * Gets an Uri from a string.
+	 * 
+	 * @param type	The type of media.
+	 * @param lift	The name of the media.
+	 * @return Uri	The requested Uri.
+	 */
 	private Uri getMediaFileUri(int type, String lift) {
 		return Uri.fromFile(getMediaFile(type, lift));
 	}
+	
 
+	/* *
+	 * Returns a File from a String.
+	 * 
+	 * @param type	The type of media.
+	 * @param lift	The name of the media.
+	 * @return File	Returns the requested file. 
+	 */
 	private File getMediaFile(int type, String lift) {
 		File dir;
 		if (type == MEDIA_TYPE_IMAGE) {
@@ -143,6 +183,14 @@ public class MediaCaptureActivity extends Activity {
 		return mediaFile;
 	}
 	
+
+	/* *
+	 * Checks whether a video exists, and returns an Uri to its location.
+	 * 
+	 * @param text	The name of the exercise we are looking for.
+	 * @return Uri	The Uri of the discovered video.
+	 * @return null	null is returned if no video is found.
+	 */
 	private Uri videoExists(String text){
 		File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), "StrongLifts/"); //set destination folder
 		File[] vids = dir.listFiles();

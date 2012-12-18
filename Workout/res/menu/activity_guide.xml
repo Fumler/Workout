@@ -17,12 +17,6 @@
 	        android:icon="@drawable/ic_music"
 	        android:orderInCategory="200"
 	        android:showAsAction="ifRoom|withText" />
-	    
-	    <item android:id="@+id/menu_help"
-	        android:title="@string/str_menu_help"
-	        android:icon="@drawable/ic_menu_help"
-	        android:orderInCategory="300"
-	        android:showAsAction="ifRoom|withText" />
     </group>
     
 </menu>
