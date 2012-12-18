@@ -31,8 +31,17 @@ public class SetWeightDialog_1 extends DialogPreference {
 	public void onClick(DialogInterface dialog, int which) {
 		switch (which) {
 		case DialogInterface.BUTTON_POSITIVE:
+			int np_6_value = np_6.getValue();
+			
+			if (np_6_value == 1)
+				np_6_value = 1;
+			else if (np_6_value == 2)
+				np_6_value = 3;
+			else if (np_6_value == 3)
+				np_6_value = 5;
+			
 			MainActivity.SLCalc.getBothSessions().get(0).setCurrentWeight(convertMultiIntToSingle());
-			MainActivity.SLCalc.getBothSessions().get(0).setNumberOfSets(np_6.getValue());
+			MainActivity.SLCalc.getBothSessions().get(0).setNumberOfSets(np_6_value);
 			break;
 		}
 		
@@ -49,6 +58,7 @@ public class SetWeightDialog_1 extends DialogPreference {
 		np_2 = (NumberPicker) root.findViewById(R.id.set_weight_np2);
 		np_3 = (NumberPicker) root.findViewById(R.id.set_weight_np3);
 		np_4 = (NumberPicker) root.findViewById(R.id.set_weight_np4);
+		np_5 = (NumberPicker) root.findViewById(R.id.set_weight_np5);
 		np_6 = (NumberPicker) root.findViewById(R.id.set_sets_np);
 		
 		createDefaultNumberPickers();
@@ -63,6 +73,10 @@ public class SetWeightDialog_1 extends DialogPreference {
 		values[1] = "3";
 		values[2] = "5";
 		
+		String[] values2 = new String[2];
+		values2[0] = "0";
+		values2[1] = "5";
+		
 		List<Exercise> 	exercises;
 		exercises = MainActivity.SLCalc.getBothSessions();
 		
@@ -74,8 +88,12 @@ public class SetWeightDialog_1 extends DialogPreference {
 		np_3.setMinValue(0);
 		np_4.setMaxValue(9);
 		np_4.setMinValue(0);
+		np_5.setMaxValue(2);
+		np_5.setMinValue(1);
 		np_6.setMaxValue(3);
 		np_6.setMinValue(1);
+		
+		np_5.setDisplayedValues(values2);
 		
 		np_6.setDisplayedValues(values);
 		
@@ -101,37 +119,48 @@ public class SetWeightDialog_1 extends DialogPreference {
 		newInt = newInt % 1000;
 		newInt = newInt / 100;
 		np_1.setValue((int)newInt);
-		System.out.println(newInt);
 		
 		newInt = original;
 		newInt = newInt % 100;
 		newInt = newInt / 10;
 		np_2.setValue((int)newInt);
-		System.out.println(newInt);
 		
 		newInt = original;
 		newInt = newInt % 10;
 		np_3.setValue((int)newInt);
-		System.out.println(newInt);
 		
 		newInt = original;
 		newInt = newInt % 1;
-		newInt = newInt / 10;
+		newInt = newInt * 10;
 		np_4.setValue((int)newInt);
-		System.out.println(newInt);
+		
+		newInt = original;
+		newInt = newInt % 0.1;
+		newInt = newInt * 100;
+		
+		System.out.println((int)newInt);
+		
+		if ((int)newInt > 5)
+			np_5.setValue(0);
+		else
+			np_5.setValue(5);
 	}
 	
 	public double convertMultiIntToSingle(){
 		double finishedMerge = 0.0d;
+		double np_5_value = 0.0d;
 		
+		// Sets the correct fraction according to the chosen value
+		if (np_5.getValue() > 0)
+			np_5_value = 0.05;
+		else
+			np_5_value = 0.00;
+		
+		finishedMerge += (np_5_value);
 		finishedMerge += ((double)(np_4.getValue()) / 10);
-		System.out.println(finishedMerge);
 		finishedMerge += (np_3.getValue());
-		System.out.println(finishedMerge);
 		finishedMerge += (np_2.getValue() * 10);
-		System.out.println(finishedMerge);
 		finishedMerge += (np_1.getValue() * 100);
-		System.out.println(finishedMerge);
 		
 		return finishedMerge;
 	}
