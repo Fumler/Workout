@@ -72,15 +72,9 @@ public class StrongLiftsCalculator implements Serializable {
 		b_session.add(new Exercise(20, "Shoulderpress", "spr",	5, 2.5d));
 		b_session.add(new Exercise(40, "Deadlift", 		"dlt",  1, 5.0d));
 		
-		sessionTypeA 			= false;
+		sessionTypeA 			= true;
 		weightUnitKilograms = true;
 		numberOfSessionsLogged  = 0;	
-		
-		// REEEEMOOOOOOVVEEEEE!!!!
-		for(int i = 0; i < 5; i++)
-		{
-			a_session.get(0).updateProgress();
-		}
 			
 	}
 	
