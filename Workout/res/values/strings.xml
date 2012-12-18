@@ -31,6 +31,8 @@
 
     <!-- LOG WORKOUT ACTIVITY -->
     <string name="tv_log_start">Here you can log your workout, fill out the boxes.</string>
+    <string name="alert_note">Notice</string>
+    <string name="alert_sure">Are you sure you wish to log this workout?</string>
     
     <!-- SETTINGS ACTIVITY -->
     <string name="set_main">Settings</string>
@@ -70,6 +72,9 @@
 	<string name="gallery_picture">Picture</string>
     <string name="gallery_select_intro">Long-press a thumbnail to add an image</string>
 	<string name="gallery_show_intro">Press a thumbnail to display at larger size</string>
+	
+	<!-- STATS ACTIVITY -->
+	<string name="tv_statsMessage">These are your current stats in the Stronglifts 5x5 program.\nClick the video button to view your latest form recordings.</string>
     
     <!-- EXERCISE NAMES -->
     <string name="ex_squats">Squats</string>
@@ -80,8 +85,8 @@
     
     <!-- HELP DIALOG -->
     <string name="dialog_close">Close</string>
-    <string name="dialog_help0">This is where you log your workout. This message needs to be changed</string>
-    <string name="dialog_help1">This is the homepage. This message needs to be changed</string>
-    <string name="dialog_help2">This is where you view statistics. This message needs to be changed</string>
+    <string name="dialog_help0">This is where you log your workout. Click the checkboxes until you get a checkmark (for completed sets) or a cross (for failed sets). Click the Video button by any exercise to record your form in that exercise.</string>
+    <string name="dialog_help1">This is the homepage. You can access the functionality of Strongbird by swiping to a side, or by opening the menu. You can use the Camera button and Music button on any page to open your default camera (for taking progress pictures) or media player.</string>
+    <string name="dialog_help2">This is where you view statistics for your progress in Stronglifts 5x5. Click the video button to the right to view your last form recording in the exercise of your choice.</string>
     <string name="dialog_help3">This is the gallery. Here you can see the progress pictures you have taken. Press a thumbnail to display the picture, or long-press it to add an image from your own collection.</string>
 </resources>

@@ -926,27 +926,6 @@ public class MainActivity extends FragmentActivity {
 			        		for(int j = 0; j < currentSession.get(0).getNumberOfSets(); j++) {
 				        		state[j] = tab1_ohp.get(j).getState();
 
-		}
-		
-		// Initializes tab 2
-		public void initTab2() {
-			tab2_tv_aOrB				= (TextView) getActivity().findViewById(R.id.tab2_tv1_aOrB);
-//			tab2_tv_exerciseOneWeight	= (TextView) getActivity().findViewById(R.id.tab2_tv2_details);
-		}
-		
-		public void refreshTab2() {
-			List<Exercise> 	exercises;
-			exercises = SLCalc.getBothSessions();
-			
-			String aOrB;
-			if (SLCalc.getSessionTypeA())
-				aOrB = "A";
-			else
-				aOrB = "B";
-			
-			tab2_tv_aOrB.setText(aOrB);
-			
-//			tab2_tv_exerciseOneWeight.setText(String.valueOf(exercises.get(0).getCurrentWeight()));
 			        		}
 							if(currentSession.get(1).getNumberOfSets() == 3) {
 								if(state[0] == 1 && state[1] == 1 && state[2] == 1) {
@@ -1032,6 +1011,28 @@ public class MainActivity extends FragmentActivity {
 			});
 		}
 		
+<<<<<<< HEAD
+		// Initializes tab 2
+		public void initTab2() {
+			tab2_tv_aOrB				= (TextView) getActivity().findViewById(R.id.tab2_tv1_aOrB);
+//			tab2_tv_exerciseOneWeight	= (TextView) getActivity().findViewById(R.id.tab2_tv2_details);
+		}
+		
+		public void refreshTab2() {
+			List<Exercise> 	exercises;
+			exercises = SLCalc.getBothSessions();
+			
+			String aOrB;
+			if (SLCalc.getSessionTypeA())
+				aOrB = "A";
+			else
+				aOrB = "B";
+			
+			tab2_tv_aOrB.setText(aOrB);
+			
+//			tab2_tv_exerciseOneWeight.setText(String.valueOf(exercises.get(0).getCurrentWeight()));
+		}
+=======
 		public void updateSuccess(boolean completed1, boolean completed2, boolean completed3) { // Sends results to exercise
 			System.out.println("Completed[0]: " + completed[0] + "\n" + "Completed[1]: " + completed[1] + "\n" + "Completed[2]: " + completed[2]);
 
@@ -1084,6 +1085,7 @@ public class MainActivity extends FragmentActivity {
 			
 		}
 		// END WORLD CHAMPIONSHIP OF LAZY CODE ~~
+>>>>>>> 6bde4259808982a1e7eebbcc38f7847dc40fa0fa
 		
 		//Initializes tab 3
 		public void initTab3(){

@@ -70,9 +70,9 @@ public class StrongLiftsCalculator implements Serializable {
 		b_session = new ArrayList<Exercise>();
 		b_session.add(a_session.get(0));
 		b_session.add(new Exercise(20, "Shoulderpress", "spr",	5, 2.5d));
-		b_session.add(new Exercise(40, "Deadlift", 		"dlt",  5, 5.0d));
+		b_session.add(new Exercise(40, "Deadlift", 		"dlt",  1, 5.0d));
 		
-		sessionTypeA 			= true;
+		sessionTypeA 			= false;
 		weightUnitKilograms = true;
 		numberOfSessionsLogged  = 0;	
 		
@@ -142,7 +142,7 @@ public class StrongLiftsCalculator implements Serializable {
 				exercise.setNumberOfFails(0);
 			}
 			
-			else if((exercise.getNumberOfDeloads() 	== 3) 
+			else if((exercise.getNumberOfDeloads() 	== 2) 
 				 && (exercise.getNumberOfSets() 	!= 1))
 			{
 				exercise.adjustNumberOfSets();
@@ -166,6 +166,7 @@ public class StrongLiftsCalculator implements Serializable {
 			{
 				updateWeightsForExercise(exercise);
 				exercise.setNumberOfFails(0);
+				exercise.setSuccess(false);
 			}
 			else
 			{
