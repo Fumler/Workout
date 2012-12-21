@@ -149,7 +149,7 @@ public class SetWeightDialog_2 extends DialogPreference {
 		double np_5_value = 0.0d;
 		
 		// Sets the correct fraction according to the chosen value
-		if (np_5.getValue() > 0)
+		if (np_5.getValue() == 1)
 			np_5_value = 0.05;
 		else
 			np_5_value = 0.00;
