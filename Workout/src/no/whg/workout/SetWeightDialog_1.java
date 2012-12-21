@@ -137,6 +137,7 @@ public class SetWeightDialog_1 extends DialogPreference {
 		newInt = original;
 		newInt = newInt % 0.1;
 		newInt = newInt * 100;
+		System.out.println("derp" + newInt);
 		
 		if ((int)newInt > 5)
 			np_5.setValue(0);
@@ -148,17 +149,21 @@ public class SetWeightDialog_1 extends DialogPreference {
 		double finishedMerge = 0.0d;
 		double np_5_value = 0.0d;
 		
+		System.out.println("np_5.getvalue(): " + np_5.getValue());
+		
 		// Sets the correct fraction according to the chosen value
-		if (np_5.getValue() > 0)
-			np_5_value = 0.05;
-		else
+		if (np_5.getValue() == 1)
 			np_5_value = 0.00;
+		else
+			np_5_value = 0.05;
 		
 		finishedMerge += (np_5_value);
 		finishedMerge += ((double)(np_4.getValue()) / 10);
 		finishedMerge += (np_3.getValue());
 		finishedMerge += (np_2.getValue() * 10);
 		finishedMerge += (np_1.getValue() * 100);
+		
+		System.out.println(finishedMerge);
 		
 		return finishedMerge;
 	}
